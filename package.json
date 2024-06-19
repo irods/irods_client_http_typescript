@@ -1,0 +1,30 @@
+{
+  "name": "irods-http-api-wrapper",
+  "version": "1.0.0",
+  "description": "Wrapper for iRODS HTTP API written in JavaScript",
+  "main": "index.ts",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/farbs03/irods-http-api-wrapper-js.git"
+  },
+  "author": "Chris Farber",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/farbs03/irods-http-api-wrapper-js/issues"
+  },
+  "homepage": "https://github.com/farbs03/irods-http-api-wrapper-js#readme",
+  "dependencies": {
+    "axios": "^1.7.2"
+  },
+  "devDependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/node": "^20.14.6",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.15.6",
+    "typescript": "^5.4.5"
+  }
+}
