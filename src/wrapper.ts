@@ -1,11 +1,31 @@
 import axios, { AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
-import { resource_create } from './resources';
 import { saveToken, loadToken, clearToken } from './tokenStorage';
+import {
+    CollectionOperations,
+    DataObjectOperations,
+    InformationOperations,
+    QueryOperations,
+    ResourceOperations,
+    RuleOperations,
+    TicketOperations,
+    UserGroupOperations,
+    ZoneOperations
+} from "./operations"
 
 
 class Wrapper {
-    public client: AxiosInstance;
-    public token: string | null = null;
+    private client: AxiosInstance;
+    private token: string | null = null;
+
+    public collections: CollectionOperations;
+    public data_objects: DataObjectOperations;
+    public information: InformationOperations;
+    public queries: QueryOperations;
+    public resources: ResourceOperations;
+    public rules: RuleOperations;
+    public tickets: TicketOperations;
+    public users_groups: UserGroupOperations;
+    public zones: ZoneOperations;
 
     constructor(private baseURL: string, username: string, password: string) {
         const tokenData = loadToken();
@@ -34,8 +54,15 @@ class Wrapper {
             }
         });
 
-        // Attach endpoint functions
-        this.resource_create = resource_create.bind(this);
+        this.collections = new CollectionOperations(this.client);
+        this.data_objects = new DataObjectOperations(this.client);
+        this.information = new InformationOperations(this.client);
+        this.queries = new QueryOperations(this.client);
+        this.resources = new ResourceOperations(this.client);
+        this.rules = new RuleOperations(this.client);
+        this.tickets = new TicketOperations(this.client);
+        this.users_groups = new UserGroupOperations(this.client);
+        this.zones = new ZoneOperations(this.client);
     }
 
     async authenticate(baseURL: string, username: string, password: string): Promise<void> {
@@ -59,8 +86,6 @@ class Wrapper {
             this.handleError(error);
         }
     }
-
-    resource_create: typeof resource_create;
 
     private handleError(error: any): void {
         if (error.response) {

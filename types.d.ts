@@ -1,3 +1,10 @@
+// Format: http://<host>:<port>/irods-http-api/<version>
+type BaseURLType = {
+    host: string,
+    port: string,
+    version: string
+}
+
 type ResourceCreateData = {
     op: "create",
     name: string,
