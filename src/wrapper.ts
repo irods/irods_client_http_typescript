@@ -14,8 +14,13 @@ import {
 
 
 class Wrapper {
+    public username: string;
+    public password: string;
+
     private client: AxiosInstance;
     private token: string | null = null;
+
+    public baseURL: string;
 
     public collections: CollectionOperations;
     public data_objects: DataObjectOperations;
@@ -27,31 +32,39 @@ class Wrapper {
     public users_groups: UserGroupOperations;
     public zones: ZoneOperations;
 
-    constructor(private baseURL: string, username: string, password: string) {
-        const tokenData = loadToken();
-        if (tokenData) {
-            const isExpired = new Date(tokenData.expiry) < new Date();
-            if (!isExpired) {
-                console.log("Re-using token, not expired")
-                this.token = tokenData.token;
-            } else {
-                console.log("Token is expired, renewing credentials")
-                clearToken(); // Clear expired token
-                this.authenticate(baseURL, username, password); // re-authenticate the user
-            }
-        }
-        else {
-            console.log("No auth credentials, creating credentials")
-            this.authenticate(baseURL, username, password)
-        }
-
-        console.log("Using token: ", this.token)
+    constructor(urlComponents: URLComponentsType, username: string, password: string) {
+        this.username = username;
+        this.password = password;
+        // Format: http://<host>:<port>/irods-http-api/<version>
+        this.baseURL = "http://" + urlComponents.host + ":" + urlComponents.port +
+            "/irods-http-api/" + urlComponents.version
 
         this.client = axios.create({
-            baseURL: baseURL,
-            headers: {
-                'Authorization': `Bearer ${this.token}`
-            }
+            baseURL: this.baseURL,
+        });
+
+        // Add a request interceptor
+        this.client.interceptors.request.use((config) => {
+            this.checkToken();
+            config.headers['Authorization'] = `Bearer ${this.token}`
+            // Do something before request is sent
+            return config;
+        }, (error) => {
+            // Do something with request error
+            return Promise.reject(error);
+        });
+
+        // Add a response interceptor
+        this.client.interceptors.response.use((response) => {
+            // Any status code that lie within the range of 2xx cause this function to trigger
+            // Do something with response data
+            return response;
+        }, (error) => {
+            // Any status codes that falls outside the range of 2xx cause this function to trigger
+            // Do something with response error
+            this.checkToken()
+            this.handleError(error);
+            return Promise.reject(error);
         });
 
         this.collections = new CollectionOperations(this.client);
@@ -65,12 +78,34 @@ class Wrapper {
         this.zones = new ZoneOperations(this.client);
     }
 
-    async authenticate(baseURL: string, username: string, password: string): Promise<void> {
+    checkToken() {
+        const tokenData = loadToken();
+        if (tokenData) {
+            this.token = tokenData.token;
+            // const isExpired = new Date(tokenData.expiry) < new Date();
+            // if (!isExpired) {
+            //     console.log("Re-using token, not expired")
+            //     this.token = tokenData.token;
+            // } else {
+            //     console.log("Token is expired, renewing credentials")
+            //     clearToken(); // Clear expired token
+            //     this.authenticate(); // re-authenticate the user
+            // }
+        }
+        else {
+            console.log("No auth credentials, creating credentials")
+            this.authenticate()
+        }
+
+        console.log("Using token: ", this.token)
+    }
+
+    async authenticate(): Promise<void> {
         try {
-            await axios.post(`${baseURL}/authenticate`, null, {
+            await axios.post(`${this.baseURL}/authenticate`, null, {
                 auth: {
-                    username: username,
-                    password: password
+                    username: this.username,
+                    password: this.password
                 }
             })
                 .then((response) => {

@@ -1,5 +1,5 @@
 // Format: http://<host>:<port>/irods-http-api/<version>
-type BaseURLType = {
+type URLComponentsType = {
     host: string,
     port: string,
     version: string
@@ -15,4 +15,9 @@ type ResourceCreateData = {
     host?: string,
     "vault-path"?: string,
     context?: string
+}
+
+type ResourceRemoveData = {
+    op: "remove",
+    name: string
 }
