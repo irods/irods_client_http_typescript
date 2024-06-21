@@ -1,5 +1,5 @@
-import { AxiosError, AxiosInstance, AxiosResponse } from "axios";
-import { URLSearchParams } from "url";
+import { AxiosInstance, AxiosResponse } from "axios";
+import { toURLSearchParams } from "../../utils/toURLSearchParams";
 
 export class CollectionOperations {
     private client: AxiosInstance;
@@ -10,13 +10,13 @@ export class CollectionOperations {
 
     async create(params: CollectionCreateParams): Promise<AxiosResponse<any, any>> {
         return this.client.post("/collections",
-            new URLSearchParams({ op: "create", ...params })
+            toURLSearchParams({ op: "create", ...params })
         )
     }
 
     async remove(params: CollectionRemoveParams): Promise<AxiosResponse<any, any>> {
         return this.client.post("/collections",
-            new URLSearchParams({ op: "remove", ...params })
+            toURLSearchParams({ op: "remove", ...params })
         )
     }
 
@@ -36,55 +36,43 @@ export class CollectionOperations {
 
     async set_permission(params: CollectionSetPermissionParams): Promise<AxiosResponse<any, any>> {
         return this.client.post("/collections",
-            new URLSearchParams({ op: "set_permission", ...params })
+            toURLSearchParams({ op: "set_permission", ...params })
         )
     }
 
     async set_inheritance(params: CollectionSetInheritanceParams): Promise<AxiosResponse<any, any>> {
         return this.client.post("/collections",
-            new URLSearchParams({ op: "set_inheritance", ...params })
+            toURLSearchParams({ op: "set_inheritance", ...params })
         )
     }
 
     async modify_permissions(params: CollectionModifyPermissionsParams): Promise<AxiosResponse<any, any>> {
-        let operations = params.operations.toString()
         return this.client.post("/collections",
-            new URLSearchParams({
+            toURLSearchParams({
                 op: "modify_permissions",
-                lpath: params.lpath,
-                operations: operations,
-                admin: params.admin ? params.admin : "0"
+                ...params
             })
         )
     }
 
     async modify_metadata(params: CollectionModifyMetadataParams): Promise<AxiosResponse<any, any>> {
-        let operations = params.operations.toString()
         return this.client.post("/collections",
-            new URLSearchParams({
+            toURLSearchParams({
                 op: "modify_metadata",
-                lpath: params.lpath,
-                operations: operations,
-                admin: params.admin ? params.admin : "0"
+                ...params
             })
         )
     }
 
     async rename(params: CollectionRenameParams): Promise<AxiosResponse<any, any>> {
         return this.client.post("/collections",
-            new URLSearchParams({ op: "rename", ...params })
+            toURLSearchParams({ op: "rename", ...params })
         )
     }
 
     async touch(params: CollectionTouchParams): Promise<void | AxiosResponse<any, any>> {
-        if (params["seconds-since-epoch"]) {
-            // If input for seconds-since-epoch isn't a numeric string, return error
-            if (isNaN(Number(params["seconds-since-epoch"]))) {
-                return;
-            }
-        }
         return this.client.post("/collections",
-            new URLSearchParams({ op: "touch", ...params })
+            toURLSearchParams({ op: "touch", ...params })
         )
     }
 }
