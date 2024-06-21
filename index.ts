@@ -8,8 +8,13 @@ const urlComponents: URLComponentsType = {
 
 const api = new Wrapper(urlComponents, "rods", "rods");
 
+// const res = await api.resources.create({
+//     name: "wrapperResc",
+//     type: "unixfilesystem",
+//     host: "ip-172-31-12-211",
+//     "vault-path": "/var/lib/irods/new_vault"
+// })
 const res = await api.resources.remove({
-    op: "remove",
     name: "wrapperResc"
 })
 console.log(res.data)
