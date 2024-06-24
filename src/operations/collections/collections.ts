@@ -23,14 +23,14 @@ export class CollectionOperations {
     // GET request, don't use URLSearchParams (I think)
     async stat(params: CollectionRemoveParams): Promise<AxiosResponse<any, any>> {
         return this.client.get("/collections",
-            { data: { op: "stat", ...params } }
+            { params: { op: "stat", ...params } }
         )
     }
 
     // GET request
     async list(params: CollectionListParams): Promise<AxiosResponse<any, any>> {
         return this.client.get("/collections",
-            { data: { op: "list", ...params } }
+            { params: { op: "list", ...params } }
         )
     }
 

@@ -6,4 +6,14 @@ export class ZoneOperations {
     constructor(client: AxiosInstance) {
         this.client = client;
     }
+
+    async report() {
+        return this.client.get("/zones",
+            {
+                params: {
+                    op: "report"
+                }
+            }
+        )
+    }
 }

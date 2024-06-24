@@ -14,3 +14,28 @@ type ResourceCreateParams = {
 type ResourceRemoveParams = {
     name: string
 }
+
+type ResourceAddChildParams = {
+    'parent-name': string;
+    'child-name': string;
+    context?: string;
+}
+
+type ResourceRemoveChildParams = {
+    'parent-name': string;
+    'child-name': string;
+}
+
+type ResourceRebalanceParams = {
+    name: string
+}
+
+// GET request
+type ResourceStatParams = {
+    name: string
+}
+
+type ResourceModifyMetadataParams = {
+    name: string,
+    operations: [AVUOperation]
+}

@@ -1,4 +1,5 @@
-import { AxiosInstance } from "axios";
+import { AxiosInstance, AxiosResponse } from "axios";
+import { toURLSearchParams } from "../../utils/toURLSearchParams";
 
 export class TicketOperations {
     private client: AxiosInstance;
@@ -6,4 +7,23 @@ export class TicketOperations {
     constructor(client: AxiosInstance) {
         this.client = client;
     }
+
+    async create(params: TicketCreateParams): Promise<AxiosResponse<any, any>> {
+        return this.client.post("/tickets",
+            toURLSearchParams({
+                op: 'create',
+                ...params
+            })
+        );
+    }
+
+    async remove(params: TicketRemoveParams): Promise<AxiosResponse<any, any>> {
+        return this.client.post("/tickets",
+            toURLSearchParams({
+                op: 'remove',
+                ...params
+            })
+        );
+    }
+
 }

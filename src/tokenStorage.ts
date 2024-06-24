@@ -5,7 +5,6 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const TOKEN_PATH = path.join(__dirname, 'token.json');
-console.log(TOKEN_PATH)
 
 interface TokenData {
     token: string;

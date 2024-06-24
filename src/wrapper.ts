@@ -3,7 +3,6 @@ import { saveToken, loadToken, clearToken } from './tokenStorage';
 import {
     CollectionOperations,
     DataObjectOperations,
-    InformationOperations,
     QueryOperations,
     ResourceOperations,
     RuleOperations,
@@ -24,7 +23,6 @@ class Wrapper {
 
     public collections: CollectionOperations;
     public data_objects: DataObjectOperations;
-    public information: InformationOperations;
     public queries: QueryOperations;
     public resources: ResourceOperations;
     public rules: RuleOperations;
@@ -69,7 +67,6 @@ class Wrapper {
 
         this.collections = new CollectionOperations(this.client);
         this.data_objects = new DataObjectOperations(this.client);
-        this.information = new InformationOperations(this.client);
         this.queries = new QueryOperations(this.client);
         this.resources = new ResourceOperations(this.client);
         this.rules = new RuleOperations(this.client);
@@ -120,6 +117,10 @@ class Wrapper {
         } catch (error) {
             this.handleError(error);
         }
+    }
+
+    async get_information(): Promise<AxiosResponse<any, any>> {
+        return axios.get(`${this.baseURL}/info`)
     }
 
     private handleError(error: any): void {

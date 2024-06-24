@@ -29,7 +29,7 @@ export class DataObjectOperations {
     // GET request
     async verify_checksum(params: DataObjectVerifyChecksumParams): Promise<void | AxiosResponse<any, any>> {
         return this.client.get("/data-objects",
-            { data: { op: "verify_checksum", ...params } }
+            { params: { op: "verify_checksum", ...params } }
         )
     }
 
@@ -72,7 +72,7 @@ export class DataObjectOperations {
     // GET request
     async read(params: DataObjectReadParams): Promise<void | AxiosResponse<any, any>> {
         return this.client.get("/data-objects",
-            { data: { op: "read", ...params } }
+            { params: { op: "read", ...params } }
         )
     }
 
