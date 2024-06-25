@@ -6,12 +6,6 @@ const urlComponents: URLComponentsType = {
     version: "0.3.0"
 }
 
-const api = new Wrapper(urlComponents, "rods", "rods");
+const api = new Wrapper(urlComponents, "alice", "alicepass");
 
-// const res = await api.resources.create({
-//     name: "wrapperResc",
-//     type: "unixfilesystem",
-//     host: "ip-172-31-12-211",
-//     "vault-path": "/var/lib/irods/new_vault"
-// })
-
+// console.log(res?.data)

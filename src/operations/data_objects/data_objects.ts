@@ -33,9 +33,10 @@ export class DataObjectOperations {
         )
     }
 
+    // GET request
     async stat(params: DataObjectStatParams): Promise<AxiosResponse<any, any>> {
-        return this.client.post("/data-objects",
-            toURLSearchParams({ op: "stat", ...params })
+        return this.client.get("/data-objects",
+            { params: { op: "stat", ...params } }
         )
     }
 
@@ -81,7 +82,7 @@ export class DataObjectOperations {
     /*
         params = {
             ...,
-            bytes: new Blob([binaryData], { type: 'application/octet-stream' },
+            bytes: new Blob([binaryData], { type: 'application/octet-stream' }),
             ...
         }
     */

@@ -85,7 +85,7 @@ type DataObjectWriteParams = {
     offset?: number,
     truncate?: 0 | 1,
     append?: 0 | 1,
-    bytes: Blob, // You can use Blob for binary data
+    bytes: Buffer, // You can use Buffer for binary data
     "parallel-write-handle"?: string,
     "stream-index"?: number
 };
@@ -112,19 +112,26 @@ type DataObjectSetPermissionParams = {
     lpath: string,
     "entity-name": string,
     permission: "null" | "read" | "write" | "own",
-    admin: 0 | 1
+    admin?: 0 | 1
 }
 
 type DataObjectModifyPermissionsParams = {
     lpath: string,
     operations: [ModifyPermissionsOperation],
-    admin: 0 | 1
+    admin?: 0 | 1
 }
 
-type DataObjectModifyReplicaParams = {
-    lpath: string;
-    'resource-hierarchy': string;
-    'replica-number': number;
+// Separate resource hierarchy and replica number, make them mutually exclusive fields
+
+type ResourceHierarchyType = {
+    "resource-hierarchy": string
+}
+
+type ReplicaNumberType = {
+    "replica-number": number
+}
+
+type DataObjectModifyReplicaOptionalParams = {
     'new-data-checksum'?: string;
     'new-data-comments'?: string;
     'new-data-create-time'?: number;
@@ -140,3 +147,12 @@ type DataObjectModifyReplicaParams = {
     'new-data-type-name'?: string;
     'new-data-version'?: string;
 }
+
+type DataObjectModifyReplicaBaseParams = {
+    lpath: string;
+}
+
+// Ensure mutually exclusive fields of "resource-hierarchy" and "replica-number", and that at least one optional field is filled in
+type DataObjectModifyReplicaParams = DataObjectModifyReplicaBaseParams &
+    XOR<ResourceHierarchyType, ReplicaNumberType> &
+    RequireAtLeastOne<DataObjectModifyReplicaOptionalParams>
