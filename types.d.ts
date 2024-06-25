@@ -13,6 +13,6 @@ type AVUOperation = {
 }
 
 type ModifyPermissionsOperation = {
-    "entity_name": string,
-    "acl": string
+    entity_name: string,
+    acl: "null" | "read" | "write" | "own"
 }

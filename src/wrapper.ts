@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
+import axios, { AxiosError, AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import { saveToken, loadToken, clearToken } from './tokenStorage';
 import {
     CollectionOperations,
@@ -57,12 +57,17 @@ class Wrapper {
             // Any status code that lie within the range of 2xx cause this function to trigger
             // Do something with response data
             return response;
-        }, (error) => {
+        }, (error: AxiosError) => {
             // Any status codes that falls outside the range of 2xx cause this function to trigger
             // Do something with response error
-            this.checkToken()
-            this.handleError(error);
-            return Promise.reject(error);
+            // this.checkToken()
+            // console.log(error)
+            if (error.response?.status === 502) {
+                console.log("Token is expired, re-authentication needed")
+                return Promise.reject(error)
+            }
+            // this.handleError(error);
+            // return Promise.reject(error);
         });
 
         this.collections = new CollectionOperations(this.client);

@@ -14,6 +14,4 @@ const api = new Wrapper(urlComponents, "rods", "rods");
 //     host: "ip-172-31-12-211",
 //     "vault-path": "/var/lib/irods/new_vault"
 // })
-const res = await api.rules.list_rule_engines()
-console.log(res.data)
 
