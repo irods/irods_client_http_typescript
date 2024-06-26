@@ -8,7 +8,7 @@ export class QueryOperations {
     }
 
 
-    async execute_genquery(params: QueryExecuteGenqueryParams): Promise<AxiosResponse<any, any>> {
+    async execute_genquery(params: ExecuteGenqueryParams): Promise<AxiosResponse<any, any>> {
         return this.client.get("/query",
             {
                 params: {
@@ -18,7 +18,7 @@ export class QueryOperations {
         )
     }
 
-    async execute_specific_query(params: QueryExecuteSpecificQueryParams): Promise<AxiosResponse<any, any>> {
+    async execute_specific_query(params: ExecuteSpecificQueryParams): Promise<AxiosResponse<any, any>> {
         return this.client.get("/query",
             {
                 params: {

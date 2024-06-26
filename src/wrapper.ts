@@ -99,7 +99,7 @@ class Wrapper {
             this.authenticate()
         }
 
-        console.log("Using token: ", this.token)
+        console.log("Using token:", this.token)
     }
 
     async authenticate(): Promise<void> {
@@ -124,7 +124,7 @@ class Wrapper {
         }
     }
 
-    async get_information(): Promise<AxiosResponse<any, any>> {
+    async get_information(): Promise<ServerInfo> {
         return axios.get(`${this.baseURL}/info`)
     }
 

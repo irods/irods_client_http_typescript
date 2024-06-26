@@ -1,5 +1,7 @@
+/* Execute Genquery */
+
 // GET request
-type QueryExecuteGenqueryParams = {
+type ExecuteGenqueryParams = {
     query: string,
     offset?: number,
     count?: number,
@@ -10,11 +12,24 @@ type QueryExecuteGenqueryParams = {
     zone?: string
 }
 
+type ExecuteGenqueryResponse = {
+    irods_response: IrodsResponse,
+    rows: [[string, string, string]],
+    sql?: string
+}
+
+/* Execute Specific Query */
+
 // GET request
-type QueryExecuteSpecificQueryParams = {
+type ExecuteSpecificQueryParams = {
     name: string,
     args?: string,
     "args-delimiter"?: string,
     offset?: number,
     count?: number
+}
+
+type ExecuteSpecificQueryResponse = {
+    irods_response: IrodsResponse,
+    rows: [[string, string, string]]
 }

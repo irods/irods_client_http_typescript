@@ -29,6 +29,17 @@ type Permission = {
     perm: string
 }
 
+type ServerInfo = {
+    api_version: string,
+    build: string,
+    genquery2_enabled: boolean,
+    irods_zone: string,
+    max_number_of_parallel_write_streams: number,
+    max_number_of_rows_per_catalog_query: number,
+    max_size_of_request_body_in_bytes: number,
+    openid_connect_enabled: boolean
+}
+
 // Mutually exclusive fields: https://stackoverflow.com/questions/42123407/does-typescript-support-mutually-exclusive-types
 type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never };
 
