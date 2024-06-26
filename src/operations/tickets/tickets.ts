@@ -8,7 +8,7 @@ export class TicketOperations {
         this.client = client;
     }
 
-    async create(params: TicketCreateParams): Promise<AxiosResponse<any, any>> {
+    async create(params: TicketCreateParams): Promise<TicketCreateResponse> {
         return this.client.post("/tickets",
             toURLSearchParams({
                 op: 'create',
@@ -17,7 +17,7 @@ export class TicketOperations {
         );
     }
 
-    async remove(params: TicketRemoveParams): Promise<AxiosResponse<any, any>> {
+    async remove(params: TicketRemoveParams): Promise<TicketRemoveResponse> {
         return this.client.post("/tickets",
             toURLSearchParams({
                 op: 'remove',

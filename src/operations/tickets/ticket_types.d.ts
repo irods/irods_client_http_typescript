@@ -1,3 +1,5 @@
+/* Create */
+
 type TicketCreateParams = {
     lpath: string;
     type?: string;
@@ -10,6 +12,14 @@ type TicketCreateParams = {
     hosts?: string;
 }
 
+type TicketCreateResponse = IrodsResponse & {
+    ticket: string
+}
+
+/* Remove */
+
 type TicketRemoveParams = {
     name: string
 }
+
+type TicketRemoveResponse = IrodsResponse
