@@ -8,7 +8,7 @@ export class UserGroupOperations {
         this.client = client;
     }
 
-    async create_user(params: UserCreateParams): Promise<AxiosResponse<any, any>> {
+    async create_user(params: UserCreateParams): Promise<UserCreateResponse> {
         return this.client.post("/users-groups",
             toURLSearchParams({
                 op: 'create_user',
@@ -17,7 +17,7 @@ export class UserGroupOperations {
         );
     }
 
-    async remove_user(params: UserRemoveParams): Promise<AxiosResponse<any, any>> {
+    async remove_user(params: UserRemoveParams): Promise<UserRemoveResponse> {
         return this.client.post("/users-groups",
             toURLSearchParams({
                 op: 'remove_user',
@@ -26,7 +26,7 @@ export class UserGroupOperations {
         );
     }
 
-    async set_password(params: UserSetPasswordParams): Promise<AxiosResponse<any, any>> {
+    async set_password(params: UserSetPasswordParams): Promise<UserSetPasswordResponse> {
         return this.client.post("/users-groups",
             toURLSearchParams({
                 op: 'set_password',
@@ -35,7 +35,7 @@ export class UserGroupOperations {
         );
     }
 
-    async set_user_type(params: UserSetTypeParams): Promise<AxiosResponse<any, any>> {
+    async set_user_type(params: UserSetTypeParams): Promise<UserSetTypeResponse> {
         return this.client.post("/users-groups",
             toURLSearchParams({
                 op: "set_user_type",
@@ -44,7 +44,7 @@ export class UserGroupOperations {
         )
     }
 
-    async create_group(params: GroupCreateParams): Promise<AxiosResponse<any, any>> {
+    async create_group(params: GroupCreateParams): Promise<GroupCreateResponse> {
         return this.client.post("/users-groups",
             toURLSearchParams({
                 op: "create_group",
@@ -53,7 +53,7 @@ export class UserGroupOperations {
         )
     }
 
-    async remove_group(params: GroupRemoveParams): Promise<AxiosResponse<any, any>> {
+    async remove_group(params: GroupRemoveParams): Promise<GroupRemoveResponse> {
         return this.client.post("/users-groups",
             toURLSearchParams({
                 op: "remove_group",
@@ -62,7 +62,7 @@ export class UserGroupOperations {
         )
     }
 
-    async add_to_group(params: UserAddToGroupParams): Promise<AxiosResponse<any, any>> {
+    async add_to_group(params: UserAddToGroupParams): Promise<UserAddToGroupResponse> {
         return this.client.post("/users-groups",
             toURLSearchParams({
                 op: "add_to_group",
@@ -71,7 +71,7 @@ export class UserGroupOperations {
         )
     }
 
-    async remove_from_group(params: UserRemoveFromGroupParams): Promise<AxiosResponse<any, any>> {
+    async remove_from_group(params: UserRemoveFromGroupParams): Promise<UserRemoveFromGroupResponse> {
         return this.client.post("/users-groups",
             toURLSearchParams({
                 op: "remove_from_group",
@@ -81,7 +81,7 @@ export class UserGroupOperations {
     }
 
     // GET request
-    async users() {
+    async users(): Promise<UsersResponse> {
         return this.client.get("/users-groups",
             {
                 params: {
@@ -91,7 +91,7 @@ export class UserGroupOperations {
         )
     }
 
-    async groups() {
+    async groups(): Promise<GroupsResponse> {
         return this.client.get("/users-groups",
             {
                 params: {
@@ -102,7 +102,7 @@ export class UserGroupOperations {
     }
 
     // GET request
-    async is_member_of_group(params: UserMemberOfGroupParams): Promise<AxiosResponse<any, any>> {
+    async is_member_of_group(params: UserMemberOfGroupParams): Promise<UserMemberOfGroupResponse> {
         return this.client.get("/users-groups",
             {
                 params: {
@@ -114,7 +114,7 @@ export class UserGroupOperations {
     }
 
     // GET request
-    async stat(params: UserGroupStatParams): Promise<AxiosResponse<any, any>> {
+    async stat(params: UserGroupStatParams): Promise<UserGroupStatResponse> {
         return this.client.get("/users-groups",
             {
                 params: {
@@ -125,7 +125,7 @@ export class UserGroupOperations {
         )
     }
 
-    async modify_metadata(params: UserGroupModifyMetadata): Promise<AxiosResponse<any, any>> {
+    async modify_metadata(params: UserGroupModifyMetadata): Promise<UserGroupModifyMetadataResponse> {
         return this.client.post("/users-groups",
             toURLSearchParams({
                 op: "modify_metadata",

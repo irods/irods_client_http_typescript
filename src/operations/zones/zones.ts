@@ -7,7 +7,7 @@ export class ZoneOperations {
         this.client = client;
     }
 
-    async report() {
+    async report(): Promise<ZoneReportResponse> {
         return this.client.get("/zones",
             {
                 params: {
