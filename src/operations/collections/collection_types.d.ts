@@ -9,8 +9,7 @@ type CollectionCreateParams = {
     "create-intermediates"?: 0 | 1
 }
 
-type CollectionCreateResponse = {
-    irods_response: IrodsResponse
+type CollectionCreateResponse = IrodsResponse & {
     created?: 0 | 1
 }
 
@@ -22,9 +21,7 @@ type CollectionRemoveParams = {
     "no-trash"?: 0 | 1
 }
 
-type CollectionRemoveResponse = {
-    irods_response: IrodsResponse
-}
+type CollectionRemoveResponse = IrodsResponse
 
 /* Stat */
 
@@ -34,8 +31,7 @@ type CollectionStatParams = {
     ticket?: string
 }
 
-type CollectionStatResponse = {
-    irods_response: IrodsResponse,
+type CollectionStatResponse = IrodsResponse & {
     type: string,
     inheritance_enabled: boolean,
     permissions: [Permission],
@@ -52,8 +48,7 @@ type CollectionListParams = {
     ticket?: string
 }
 
-type CollectionListResponse = {
-    irods_response: IrodsResponse,
+type CollectionListResponse = IrodsResponse & {
     entries: [string]
 }
 
@@ -66,9 +61,7 @@ type CollectionSetPermissionParams = {
     admin?: 0 | 1
 }
 
-type CollectionSetPermissionResponse = {
-    irods_response: IrodsResponse
-}
+type CollectionSetPermissionResponse = IrodsResponse
 
 /* Set Inheritance */
 
@@ -78,9 +71,7 @@ type CollectionSetInheritanceParams = {
     admin?: 0 | 1
 }
 
-type CollectionSetInheritanceResponse = {
-    irods_response: IrodsResponse
-}
+type CollectionSetInheritanceResponse = IrodsResponse
 
 /* Modify Permissions */
 
@@ -90,17 +81,7 @@ type CollectionModifyPermissionsParams = {
     admin?: 0 | 1
 }
 
-type CollectionModifyFailure = {
-    failed_operation?: {
-        operation: ModifyPermissionsOperation
-    },
-    operation_index?: number
-    status_message?: string
-}
-
-type CollectionModifyPermissionsResponse = {
-    irods_response: IrodsResponse & CollectionModifyFailure
-}
+type CollectionModifyPermissionsResponse = IrodsResponse
 
 /* Modify Metadata */
 
@@ -110,17 +91,7 @@ type CollectionModifyMetadataParams = {
     admin?: 0 | 1
 }
 
-type CollectionModifyMetadataFailure = {
-    failed_operation?: {
-        operation: AVUOperation
-    },
-    operation_index?: number,
-    status_message?: string
-}
-
-type CollectionModifyMetadataResponse = {
-    irods_response: IrodsResponse & CollectionModifyMetadataFailure
-}
+type CollectionModifyMetadataResponse = IrodsResponse
 
 /* Rename */
 
@@ -129,9 +100,7 @@ type CollectionRenameParams = {
     "new-lpath": string
 }
 
-type CollectionRenameResponse = {
-    irods_response: IrodsResponse
-}
+type CollectionRenameResponse = IrodsResponse
 
 /* Touch */
 
@@ -141,6 +110,4 @@ type CollectionTouchParams = {
     reference?: string
 }
 
-type CollectionTouchResponse = {
-    irods_response: IrodsResponse
-}
+type CollectionTouchResponse = IrodsResponse

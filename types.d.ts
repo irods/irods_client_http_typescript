@@ -18,8 +18,15 @@ type ModifyPermissionsOperation = {
 }
 
 type IrodsResponse = {
-    status_code: number,
-    status_message?: string
+    irods_response: {
+        status_code: number,
+        status_message?: string,
+        failed_operation?: {
+            operation: AVUOperation | ModifyPermissionsOperation,
+            operation_index: number,
+            status_message: string
+        }
+    }
 }
 
 type Permission = {

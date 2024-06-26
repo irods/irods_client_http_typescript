@@ -9,9 +9,7 @@ type DataObjectTouchParams = {
     "reference"?: string
 }
 
-type DataObjectTouchResponse = {
-    irods_response: IrodsResponse
-}
+type DataObjectTouchResponse = IrodsResponse
 
 /* Remove */
 
@@ -22,9 +20,7 @@ type DataObjectRemoveParams = {
     admin?: 0 | 1
 }
 
-type DataObjectRemoveResponse = {
-    irods_response: IrodsResponse
-}
+type DataObjectRemoveResponse = IrodsResponse
 
 /* Calculate Checksum */
 
@@ -37,8 +33,7 @@ type DataObjectCalculateChecksumParams = {
     admin?: 0 | 1
 }
 
-type DataObjectCalculateChecksumResponse = {
-    irods_response: IrodsResponse,
+type DataObjectCalculateChecksumResponse = IrodsResponse & {
     checksum: string
 }
 
@@ -52,8 +47,7 @@ type DataObjectVerifyChecksumParams = {
     admin?: 0 | 1
 }
 
-type DataObjectVerifyChecksumResponse = {
-    irods_response: IrodsResponse,
+type DataObjectVerifyChecksumResponse = IrodsResponse & {
     results?: object,
     r_error_info: [{ status: number, message: string }]
 }
@@ -65,8 +59,7 @@ type DataObjectStatParams = {
     ticket?: string
 }
 
-type DataObjectStatResponse = {
-    irods_response: IrodsResponse,
+type DataObjectStatResponse = IrodsResponse & {
     type: string,
     permissions: [Permission],
     size: number,
@@ -82,9 +75,7 @@ type DataObjectRenameParams = {
     "new-lpath": string
 }
 
-type DataObjectRenameResponse = {
-    irods_response: IrodsResponse
-}
+type DataObjectRenameResponse = IrodsResponse
 
 /* Copy */
 
@@ -96,9 +87,7 @@ type DataObjectCopyParams = {
     overwrite?: 0 | 1
 }
 
-type DataObjectCopyResponse = {
-    irods_response: IrodsResponse
-}
+type DataObjectCopyResponse = IrodsResponse
 
 /* Replicate */
 
@@ -109,9 +98,7 @@ type DataObjectReplicateParams = {
     admin?: 0 | 1
 }
 
-type DataObjectReplicateResponse = {
-    irods_response: IrodsResponse
-}
+type DataObjectReplicateResponse = IrodsResponse
 
 /* Trim */
 
@@ -122,9 +109,7 @@ type DataObjectTrimParams = {
     admin?: 0 | 1
 }
 
-type DataObjectTrimResponse = {
-    irods_response: IrodsResponse
-}
+type DataObjectTrimResponse = IrodsResponse
 
 /* Register */
 
@@ -137,9 +122,7 @@ type DataObjectRegisterParams = {
     checksum?: string
 }
 
-type DataObjectRegisterResponse = {
-    irods_response: IrodsResponse
-}
+type DataObjectRegisterResponse = IrodsResponse
 
 /* Read */
 
@@ -165,9 +148,7 @@ type DataObjectWriteParams = {
     "stream-index"?: number
 }
 
-type DataObjectWriteResponse = {
-    irods_response: IrodsResponse
-}
+type DataObjectWriteResponse = IrodsResponse
 
 /* Parallel Write Init */
 
@@ -179,8 +160,7 @@ type DataObjectParallelWriteInitParams = {
     ticket?: string
 }
 
-type DataObjectParallelWriteInitResponse = {
-    irods_response: IrodsResponse,
+type DataObjectParallelWriteInitResponse = IrodsResponse & {
     parallel_write_handle: string
 }
 
@@ -190,9 +170,7 @@ type DataObjectParallelWriteShutdownParams = {
     "parallel-write-handle": string
 }
 
-type DataObjectParallelWriteShutdownResponse = {
-    irods_response: IrodsResponse,
-}
+type DataObjectParallelWriteShutdownResponse = IrodsResponse
 
 /* Modify Metadata */
 
@@ -202,17 +180,7 @@ type DataObjectModifyMetadataParams = {
     admin?: 0 | 1
 }
 
-type DataObjectModifyMetadataFailure = {
-    failed_operation?: {
-        operation: AVUOperation
-    },
-    operation_index?: number,
-    status_message?: string
-}
-
-type DataObjectModifyMetadataResponse = {
-    irods_response: IrodsResponse & DataObjectModifyMetadataFailure,
-}
+type DataObjectModifyMetadataResponse = IrodsResponse
 
 /* Set Permission */
 
@@ -223,10 +191,7 @@ type DataObjectSetPermissionParams = {
     admin?: 0 | 1
 }
 
-type DataObjectSetPermissionResponse = {
-    irods_response: IrodsResponse
-}
-
+type DataObjectSetPermissionResponse = IrodsResponse
 
 /* Modify Permissions */
 
@@ -236,17 +201,7 @@ type DataObjectModifyPermissionsParams = {
     admin?: 0 | 1
 }
 
-type DataObjectModifyPermissionsFailure = {
-    failed_operation?: {
-        operation: ModifyPermissionsOperation
-    },
-    operation_index?: number
-    status_message?: string
-}
-
-type DataObjectModifyPermissionsResponse = {
-    irods_response: IrodsResponse & DataObjectModifyPermissionsFailure
-}
+type DataObjectModifyPermissionsResponse = IrodsResponse
 
 /* Modify Replica */
 
@@ -286,6 +241,4 @@ type DataObjectModifyReplicaParams = DataObjectModifyReplicaBaseParams &
     XOR<ResourceHierarchyType, ReplicaNumberType> &
     RequireAtLeastOne<DataObjectModifyReplicaOptionalParams>
 
-type DataObjectModifyReplicaResponse = {
-    irods_response: IrodsResponse
-}
+type DataObjectModifyReplicaResponse = IrodsResponse
