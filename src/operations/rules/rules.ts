@@ -9,7 +9,7 @@ export class RuleOperations {
     }
 
     // GET request
-    async list_rule_engines() {
+    async list_rule_engines(): Promise<ListRuleEnginesResponse> {
         return this.client.get("/rules", {
             params: {
                 op: "list_rule_engines"
@@ -17,7 +17,7 @@ export class RuleOperations {
         })
     }
 
-    async execute(params: RuleExecuteParams): Promise<AxiosResponse<any, any>> {
+    async execute(params: RuleExecuteParams): Promise<RuleExecuteResponse> {
         return this.client.post("/rules",
             toURLSearchParams({
                 op: 'execute',
@@ -26,7 +26,7 @@ export class RuleOperations {
         );
     }
 
-    async remove_delay_rule(params: RuleRemoveDelayRuleParams): Promise<AxiosResponse<any, any>> {
+    async remove_delay_rule(params: RuleRemoveDelayRuleParams): Promise<RuleRemoveDelayRuleResponse> {
         return this.client.post("/rules",
             toURLSearchParams({
                 op: 'remove_delay_rule',
