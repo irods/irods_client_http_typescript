@@ -1,3 +1,5 @@
+/* Touch */
+
 type DataObjectTouchParams = {
     lpath: string,
     "no-create"?: 0 | 1,
@@ -7,12 +9,24 @@ type DataObjectTouchParams = {
     "reference"?: string
 }
 
+type DataObjectTouchResponse = {
+    irods_response: IrodsResponse
+}
+
+/* Remove */
+
 type DataObjectRemoveParams = {
     lpath: string,
     "catalog-only": 0 | 1,
     "no-trash": 0 | 1,
     admin?: 0 | 1
 }
+
+type DataObjectRemoveResponse = {
+    irods_response: IrodsResponse
+}
+
+/* Calculate Checksum */
 
 type DataObjectCalculateChecksumParams = {
     lpath: string,
@@ -23,6 +37,13 @@ type DataObjectCalculateChecksumParams = {
     admin?: 0 | 1
 }
 
+type DataObjectCalculateChecksumResponse = {
+    irods_response: IrodsResponse,
+    checksum: string
+}
+
+/* Verify Checksum */
+
 type DataObjectVerifyChecksumParams = {
     lpath: string,
     resource?: string,
@@ -31,15 +52,41 @@ type DataObjectVerifyChecksumParams = {
     admin?: 0 | 1
 }
 
+type DataObjectVerifyChecksumResponse = {
+    irods_response: IrodsResponse,
+    results?: object,
+    r_error_info: [{ status: number, message: string }]
+}
+
+/* Stat */
+
 type DataObjectStatParams = {
     lpath: string,
     ticket?: string
 }
 
+type DataObjectStatResponse = {
+    irods_response: IrodsResponse,
+    type: string,
+    permissions: [Permission],
+    size: number,
+    checksum: string,
+    registered: boolean,
+    modified_at: number
+}
+
+/* Rename */
+
 type DataObjectRenameParams = {
     "old-lpath": string,
     "new-lpath": string
 }
+
+type DataObjectRenameResponse = {
+    irods_response: IrodsResponse
+}
+
+/* Copy */
 
 type DataObjectCopyParams = {
     "src-lpath": string,
@@ -49,6 +96,12 @@ type DataObjectCopyParams = {
     overwrite?: 0 | 1
 }
 
+type DataObjectCopyResponse = {
+    irods_response: IrodsResponse
+}
+
+/* Replicate */
+
 type DataObjectReplicateParams = {
     lpath: string,
     "src-resource": string,
@@ -56,12 +109,24 @@ type DataObjectReplicateParams = {
     admin?: 0 | 1
 }
 
+type DataObjectReplicateResponse = {
+    irods_response: IrodsResponse
+}
+
+/* Trim */
+
 type DataObjectTrimParams = {
     lpath: string,
     "replica-number": number,
     "catalog-only"?: 0 | 1,
     admin?: 0 | 1
 }
+
+type DataObjectTrimResponse = {
+    irods_response: IrodsResponse
+}
+
+/* Register */
 
 type DataObjectRegisterParams = {
     lpath: string,
@@ -72,12 +137,22 @@ type DataObjectRegisterParams = {
     checksum?: string
 }
 
+type DataObjectRegisterResponse = {
+    irods_response: IrodsResponse
+}
+
+/* Read */
+
 type DataObjectReadParams = {
     lpath: string,
     offset?: number,
     count?: number,
     ticket?: string
 }
+
+type DataObjectReadResponse = string
+
+/* Write */
 
 type DataObjectWriteParams = {
     lpath: string,
@@ -88,7 +163,13 @@ type DataObjectWriteParams = {
     bytes: Buffer, // You can use Buffer for binary data
     "parallel-write-handle"?: string,
     "stream-index"?: number
-};
+}
+
+type DataObjectWriteResponse = {
+    irods_response: IrodsResponse
+}
+
+/* Parallel Write Init */
 
 type DataObjectParallelWriteInitParams = {
     lpath: string,
@@ -98,15 +179,42 @@ type DataObjectParallelWriteInitParams = {
     ticket?: string
 }
 
+type DataObjectParallelWriteInitResponse = {
+    irods_response: IrodsResponse,
+    parallel_write_handle: string
+}
+
+/* Parallel Write Shutdown */
+
 type DataObjectParallelWriteShutdownParams = {
     "parallel-write-handle": string
 }
+
+type DataObjectParallelWriteShutdownResponse = {
+    irods_response: IrodsResponse,
+}
+
+/* Modify Metadata */
 
 type DataObjectModifyMetadataParams = {
     lpath: string,
     operations: [AVUOperation],
     admin?: 0 | 1
 }
+
+type DataObjectModifyMetadataFailure = {
+    failed_operation?: {
+        operation: AVUOperation
+    },
+    operation_index?: number,
+    status_message?: string
+}
+
+type DataObjectModifyMetadataResponse = {
+    irods_response: IrodsResponse & DataObjectModifyMetadataFailure,
+}
+
+/* Set Permission */
 
 type DataObjectSetPermissionParams = {
     lpath: string,
@@ -115,11 +223,32 @@ type DataObjectSetPermissionParams = {
     admin?: 0 | 1
 }
 
+type DataObjectSetPermissionResponse = {
+    irods_response: IrodsResponse
+}
+
+
+/* Modify Permissions */
+
 type DataObjectModifyPermissionsParams = {
     lpath: string,
     operations: [ModifyPermissionsOperation],
     admin?: 0 | 1
 }
+
+type DataObjectModifyPermissionsFailure = {
+    failed_operation?: {
+        operation: ModifyPermissionsOperation
+    },
+    operation_index?: number
+    status_message?: string
+}
+
+type DataObjectModifyPermissionsResponse = {
+    irods_response: IrodsResponse & DataObjectModifyPermissionsFailure
+}
+
+/* Modify Replica */
 
 // Separate resource hierarchy and replica number, make them mutually exclusive fields
 
@@ -156,3 +285,7 @@ type DataObjectModifyReplicaBaseParams = {
 type DataObjectModifyReplicaParams = DataObjectModifyReplicaBaseParams &
     XOR<ResourceHierarchyType, ReplicaNumberType> &
     RequireAtLeastOne<DataObjectModifyReplicaOptionalParams>
+
+type DataObjectModifyReplicaResponse = {
+    irods_response: IrodsResponse
+}
