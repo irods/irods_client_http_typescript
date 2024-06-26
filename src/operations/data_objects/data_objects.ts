@@ -8,70 +8,70 @@ export class DataObjectOperations {
         this.client = client;
     }
 
-    async touch(params: DataObjectTouchParams): Promise<void | AxiosResponse<any, any>> {
+    async touch(params: DataObjectTouchParams): Promise<void | AxiosResponse> {
         return this.client.post("/data-objects",
             toURLSearchParams({ op: "touch", ...params })
         )
     }
 
-    async remove(params: DataObjectRemoveParams): Promise<AxiosResponse<any, any>> {
+    async remove(params: DataObjectRemoveParams): Promise<AxiosResponse> {
         return this.client.post("/data-objects",
             toURLSearchParams({ op: "remove", ...params })
         )
     }
 
-    async calculate_checksum(params: DataObjectCalculateChecksumParams): Promise<void | AxiosResponse<any, any>> {
+    async calculate_checksum(params: DataObjectCalculateChecksumParams): Promise<void | AxiosResponse> {
         return this.client.post("/data-objects",
             toURLSearchParams({ op: "calculate_checksum", ...params })
         )
     }
 
     // GET request
-    async verify_checksum(params: DataObjectVerifyChecksumParams): Promise<void | AxiosResponse<any, any>> {
+    async verify_checksum(params: DataObjectVerifyChecksumParams): Promise<void | AxiosResponse> {
         return this.client.get("/data-objects",
             { params: { op: "verify_checksum", ...params } }
         )
     }
 
     // GET request
-    async stat(params: DataObjectStatParams): Promise<AxiosResponse<any, any>> {
+    async stat(params: DataObjectStatParams): Promise<AxiosResponse> {
         return this.client.get("/data-objects",
             { params: { op: "stat", ...params } }
         )
     }
 
-    async rename(params: DataObjectRenameParams): Promise<AxiosResponse<any, any>> {
+    async rename(params: DataObjectRenameParams): Promise<AxiosResponse> {
         return this.client.post("/data-objects",
             toURLSearchParams({ op: "rename", ...params })
         )
     }
 
-    async copy(params: DataObjectCopyParams): Promise<AxiosResponse<any, any>> {
+    async copy(params: DataObjectCopyParams): Promise<AxiosResponse> {
         return this.client.post("/data-objects",
             toURLSearchParams({ op: "copy", ...params })
         )
     }
 
-    async replicate(params: DataObjectReplicateParams): Promise<AxiosResponse<any, any>> {
+    async replicate(params: DataObjectReplicateParams): Promise<AxiosResponse> {
         return this.client.post("/data-objects",
             toURLSearchParams({ op: "replicate", ...params })
         )
     }
 
-    async trim(params: DataObjectTrimParams): Promise<void | AxiosResponse<any, any>> {
+    async trim(params: DataObjectTrimParams): Promise<void | AxiosResponse> {
         return this.client.post("/data-objects",
             toURLSearchParams({ op: "trim", ...params })
         )
     }
 
-    async register(params: DataObjectRegisterParams): Promise<void | AxiosResponse<any, any>> {
+    async register(params: DataObjectRegisterParams): Promise<void | AxiosResponse> {
         return this.client.post("/data-objects",
             toURLSearchParams({ op: "register", ...params })
         )
     }
 
     // GET request
-    async read(params: DataObjectReadParams): Promise<void | AxiosResponse<any, any>> {
+    async read(params: DataObjectReadParams): Promise<void | AxiosResponse> {
         return this.client.get("/data-objects",
             { params: { op: "read", ...params } }
         )
@@ -87,7 +87,7 @@ export class DataObjectOperations {
         }
     */
 
-    async write(params: DataObjectWriteParams): Promise<void | AxiosResponse<any, any>> {
+    async write(params: DataObjectWriteParams): Promise<void | AxiosResponse> {
         return this.client.post("/data-objects",
             toFormData({ op: "write", ...params }),
             {
@@ -98,37 +98,37 @@ export class DataObjectOperations {
         )
     }
 
-    async parallel_write_init(params: DataObjectParallelWriteInitParams): Promise<void | AxiosResponse<any, any>> {
+    async parallel_write_init(params: DataObjectParallelWriteInitParams): Promise<void | AxiosResponse> {
         return this.client.post("/data-objects",
             toURLSearchParams({ op: "parallel_write_init", ...params })
         )
     }
 
-    async parallel_write_shutdown(params: DataObjectParallelWriteShutdownParams): Promise<AxiosResponse<any, any>> {
+    async parallel_write_shutdown(params: DataObjectParallelWriteShutdownParams): Promise<AxiosResponse> {
         return this.client.post("/data-objects",
             toURLSearchParams({ op: "parallel_write_shutdown", ...params })
         )
     }
 
-    async modify_metadata(params: DataObjectModifyMetadataParams): Promise<AxiosResponse<any, any>> {
+    async modify_metadata(params: DataObjectModifyMetadataParams): Promise<AxiosResponse> {
         return this.client.post("/data-objects",
             toURLSearchParams({ op: "modify_metadata", ...params })
         )
     }
 
-    async set_permission(params: DataObjectSetPermissionParams): Promise<AxiosResponse<any, any>> {
+    async set_permission(params: DataObjectSetPermissionParams): Promise<AxiosResponse> {
         return this.client.post("/data-objects",
             toURLSearchParams({ op: "set_permission", ...params })
         )
     }
 
-    async modify_permissions(params: DataObjectModifyPermissionsParams): Promise<AxiosResponse<any, any>> {
+    async modify_permissions(params: DataObjectModifyPermissionsParams): Promise<AxiosResponse> {
         return this.client.post("/data-objects",
             toURLSearchParams({ op: "modify_permissions", ...params })
         )
     }
 
-    async modify_replica(params: DataObjectModifyReplicaParams): Promise<AxiosResponse<any, any>> {
+    async modify_replica(params: DataObjectModifyReplicaParams): Promise<AxiosResponse> {
         return this.client.post("/data-objects",
             toURLSearchParams({ op: "modify_replica", ...params })
         )

@@ -7,5 +7,8 @@ const urlComponents: URLComponentsType = {
 }
 
 const api = new Wrapper(urlComponents, "alice", "alicepass");
+const res = await api.collections.list({ lpath: "/tempZone/home/alice" })
+// const res = await api.collections.remove({ lpath: "/tempZone/home/testing" })
 
-// console.log(res?.data)
+// const res = await api.collections.stat({ lpath: "/tempZone/home/rods" })
+console.log(res)

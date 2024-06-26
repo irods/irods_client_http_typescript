@@ -10,6 +10,7 @@ import {
     UserGroupOperations,
     ZoneOperations
 } from "./operations"
+import { toURLSearchParams } from './utils/toURLSearchParams';
 
 
 class Wrapper {
@@ -56,18 +57,17 @@ class Wrapper {
         this.client.interceptors.response.use((response) => {
             // Any status code that lie within the range of 2xx cause this function to trigger
             // Do something with response data
-            return response;
+            return response.data;
         }, (error: AxiosError) => {
             // Any status codes that falls outside the range of 2xx cause this function to trigger
             // Do something with response error
             // this.checkToken()
-            // console.log(error)
+
+            this.handleError(error);
             if (error.response?.status === 502) {
                 console.log("Token is expired, re-authentication needed")
-                return Promise.reject(error)
             }
-            // this.handleError(error);
-            // return Promise.reject(error);
+            return Promise.reject(error);
         });
 
         this.collections = new CollectionOperations(this.client);
@@ -119,7 +119,7 @@ class Wrapper {
                     else
                         console.log("Error getting auth token.")
                 })
-        } catch (error) {
+        } catch (error: any) {
             this.handleError(error);
         }
     }
@@ -128,7 +128,7 @@ class Wrapper {
         return axios.get(`${this.baseURL}/info`)
     }
 
-    private handleError(error: any): void {
+    private handleError(error: AxiosError): void {
         if (error.response) {
             console.error('Error response:', error.response.data);
             console.error('Status:', error.response.status);

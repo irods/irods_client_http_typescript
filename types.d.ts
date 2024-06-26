@@ -17,6 +17,18 @@ type ModifyPermissionsOperation = {
     acl: "null" | "read" | "write" | "own"
 }
 
+type IrodsResponse = {
+    status_code: number,
+    status_message?: string
+}
+
+type Permission = {
+    name: string,
+    zone: string,
+    type: string,
+    perm: string
+}
+
 // Mutually exclusive fields: https://stackoverflow.com/questions/42123407/does-typescript-support-mutually-exclusive-types
 type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never };
 
