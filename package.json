@@ -18,15 +18,15 @@
     },
     "homepage": "https://github.com/farbs03/irods-http-api-wrapper-js#readme",
     "dependencies": {
-        "axios": "^1.7.2",
-        "typedoc-plugin-missing-exports": "^3.0.0"
+        "axios": "^1.7.2"
     },
     "devDependencies": {
         "@types/axios": "^0.14.0",
         "@types/node": "^20.14.6",
         "ts-node": "^10.9.2",
         "tsx": "^4.15.6",
-        "typedoc": "^0.26.2",
+        "typedoc": "^0.25.13",
+        "typedoc-plugin-missing-exports": "^2.3.0",
         "typescript": "^5.4.5"
     }
 }

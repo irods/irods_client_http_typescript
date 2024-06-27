@@ -1,33 +1,33 @@
 /* Create */
 
-export type CollectionCreateParams = {
+type CollectionCreateParams = {
     lpath: string
     'create-intermediates'?: 0 | 1
 }
 
-export type CollectionCreateResponse = IrodsResponse & {
+type CollectionCreateResponse = IrodsResponse & {
     created?: 0 | 1
 }
 
 /* Remove */
 
-export type CollectionRemoveParams = {
+type CollectionRemoveParams = {
     lpath: string
     recurse?: 0 | 1
     'no-trash'?: 0 | 1
 }
 
-export type CollectionRemoveResponse = IrodsResponse
+type CollectionRemoveResponse = IrodsResponse
 
 /* Stat */
 
 // GET request
-export type CollectionStatParams = {
+type CollectionStatParams = {
     lpath: string
     ticket?: string
 }
 
-export type CollectionStatResponse = IrodsResponse & {
+type CollectionStatResponse = IrodsResponse & {
     type: string
     inheritance_enabled: boolean
     permissions: [Permission]
@@ -38,72 +38,72 @@ export type CollectionStatResponse = IrodsResponse & {
 /* List */
 
 // GET request
-export type CollectionListParams = {
+type CollectionListParams = {
     lpath: string
     recurse?: 0 | 1
     ticket?: string
 }
 
-export type CollectionListResponse = IrodsResponse & {
+type CollectionListResponse = IrodsResponse & {
     entries: [string]
 }
 
 /* Set Permission */
 
-export type CollectionSetPermissionParams = {
+type CollectionSetPermissionParams = {
     lpath: string
     'entity-name': string
     permission: 'null' | 'read' | 'write' | 'own'
     admin?: 0 | 1
 }
 
-export type CollectionSetPermissionResponse = IrodsResponse
+type CollectionSetPermissionResponse = IrodsResponse
 
 /* Set Inheritance */
 
-export type CollectionSetInheritanceParams = {
+type CollectionSetInheritanceParams = {
     lpath: string
     enable: 0 | 1
     admin?: 0 | 1
 }
 
-export type CollectionSetInheritanceResponse = IrodsResponse
+type CollectionSetInheritanceResponse = IrodsResponse
 
 /* Modify Permissions */
 
-export type CollectionModifyPermissionsParams = {
+type CollectionModifyPermissionsParams = {
     lpath: string
     operations: [ModifyPermissionsOperation]
     admin?: 0 | 1
 }
 
-export type CollectionModifyPermissionsResponse = IrodsResponse
+type CollectionModifyPermissionsResponse = IrodsResponse
 
 /* Modify Metadata */
 
-export type CollectionModifyMetadataParams = {
+type CollectionModifyMetadataParams = {
     lpath: string
     operations: [AVUOperation]
     admin?: 0 | 1
 }
 
-export type CollectionModifyMetadataResponse = IrodsResponse
+type CollectionModifyMetadataResponse = IrodsResponse
 
 /* Rename */
 
-export type CollectionRenameParams = {
+type CollectionRenameParams = {
     'old-lpath': string
     'new-lpath': string
 }
 
-export type CollectionRenameResponse = IrodsResponse
+type CollectionRenameResponse = IrodsResponse
 
 /* Touch */
 
-export type CollectionTouchParams = {
+type CollectionTouchParams = {
     lpath: string
     'seconds-since-epoch'?: number
     reference?: string
 }
 
-export type CollectionTouchResponse = IrodsResponse
+type CollectionTouchResponse = IrodsResponse

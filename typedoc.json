@@ -1,6 +1,8 @@
 {
-    "entryPoints": ["./src/operations/collections/collections.ts"],
+    "entryPoints": ["src/operations", "src/wrapper.ts"],
+    "entryPointStrategy": "expand",
     "out": "./docs",
+    "plugin": ["typedoc-plugin-missing-exports"],
     "internalModule": "Types",
     "excludeExternals": true
 }

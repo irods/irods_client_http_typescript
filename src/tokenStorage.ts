@@ -6,7 +6,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 const TOKEN_PATH = path.join(__dirname, 'token.json')
 
-interface TokenData {
+type TokenData = {
     token: string
     expiry: string // ISO string format
 }
