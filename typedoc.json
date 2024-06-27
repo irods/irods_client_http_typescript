@@ -1,0 +1,6 @@
+{
+  "entryPoints": ["./src/operations/collections"],
+  "out": "./docs",
+  "internalModule": "Types",
+  "excludeExternals": true
+}

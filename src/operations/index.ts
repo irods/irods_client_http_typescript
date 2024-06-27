@@ -1,5 +1,5 @@
 export { CollectionOperations } from "./collections/collections";
-export { DataObjectOperations } from "./data_objects/data_objects"
+export { DataObjectOperations } from "./data_objects/data_objects";
 export { QueryOperations } from "./query/query";
 export { ResourceOperations } from "./resources/resources";
 export { RuleOperations } from "./rules/rules";
