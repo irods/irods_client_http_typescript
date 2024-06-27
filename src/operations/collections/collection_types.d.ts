@@ -1,109 +1,109 @@
 /* Create */
 
 export type CollectionCreateParams = {
-  lpath: string;
-  "create-intermediates"?: 0 | 1;
-};
+    lpath: string
+    'create-intermediates'?: 0 | 1
+}
 
 export type CollectionCreateResponse = IrodsResponse & {
-  created?: 0 | 1;
-};
+    created?: 0 | 1
+}
 
 /* Remove */
 
 export type CollectionRemoveParams = {
-  lpath: string;
-  recurse?: 0 | 1;
-  "no-trash"?: 0 | 1;
-};
+    lpath: string
+    recurse?: 0 | 1
+    'no-trash'?: 0 | 1
+}
 
-export type CollectionRemoveResponse = IrodsResponse;
+export type CollectionRemoveResponse = IrodsResponse
 
 /* Stat */
 
 // GET request
 export type CollectionStatParams = {
-  lpath: string;
-  ticket?: string;
-};
+    lpath: string
+    ticket?: string
+}
 
 export type CollectionStatResponse = IrodsResponse & {
-  type: string;
-  inheritance_enabled: boolean;
-  permissions: [Permission];
-  registered: boolean;
-  modified_at: number;
-};
+    type: string
+    inheritance_enabled: boolean
+    permissions: [Permission]
+    registered: boolean
+    modified_at: number
+}
 
 /* List */
 
 // GET request
 export type CollectionListParams = {
-  lpath: string;
-  recurse?: 0 | 1;
-  ticket?: string;
-};
+    lpath: string
+    recurse?: 0 | 1
+    ticket?: string
+}
 
 export type CollectionListResponse = IrodsResponse & {
-  entries: [string];
-};
+    entries: [string]
+}
 
 /* Set Permission */
 
 export type CollectionSetPermissionParams = {
-  lpath: string;
-  "entity-name": string;
-  permission: "null" | "read" | "write" | "own";
-  admin?: 0 | 1;
-};
+    lpath: string
+    'entity-name': string
+    permission: 'null' | 'read' | 'write' | 'own'
+    admin?: 0 | 1
+}
 
-export type CollectionSetPermissionResponse = IrodsResponse;
+export type CollectionSetPermissionResponse = IrodsResponse
 
 /* Set Inheritance */
 
 export type CollectionSetInheritanceParams = {
-  lpath: string;
-  enable: 0 | 1;
-  admin?: 0 | 1;
-};
+    lpath: string
+    enable: 0 | 1
+    admin?: 0 | 1
+}
 
-export type CollectionSetInheritanceResponse = IrodsResponse;
+export type CollectionSetInheritanceResponse = IrodsResponse
 
 /* Modify Permissions */
 
 export type CollectionModifyPermissionsParams = {
-  lpath: string;
-  operations: [ModifyPermissionsOperation];
-  admin?: 0 | 1;
-};
+    lpath: string
+    operations: [ModifyPermissionsOperation]
+    admin?: 0 | 1
+}
 
-export type CollectionModifyPermissionsResponse = IrodsResponse;
+export type CollectionModifyPermissionsResponse = IrodsResponse
 
 /* Modify Metadata */
 
 export type CollectionModifyMetadataParams = {
-  lpath: string;
-  operations: [AVUOperation];
-  admin?: 0 | 1;
-};
+    lpath: string
+    operations: [AVUOperation]
+    admin?: 0 | 1
+}
 
-export type CollectionModifyMetadataResponse = IrodsResponse;
+export type CollectionModifyMetadataResponse = IrodsResponse
 
 /* Rename */
 
 export type CollectionRenameParams = {
-  "old-lpath": string;
-  "new-lpath": string;
-};
+    'old-lpath': string
+    'new-lpath': string
+}
 
-export type CollectionRenameResponse = IrodsResponse;
+export type CollectionRenameResponse = IrodsResponse
 
 /* Touch */
 
 export type CollectionTouchParams = {
-  lpath: string;
-  "seconds-since-epoch"?: number;
-  reference?: string;
-};
+    lpath: string
+    'seconds-since-epoch'?: number
+    reference?: string
+}
 
-export type CollectionTouchResponse = IrodsResponse;
+export type CollectionTouchResponse = IrodsResponse

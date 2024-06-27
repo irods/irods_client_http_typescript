@@ -1,25 +1,25 @@
 /* List Rule Engines */
 
 type ListRuleEnginesResponse = IrodsResponse & {
-  rule_engine_plugin_instances: [string];
-};
+    rule_engine_plugin_instances: [string]
+}
 
 /* Execute */
 
 type RuleExecuteParams = {
-  "rule-text": string;
-  "rep-instance"?: string;
-};
+    'rule-text': string
+    'rep-instance'?: string
+}
 
 type RuleExecuteResponse = IrodsResponse & {
-  stdout: string;
-  stderr: string;
-};
+    stdout: string
+    stderr: string
+}
 
 /* Remove Delay Rule */
 
 type RuleRemoveDelayRuleParams = {
-  "rule-id": number;
-};
+    'rule-id': number
+}
 
-type RuleRemoveDelayRuleResponse = IrodsResponse;
+type RuleRemoveDelayRuleResponse = IrodsResponse

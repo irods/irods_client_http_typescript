@@ -1,17 +1,17 @@
-import { AxiosInstance } from "axios";
+import { AxiosInstance } from 'axios'
 
 export class ZoneOperations {
-  private client: AxiosInstance;
+    private client: AxiosInstance
 
-  constructor(client: AxiosInstance) {
-    this.client = client;
-  }
+    constructor(client: AxiosInstance) {
+        this.client = client
+    }
 
-  async report(): Promise<ZoneReportResponse> {
-    return this.client.get("/zones", {
-      params: {
-        op: "report",
-      },
-    });
-  }
+    async report(): Promise<ZoneReportResponse> {
+        return this.client.get('/zones', {
+            params: {
+                op: 'report',
+            },
+        })
+    }
 }

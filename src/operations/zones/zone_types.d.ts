@@ -1,3 +1,3 @@
 type ZoneReportResponse = IrodsResponse & {
-  zone_report: object;
-};
+    zone_report: object
+}

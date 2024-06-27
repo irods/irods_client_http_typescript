@@ -1,128 +1,128 @@
 /* Create User */
 
 type UserCreateParams = {
-  name: string;
-  zone: string;
-  "user-type"?: "rodsuser" | "groupadmin" | "rodsadmin";
-};
+    name: string
+    zone: string
+    'user-type'?: 'rodsuser' | 'groupadmin' | 'rodsadmin'
+}
 
-type UserCreateResponse = IrodsResponse;
+type UserCreateResponse = IrodsResponse
 
 /* Remove User */
 
 type UserRemoveParams = {
-  name: string;
-  zone: string;
-};
+    name: string
+    zone: string
+}
 
-type UserRemoveResponse = IrodsResponse;
+type UserRemoveResponse = IrodsResponse
 
 /* Set User Password */
 
 type UserSetPasswordParams = {
-  name: string;
-  zone: string;
-  "new-password": string;
-};
+    name: string
+    zone: string
+    'new-password': string
+}
 
-type UserSetPasswordResponse = IrodsResponse;
+type UserSetPasswordResponse = IrodsResponse
 
 /* Set User Type */
 
 type UserSetTypeParams = {
-  name: string;
-  zone: string;
-  "new-user-type": "rodsuser" | "groupadmin" | "rodsadmin";
-};
+    name: string
+    zone: string
+    'new-user-type': 'rodsuser' | 'groupadmin' | 'rodsadmin'
+}
 
-type UserSetTypeResponse = IrodsResponse;
+type UserSetTypeResponse = IrodsResponse
 
 /* Create Group */
 
 type GroupCreateParams = {
-  name: string;
-};
+    name: string
+}
 
-type GroupCreateResponse = IrodsResponse;
+type GroupCreateResponse = IrodsResponse
 
 /* Remove Group */
 
 type GroupRemoveParams = {
-  name: string;
-};
+    name: string
+}
 
-type GroupRemoveResponse = IrodsResponse;
+type GroupRemoveResponse = IrodsResponse
 
 /* Add User to Group */
 
 type UserAddToGroupParams = {
-  user: string;
-  zone: string;
-  group: string;
-};
+    user: string
+    zone: string
+    group: string
+}
 
-type UserAddToGroupResponse = IrodsResponse;
+type UserAddToGroupResponse = IrodsResponse
 
 /* Remove User from Group */
 
 type UserRemoveFromGroupParams = {
-  user: string;
-  zone: string;
-  group: string;
-};
+    user: string
+    zone: string
+    group: string
+}
 
-type UserRemoveFromGroupResponse = IrodsResponse;
+type UserRemoveFromGroupResponse = IrodsResponse
 
 /* List Users */
 
 type User = {
-  name: string;
-  zone: string;
-};
+    name: string
+    zone: string
+}
 
 type UsersResponse = IrodsResponse & {
-  users: [User];
-};
+    users: [User]
+}
 
 /* List Groups */
 
-type Group = [string, string, string];
+type Group = [string, string, string]
 
 type GroupsResponse = IrodsResponse & {
-  groups: [Group];
-};
+    groups: [Group]
+}
 
 /* Is User Member of Group */
 
 type UserMemberOfGroupParams = {
-  group: string;
-  user: string;
-  zone: string;
-};
+    group: string
+    user: string
+    zone: string
+}
 
 type UserMemberOfGroupResponse = IrodsResponse & {
-  is_member: boolean;
-};
+    is_member: boolean
+}
 
 /* User/Group Stat */
 
 type UserGroupStatParams = {
-  name: string;
-  zone: string;
-};
+    name: string
+    zone: string
+}
 
 type UserGroupStatResponse = IrodsResponse & {
-  exists: boolean;
-  id: string;
-  local_unique_name: string;
-  type: string;
-};
+    exists: boolean
+    id: string
+    local_unique_name: string
+    type: string
+}
 
 /* Group Modify */
 
 type UserGroupModifyMetadata = {
-  name: string;
-  operations: [AVUOperation];
-};
+    name: string
+    operations: [AVUOperation]
+}
 
-type UserGroupModifyMetadataResponse = IrodsResponse;
+type UserGroupModifyMetadataResponse = IrodsResponse

@@ -1,6 +1,6 @@
 {
-  "entryPoints": ["./src/operations/collections"],
-  "out": "./docs",
-  "internalModule": "Types",
-  "excludeExternals": true
+    "entryPoints": ["./src/operations/collections/collections.ts"],
+    "out": "./docs",
+    "internalModule": "Types",
+    "excludeExternals": true
 }
