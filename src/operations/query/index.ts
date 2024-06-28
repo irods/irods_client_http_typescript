@@ -1,10 +1,10 @@
-import { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
+import { AxiosError, AxiosInstance, AxiosResponse } from 'axios'
 
 export class QueryOperations {
-    private client: AxiosInstance;
+    private client: AxiosInstance
 
     constructor(client: AxiosInstance) {
-        this.client = client;
+        this.client = client
     }
 
     async execute_genquery(
@@ -16,12 +16,12 @@ export class QueryOperations {
                     op: 'execute_genquery',
                     ...params,
                 },
-            });
-            return res;
+            })
+            return res
         } catch (error) {
             if (error instanceof AxiosError)
-                console.error("Error: ", error.response?.statusText);
-            return null;
+                console.error('Error: ', error.response?.statusText)
+            return null
         }
     }
 
@@ -34,12 +34,12 @@ export class QueryOperations {
                     op: 'execute_specific_query',
                     ...params,
                 },
-            });
-            return res;
+            })
+            return res
         } catch (error) {
             if (error instanceof AxiosError)
-                console.error("Error: ", error.response?.statusText);
-            return null;
+                console.error('Error: ', error.response?.statusText)
+            return null
         }
     }
 }

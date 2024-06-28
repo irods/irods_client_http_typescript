@@ -1,10 +1,10 @@
-import { AxiosError, AxiosInstance } from 'axios';
+import { AxiosError, AxiosInstance } from 'axios'
 
 export class ZoneOperations {
-    private client: AxiosInstance;
+    private client: AxiosInstance
 
     constructor(client: AxiosInstance) {
-        this.client = client;
+        this.client = client
     }
 
     async report(): Promise<null | ZoneReportResponse> {
@@ -13,12 +13,12 @@ export class ZoneOperations {
                 params: {
                     op: 'report',
                 },
-            });
-            return res.data;
+            })
+            return res.data
         } catch (error) {
             if (error instanceof AxiosError)
-                console.error("Error: ", error.response?.statusText);
-            return null;
+                console.error('Error: ', error.response?.statusText)
+            return null
         }
     }
 }

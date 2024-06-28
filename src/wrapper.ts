@@ -79,8 +79,10 @@ class Wrapper {
                 // Any status codes that falls outside the range of 2xx cause this function to trigger
                 // Do something with response error
                 if (error.response?.status === 502) {
-                    console.log("Oh brother")
-                    this.authenticate().then(() => console.log("Fuckckjfdklsfkjlds"))
+                    console.log('Oh brother')
+                    this.authenticate().then(() =>
+                        console.log('Fuckckjfdklsfkjlds')
+                    )
                     let originalReq = error.config
                     console.log(originalReq)
                     // if (originalReq) {
@@ -106,14 +108,14 @@ class Wrapper {
         const tokenData = loadToken()
         if (tokenData) {
             this.token = tokenData.token
-            const isExpired = new Date(tokenData.expiry) < new Date();
+            const isExpired = new Date(tokenData.expiry) < new Date()
             if (!isExpired) {
-                console.log("Re-using token, not expired")
-                this.token = tokenData.token;
+                console.log('Re-using token, not expired')
+                this.token = tokenData.token
             } else {
-                console.log("Token is expired, renewing credentials")
+                console.log('Token is expired, renewing credentials')
                 // clearToken(); // Clear expired token
-                await this.authenticate(); // re-authenticate the user
+                await this.authenticate() // re-authenticate the user
             }
         } else {
             console.log('No auth credentials, creating credentials')
@@ -124,22 +126,22 @@ class Wrapper {
     }
 
     async authenticate(): Promise<void> {
-        console.log("Authenticating")
+        console.log('Authenticating')
         await axios
-                .post(`${this.baseURL}/authenticate`, null, {
-                    auth: {
-                        username: this.username,
-                        password: this.password,
-                    },
-                })
-                .then((response) => {
-                    console.log("Response: ", response)
-                    saveToken(response.data)
-                    this.token = response.data
-                })
-                .catch((error) => {
-                    this.handleError(error)
-                })
+            .post(`${this.baseURL}/authenticate`, null, {
+                auth: {
+                    username: this.username,
+                    password: this.password,
+                },
+            })
+            .then((response) => {
+                console.log('Response: ', response)
+                saveToken(response.data)
+                this.token = response.data
+            })
+            .catch((error) => {
+                this.handleError(error)
+            })
     }
 
     async get_information(): Promise<ServerInfo> {

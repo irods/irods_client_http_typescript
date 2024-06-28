@@ -1,11 +1,11 @@
-import { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
-import { toURLSearchParams } from '../../utils/toURLSearchParams';
+import { AxiosError, AxiosInstance, AxiosResponse } from 'axios'
+import { toURLSearchParams } from '../../utils/toURLSearchParams'
 
 export class RuleOperations {
-    private client: AxiosInstance;
+    private client: AxiosInstance
 
     constructor(client: AxiosInstance) {
-        this.client = client;
+        this.client = client
     }
 
     async list_rule_engines(): Promise<null | ListRuleEnginesResponse> {
@@ -14,16 +14,18 @@ export class RuleOperations {
                 params: {
                     op: 'list_rule_engines',
                 },
-            });
-            return res.data;
+            })
+            return res.data
         } catch (error) {
             if (error instanceof AxiosError)
-                console.error("Error: ", error.response?.statusText);
-            return null;
+                console.error('Error: ', error.response?.statusText)
+            return null
         }
     }
 
-    async execute(params: RuleExecuteParams): Promise<null | RuleExecuteResponse> {
+    async execute(
+        params: RuleExecuteParams
+    ): Promise<null | RuleExecuteResponse> {
         try {
             const res = await this.client.post(
                 '/rules',
@@ -31,12 +33,12 @@ export class RuleOperations {
                     op: 'execute',
                     ...params,
                 })
-            );
-            return res.data;
+            )
+            return res.data
         } catch (error) {
             if (error instanceof AxiosError)
-                console.error("Error: ", error.response?.statusText);
-            return null;
+                console.error('Error: ', error.response?.statusText)
+            return null
         }
     }
 
@@ -50,12 +52,12 @@ export class RuleOperations {
                     op: 'remove_delay_rule',
                     ...params,
                 })
-            );
-            return res.data;
+            )
+            return res.data
         } catch (error) {
             if (error instanceof AxiosError)
-                console.error("Error: ", error.response?.statusText);
-            return null;
+                console.error('Error: ', error.response?.statusText)
+            return null
         }
     }
 }

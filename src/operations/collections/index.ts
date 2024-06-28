@@ -1,11 +1,11 @@
-import { AxiosError, AxiosInstance } from 'axios';
-import { toURLSearchParams } from '../../utils/toURLSearchParams';
+import { AxiosError, AxiosInstance } from 'axios'
+import { toURLSearchParams } from '../../utils/toURLSearchParams'
 
 export class CollectionOperations {
-    private client: AxiosInstance;
+    private client: AxiosInstance
 
     constructor(client: AxiosInstance) {
-        this.client = client;
+        this.client = client
     }
 
     async create(
@@ -15,12 +15,12 @@ export class CollectionOperations {
             const res = await this.client.post(
                 '/collections',
                 toURLSearchParams({ op: 'create', ...params })
-            );
-            return res.data;
+            )
+            return res.data
         } catch (error) {
             if (error instanceof AxiosError)
-                console.error("Error: ", error.response?.statusText);
-            return null;
+                console.error('Error: ', error.response?.statusText)
+            return null
         }
     }
 
@@ -31,25 +31,27 @@ export class CollectionOperations {
             const res = await this.client.post(
                 '/collections',
                 toURLSearchParams({ op: 'remove', ...params })
-            );
-            return res.data;
+            )
+            return res.data
         } catch (error) {
             if (error instanceof AxiosError)
-                console.error("Error: ", error.response?.statusText);
-            return null;
+                console.error('Error: ', error.response?.statusText)
+            return null
         }
     }
 
-    async stat(params: CollectionStatParams): Promise<null | CollectionStatResponse> {
+    async stat(
+        params: CollectionStatParams
+    ): Promise<null | CollectionStatResponse> {
         try {
             const res = await this.client.get('/collections', {
                 params: { op: 'stat', ...params },
-            });
-            return res.data;
+            })
+            return res.data
         } catch (error) {
             if (error instanceof AxiosError)
-                console.error("Error: ", error.response?.statusText);
-            return null;
+                console.error('Error: ', error.response?.statusText)
+            return null
         }
     }
 
@@ -59,12 +61,12 @@ export class CollectionOperations {
         try {
             const res = await this.client.get('/collections', {
                 params: { op: 'list', ...params },
-            });
-            return res.data;
+            })
+            return res.data
         } catch (error) {
             if (error instanceof AxiosError)
-                console.error("Error: ", error.response?.statusText);
-            return null;
+                console.error('Error: ', error.response?.statusText)
+            return null
         }
     }
 
@@ -75,12 +77,12 @@ export class CollectionOperations {
             const res = await this.client.post(
                 '/collections',
                 toURLSearchParams({ op: 'set_permission', ...params })
-            );
-            return res.data;
+            )
+            return res.data
         } catch (error) {
             if (error instanceof AxiosError)
-                console.error("Error: ", error.response?.statusText);
-            return null;
+                console.error('Error: ', error.response?.statusText)
+            return null
         }
     }
 
@@ -91,12 +93,12 @@ export class CollectionOperations {
             const res = await this.client.post(
                 '/collections',
                 toURLSearchParams({ op: 'set_inheritance', ...params })
-            );
-            return res.data;
+            )
+            return res.data
         } catch (error) {
             if (error instanceof AxiosError)
-                console.error("Error: ", error.response?.statusText);
-            return null;
+                console.error('Error: ', error.response?.statusText)
+            return null
         }
     }
 
@@ -107,12 +109,12 @@ export class CollectionOperations {
             const res = await this.client.post(
                 '/collections',
                 toURLSearchParams({ op: 'modify_permissions', ...params })
-            );
-            return res.data;
+            )
+            return res.data
         } catch (error) {
             if (error instanceof AxiosError)
-                console.error("Error: ", error.response?.statusText);
-            return null;
+                console.error('Error: ', error.response?.statusText)
+            return null
         }
     }
 
@@ -123,12 +125,12 @@ export class CollectionOperations {
             const res = await this.client.post(
                 '/collections',
                 toURLSearchParams({ op: 'modify_metadata', ...params })
-            );
-            return res.data;
+            )
+            return res.data
         } catch (error) {
             if (error instanceof AxiosError)
-                console.error("Error: ", error.response?.statusText);
-            return null;
+                console.error('Error: ', error.response?.statusText)
+            return null
         }
     }
 
@@ -139,12 +141,12 @@ export class CollectionOperations {
             const res = await this.client.post(
                 '/collections',
                 toURLSearchParams({ op: 'rename', ...params })
-            );
-            return res.data;
+            )
+            return res.data
         } catch (error) {
             if (error instanceof AxiosError)
-                console.error("Error: ", error.response?.statusText);
-            return null;
+                console.error('Error: ', error.response?.statusText)
+            return null
         }
     }
 
@@ -155,12 +157,12 @@ export class CollectionOperations {
             const res = await this.client.post(
                 '/collections',
                 toURLSearchParams({ op: 'touch', ...params })
-            );
-            return res.data;
+            )
+            return res.data
         } catch (error) {
             if (error instanceof AxiosError)
-                console.error("Error: ", error.response?.statusText);
-            return null;
+                console.error('Error: ', error.response?.statusText)
+            return null
         }
     }
 }

@@ -1,11 +1,11 @@
-import { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
-import { toURLSearchParams } from '../../utils/toURLSearchParams';
+import { AxiosError, AxiosInstance, AxiosResponse } from 'axios'
+import { toURLSearchParams } from '../../utils/toURLSearchParams'
 
 export class ResourceOperations {
-    private client: AxiosInstance;
+    private client: AxiosInstance
 
     constructor(client: AxiosInstance) {
-        this.client = client;
+        this.client = client
     }
 
     async create(
@@ -15,12 +15,12 @@ export class ResourceOperations {
             const res = await this.client.post(
                 '/resources',
                 toURLSearchParams({ op: 'create', ...params })
-            );
-            return res.data;
+            )
+            return res.data
         } catch (error) {
             if (error instanceof AxiosError)
-                console.error("Error: ", error.response?.statusText);
-            return null;
+                console.error('Error: ', error.response?.statusText)
+            return null
         }
     }
 
@@ -31,12 +31,12 @@ export class ResourceOperations {
             const res = await this.client.post(
                 '/resources',
                 toURLSearchParams({ op: 'remove', ...params })
-            );
-            return res.data;
+            )
+            return res.data
         } catch (error) {
             if (error instanceof AxiosError)
-                console.error("Error: ", error.response?.statusText);
-            return null;
+                console.error('Error: ', error.response?.statusText)
+            return null
         }
     }
 
@@ -47,12 +47,12 @@ export class ResourceOperations {
             const res = await this.client.post(
                 '/resources',
                 toURLSearchParams({ op: 'add_child', ...params })
-            );
-            return res.data;
+            )
+            return res.data
         } catch (error) {
             if (error instanceof AxiosError)
-                console.error("Error: ", error.response?.statusText);
-            return null;
+                console.error('Error: ', error.response?.statusText)
+            return null
         }
     }
 
@@ -63,12 +63,12 @@ export class ResourceOperations {
             const res = await this.client.post(
                 '/resources',
                 toURLSearchParams({ op: 'remove_child', ...params })
-            );
-            return res.data;
+            )
+            return res.data
         } catch (error) {
             if (error instanceof AxiosError)
-                console.error("Error: ", error.response?.statusText);
-            return null;
+                console.error('Error: ', error.response?.statusText)
+            return null
         }
     }
 
@@ -79,25 +79,27 @@ export class ResourceOperations {
             const res = await this.client.post(
                 '/resources',
                 toURLSearchParams({ op: 'rebalance', ...params })
-            );
-            return res.data;
+            )
+            return res.data
         } catch (error) {
             if (error instanceof AxiosError)
-                console.error("Error: ", error.response?.statusText);
-            return null;
+                console.error('Error: ', error.response?.statusText)
+            return null
         }
     }
 
-    async stat(params: ResourceStatParams): Promise<null | ResourceStatResponse> {
+    async stat(
+        params: ResourceStatParams
+    ): Promise<null | ResourceStatResponse> {
         try {
             const res = await this.client.get('/resources', {
                 params: { op: 'stat', ...params },
-            });
-            return res.data;
+            })
+            return res.data
         } catch (error) {
             if (error instanceof AxiosError)
-                console.error("Error: ", error.response?.statusText);
-            return null;
+                console.error('Error: ', error.response?.statusText)
+            return null
         }
     }
 
@@ -108,12 +110,12 @@ export class ResourceOperations {
             const res = await this.client.post(
                 '/resources',
                 toURLSearchParams({ op: 'modify_metadata', ...params })
-            );
-            return res.data;
+            )
+            return res.data
         } catch (error) {
             if (error instanceof AxiosError)
-                console.error("Error: ", error.response?.statusText);
-            return null;
+                console.error('Error: ', error.response?.statusText)
+            return null
         }
     }
 }

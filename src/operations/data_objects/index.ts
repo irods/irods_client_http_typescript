@@ -1,11 +1,11 @@
-import { AxiosError, AxiosInstance } from 'axios';
-import { toURLSearchParams } from '../../utils/toURLSearchParams';
+import { AxiosError, AxiosInstance } from 'axios'
+import { toURLSearchParams } from '../../utils/toURLSearchParams'
 
 export class DataObjectOperations {
-    private client: AxiosInstance;
+    private client: AxiosInstance
 
     constructor(client: AxiosInstance) {
-        this.client = client;
+        this.client = client
     }
 
     async touch(
@@ -15,12 +15,12 @@ export class DataObjectOperations {
             const res = await this.client.post(
                 '/data-objects',
                 toURLSearchParams({ op: 'touch', ...params })
-            );
-            return res.data;
+            )
+            return res.data
         } catch (error) {
             if (error instanceof AxiosError)
-                console.error("Error: ", error.response?.statusText);
-            return null;
+                console.error('Error: ', error.response?.statusText)
+            return null
         }
     }
 
@@ -31,12 +31,12 @@ export class DataObjectOperations {
             const res = await this.client.post(
                 '/data-objects',
                 toURLSearchParams({ op: 'remove', ...params })
-            );
-            return res.data;
+            )
+            return res.data
         } catch (error) {
             if (error instanceof AxiosError)
-                console.error("Error: ", error.response?.statusText);
-            return null;
+                console.error('Error: ', error.response?.statusText)
+            return null
         }
     }
 
@@ -47,12 +47,12 @@ export class DataObjectOperations {
             const res = await this.client.post(
                 '/data-objects',
                 toURLSearchParams({ op: 'calculate_checksum', ...params })
-            );
-            return res.data;
+            )
+            return res.data
         } catch (error) {
             if (error instanceof AxiosError)
-                console.error("Error: ", error.response?.statusText);
-            return null;
+                console.error('Error: ', error.response?.statusText)
+            return null
         }
     }
 
@@ -62,12 +62,12 @@ export class DataObjectOperations {
         try {
             const res = await this.client.get('/data-objects', {
                 params: { op: 'verify_checksum', ...params },
-            });
-            return res.data;
+            })
+            return res.data
         } catch (error) {
             if (error instanceof AxiosError)
-                console.error("Error: ", error.response?.statusText);
-            return null;
+                console.error('Error: ', error.response?.statusText)
+            return null
         }
     }
 
@@ -77,12 +77,12 @@ export class DataObjectOperations {
         try {
             const res = await this.client.get('/data-objects', {
                 params: { op: 'stat', ...params },
-            });
-            return res.data;
+            })
+            return res.data
         } catch (error) {
             if (error instanceof AxiosError)
-                console.error("Error: ", error.response?.statusText);
-            return null;
+                console.error('Error: ', error.response?.statusText)
+            return null
         }
     }
 
@@ -93,12 +93,12 @@ export class DataObjectOperations {
             const res = await this.client.post(
                 '/data-objects',
                 toURLSearchParams({ op: 'rename', ...params })
-            );
-            return res.data;
+            )
+            return res.data
         } catch (error) {
             if (error instanceof AxiosError)
-                console.error("Error: ", error.response?.statusText);
-            return null;
+                console.error('Error: ', error.response?.statusText)
+            return null
         }
     }
 
@@ -109,12 +109,12 @@ export class DataObjectOperations {
             const res = await this.client.post(
                 '/data-objects',
                 toURLSearchParams({ op: 'parallel_write_init', ...params })
-            );
-            return res.data;
+            )
+            return res.data
         } catch (error) {
             if (error instanceof AxiosError)
-                console.error("Error: ", error.response?.statusText);
-            return null;
+                console.error('Error: ', error.response?.statusText)
+            return null
         }
     }
 
@@ -125,12 +125,12 @@ export class DataObjectOperations {
             const res = await this.client.post(
                 '/data-objects',
                 toURLSearchParams({ op: 'parallel_write_shutdown', ...params })
-            );
-            return res.data;
+            )
+            return res.data
         } catch (error) {
             if (error instanceof AxiosError)
-                console.error("Error: ", error.response?.statusText);
-            return null;
+                console.error('Error: ', error.response?.statusText)
+            return null
         }
     }
 
@@ -141,12 +141,12 @@ export class DataObjectOperations {
             const res = await this.client.post(
                 '/data-objects',
                 toURLSearchParams({ op: 'modify_metadata', ...params })
-            );
-            return res.data;
+            )
+            return res.data
         } catch (error) {
             if (error instanceof AxiosError)
-                console.error("Error: ", error.response?.statusText);
-            return null;
+                console.error('Error: ', error.response?.statusText)
+            return null
         }
     }
 
@@ -157,12 +157,12 @@ export class DataObjectOperations {
             const res = await this.client.post(
                 '/data-objects',
                 toURLSearchParams({ op: 'set_permission', ...params })
-            );
-            return res.data;
+            )
+            return res.data
         } catch (error) {
             if (error instanceof AxiosError)
-                console.error("Error: ", error.response?.statusText);
-            return null;
+                console.error('Error: ', error.response?.statusText)
+            return null
         }
     }
 
@@ -173,12 +173,12 @@ export class DataObjectOperations {
             const res = await this.client.post(
                 '/data-objects',
                 toURLSearchParams({ op: 'modify_permissions', ...params })
-            );
-            return res.data;
+            )
+            return res.data
         } catch (error) {
             if (error instanceof AxiosError)
-                console.error("Error: ", error.response?.statusText);
-            return null;
+                console.error('Error: ', error.response?.statusText)
+            return null
         }
     }
 
@@ -189,12 +189,12 @@ export class DataObjectOperations {
             const res = await this.client.post(
                 '/data-objects',
                 toURLSearchParams({ op: 'modify_replica', ...params })
-            );
-            return res.data;
+            )
+            return res.data
         } catch (error) {
             if (error instanceof AxiosError)
-                console.error("Error: ", error.response?.statusText);
-            return null;
+                console.error('Error: ', error.response?.statusText)
+            return null
         }
     }
 }
