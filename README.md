@@ -8,5 +8,5 @@
 
 ## Documentation
 
-- To browse the documentation for this library, open "docs/index.html"
-- If updates are made to the code, run "npx typedoc" to update the documentation html
+-   To browse the documentation for this library, open "docs/index.html"
+-   If updates are made to the code, run "npx typedoc" to update the documentation html

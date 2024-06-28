@@ -29,6 +29,11 @@ type IrodsResponse = {
     }
 }
 
+type StatusFields = {
+    http_status: number
+    message: string
+}
+
 type Permission = {
     name: string
     zone: string

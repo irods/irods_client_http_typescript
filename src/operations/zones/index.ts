@@ -1,17 +1,24 @@
-import { AxiosInstance } from 'axios'
+import { AxiosError, AxiosInstance } from 'axios';
 
 export class ZoneOperations {
-    private client: AxiosInstance
+    private client: AxiosInstance;
 
     constructor(client: AxiosInstance) {
-        this.client = client
+        this.client = client;
     }
 
-    async report(): Promise<ZoneReportResponse> {
-        return this.client.get('/zones', {
-            params: {
-                op: 'report',
-            },
-        })
+    async report(): Promise<null | ZoneReportResponse> {
+        try {
+            const res = await this.client.get('/zones', {
+                params: {
+                    op: 'report',
+                },
+            });
+            return res.data;
+        } catch (error) {
+            if (error instanceof AxiosError)
+                console.error("Error: ", error.response?.statusText);
+            return null;
+        }
     }
 }

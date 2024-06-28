@@ -1,6 +1,7 @@
 export function toURLSearchParams(
     params: Record<string, any>
 ): URLSearchParams {
+    // const searchParams = new URLSearchParams(JSON.stringify(params))
     const searchParams = new URLSearchParams()
     for (const key in params) {
         if (params[key] !== undefined) {

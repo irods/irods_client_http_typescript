@@ -7,8 +7,10 @@ const urlComponents: URLComponentsType = {
 }
 
 const api = new Wrapper(urlComponents, 'alice', 'alicepass')
+// api.authenticate();
+
 const res = await api.collections.list({ lpath: '/tempZone/home/alice' })
+console.log("Entries: ", res?.entries)
 // const res = await api.collections.remove({ lpath: "/tempZone/home/testing" })
 
 // const res = await api.collections.stat({ lpath: "/tempZone/home/rods" })
-console.log(res)

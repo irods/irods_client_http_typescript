@@ -1,96 +1,166 @@
-import { AxiosInstance } from 'axios'
-import { toURLSearchParams } from '../../utils/toURLSearchParams'
+import { AxiosError, AxiosInstance } from 'axios';
+import { toURLSearchParams } from '../../utils/toURLSearchParams';
 
 export class CollectionOperations {
-    private client: AxiosInstance
+    private client: AxiosInstance;
 
     constructor(client: AxiosInstance) {
-        this.client = client
+        this.client = client;
     }
 
     async create(
         params: CollectionCreateParams
-    ): Promise<CollectionCreateResponse> {
-        return this.client.post(
-            '/collections',
-            toURLSearchParams({ op: 'create', ...params })
-        )
+    ): Promise<null | CollectionCreateResponse> {
+        try {
+            const res = await this.client.post(
+                '/collections',
+                toURLSearchParams({ op: 'create', ...params })
+            );
+            return res.data;
+        } catch (error) {
+            if (error instanceof AxiosError)
+                console.error("Error: ", error.response?.statusText);
+            return null;
+        }
     }
 
     async remove(
         params: CollectionRemoveParams
-    ): Promise<CollectionRemoveResponse> {
-        return this.client.post(
-            '/collections',
-            toURLSearchParams({ op: 'remove', ...params })
-        )
+    ): Promise<null | CollectionRemoveResponse> {
+        try {
+            const res = await this.client.post(
+                '/collections',
+                toURLSearchParams({ op: 'remove', ...params })
+            );
+            return res.data;
+        } catch (error) {
+            if (error instanceof AxiosError)
+                console.error("Error: ", error.response?.statusText);
+            return null;
+        }
     }
 
-    // GET request
-    async stat(params: CollectionStatParams): Promise<CollectionStatResponse> {
-        return this.client.get('/collections', {
-            params: { op: 'stat', ...params },
-        })
+    async stat(params: CollectionStatParams): Promise<null | CollectionStatResponse> {
+        try {
+            const res = await this.client.get('/collections', {
+                params: { op: 'stat', ...params },
+            });
+            return res.data;
+        } catch (error) {
+            if (error instanceof AxiosError)
+                console.error("Error: ", error.response?.statusText);
+            return null;
+        }
     }
 
-    // GET request
-    async list(params: CollectionListParams): Promise<CollectionListResponse> {
-        return this.client.get('/collections', {
-            params: { op: 'list', ...params },
-        })
+    async list(
+        params: CollectionListParams
+    ): Promise<null | CollectionListResponse> {
+        try {
+            const res = await this.client.get('/collections', {
+                params: { op: 'list', ...params },
+            });
+            return res.data;
+        } catch (error) {
+            if (error instanceof AxiosError)
+                console.error("Error: ", error.response?.statusText);
+            return null;
+        }
     }
 
     async set_permission(
         params: CollectionSetPermissionParams
-    ): Promise<CollectionSetPermissionResponse> {
-        return this.client.post(
-            '/collections',
-            toURLSearchParams({ op: 'set_permission', ...params })
-        )
+    ): Promise<null | CollectionSetPermissionResponse> {
+        try {
+            const res = await this.client.post(
+                '/collections',
+                toURLSearchParams({ op: 'set_permission', ...params })
+            );
+            return res.data;
+        } catch (error) {
+            if (error instanceof AxiosError)
+                console.error("Error: ", error.response?.statusText);
+            return null;
+        }
     }
 
     async set_inheritance(
         params: CollectionSetInheritanceParams
-    ): Promise<CollectionSetInheritanceResponse> {
-        return this.client.post(
-            '/collections',
-            toURLSearchParams({ op: 'set_inheritance', ...params })
-        )
+    ): Promise<null | CollectionSetInheritanceResponse> {
+        try {
+            const res = await this.client.post(
+                '/collections',
+                toURLSearchParams({ op: 'set_inheritance', ...params })
+            );
+            return res.data;
+        } catch (error) {
+            if (error instanceof AxiosError)
+                console.error("Error: ", error.response?.statusText);
+            return null;
+        }
     }
 
     async modify_permissions(
         params: CollectionModifyPermissionsParams
-    ): Promise<CollectionModifyPermissionsResponse> {
-        return this.client.post(
-            '/collections',
-            toURLSearchParams({ op: 'modify_permissions', ...params })
-        )
+    ): Promise<null | CollectionModifyPermissionsResponse> {
+        try {
+            const res = await this.client.post(
+                '/collections',
+                toURLSearchParams({ op: 'modify_permissions', ...params })
+            );
+            return res.data;
+        } catch (error) {
+            if (error instanceof AxiosError)
+                console.error("Error: ", error.response?.statusText);
+            return null;
+        }
     }
 
     async modify_metadata(
         params: CollectionModifyMetadataParams
-    ): Promise<CollectionModifyMetadataResponse> {
-        return this.client.post(
-            '/collections',
-            toURLSearchParams({ op: 'modify_metadata', ...params })
-        )
+    ): Promise<null | CollectionModifyMetadataResponse> {
+        try {
+            const res = await this.client.post(
+                '/collections',
+                toURLSearchParams({ op: 'modify_metadata', ...params })
+            );
+            return res.data;
+        } catch (error) {
+            if (error instanceof AxiosError)
+                console.error("Error: ", error.response?.statusText);
+            return null;
+        }
     }
 
     async rename(
         params: CollectionRenameParams
-    ): Promise<CollectionRenameResponse> {
-        return this.client.post(
-            '/collections',
-            toURLSearchParams({ op: 'rename', ...params })
-        )
+    ): Promise<null | CollectionRenameResponse> {
+        try {
+            const res = await this.client.post(
+                '/collections',
+                toURLSearchParams({ op: 'rename', ...params })
+            );
+            return res.data;
+        } catch (error) {
+            if (error instanceof AxiosError)
+                console.error("Error: ", error.response?.statusText);
+            return null;
+        }
     }
 
     async touch(
-        params: CollectionTouchParams,
-    ): Promise<CollectionTouchResponse> {
-        return this.client.post(
-            '/collections',
-            toURLSearchParams({ op: 'touch', ...params })
-        )
+        params: CollectionTouchParams
+    ): Promise<null | CollectionTouchResponse> {
+        try {
+            const res = await this.client.post(
+                '/collections',
+                toURLSearchParams({ op: 'touch', ...params })
+            );
+            return res.data;
+        } catch (error) {
+            if (error instanceof AxiosError)
+                console.error("Error: ", error.response?.statusText);
+            return null;
+        }
     }
 }

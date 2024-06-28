@@ -1,71 +1,119 @@
-import { AxiosInstance, AxiosResponse } from 'axios'
-import { toURLSearchParams } from '../../utils/toURLSearchParams'
+import { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
+import { toURLSearchParams } from '../../utils/toURLSearchParams';
 
 export class ResourceOperations {
-    private client: AxiosInstance
+    private client: AxiosInstance;
 
     constructor(client: AxiosInstance) {
-        this.client = client
+        this.client = client;
     }
 
     async create(
         params: ResourceCreateParams
-    ): Promise<ResourceCreateResponse> {
-        return this.client.post(
-            '/resources',
-            toURLSearchParams({ op: 'create', ...params })
-        )
+    ): Promise<null | ResourceCreateResponse> {
+        try {
+            const res = await this.client.post(
+                '/resources',
+                toURLSearchParams({ op: 'create', ...params })
+            );
+            return res.data;
+        } catch (error) {
+            if (error instanceof AxiosError)
+                console.error("Error: ", error.response?.statusText);
+            return null;
+        }
     }
 
     async remove(
         params: ResourceRemoveParams
-    ): Promise<ResourceRemoveResponse> {
-        return this.client.post(
-            '/resources',
-            toURLSearchParams({ op: 'remove', ...params })
-        )
+    ): Promise<null | ResourceRemoveResponse> {
+        try {
+            const res = await this.client.post(
+                '/resources',
+                toURLSearchParams({ op: 'remove', ...params })
+            );
+            return res.data;
+        } catch (error) {
+            if (error instanceof AxiosError)
+                console.error("Error: ", error.response?.statusText);
+            return null;
+        }
     }
 
     async add_child(
         params: ResourceAddChildParams
-    ): Promise<ResourceAddChildResponse> {
-        return this.client.post(
-            '/resources',
-            toURLSearchParams({ op: 'add_child', ...params })
-        )
+    ): Promise<null | ResourceAddChildResponse> {
+        try {
+            const res = await this.client.post(
+                '/resources',
+                toURLSearchParams({ op: 'add_child', ...params })
+            );
+            return res.data;
+        } catch (error) {
+            if (error instanceof AxiosError)
+                console.error("Error: ", error.response?.statusText);
+            return null;
+        }
     }
 
     async remove_child(
         params: ResourceRemoveChildParams
-    ): Promise<ResourceRemoveChildResponse> {
-        return this.client.post(
-            '/resources',
-            toURLSearchParams({ op: 'remove_child', ...params })
-        )
+    ): Promise<null | ResourceRemoveChildResponse> {
+        try {
+            const res = await this.client.post(
+                '/resources',
+                toURLSearchParams({ op: 'remove_child', ...params })
+            );
+            return res.data;
+        } catch (error) {
+            if (error instanceof AxiosError)
+                console.error("Error: ", error.response?.statusText);
+            return null;
+        }
     }
 
     async rebalance(
         params: ResourceRebalanceParams
-    ): Promise<ResourceRebalanceResponse> {
-        return this.client.post(
-            '/resources',
-            toURLSearchParams({ op: 'rebalance', ...params })
-        )
+    ): Promise<null | ResourceRebalanceResponse> {
+        try {
+            const res = await this.client.post(
+                '/resources',
+                toURLSearchParams({ op: 'rebalance', ...params })
+            );
+            return res.data;
+        } catch (error) {
+            if (error instanceof AxiosError)
+                console.error("Error: ", error.response?.statusText);
+            return null;
+        }
     }
 
-    // GET request
-    async stat(params: ResourceStatParams): Promise<ResourceStatResponse> {
-        return this.client.get('/resources', {
-            params: { op: 'stat', ...params },
-        })
+    async stat(params: ResourceStatParams): Promise<null | ResourceStatResponse> {
+        try {
+            const res = await this.client.get('/resources', {
+                params: { op: 'stat', ...params },
+            });
+            return res.data;
+        } catch (error) {
+            if (error instanceof AxiosError)
+                console.error("Error: ", error.response?.statusText);
+            return null;
+        }
     }
 
     async modify_metadata(
         params: ResourceModifyMetadataParams
-    ): Promise<ResourceModifyMetadataResponse> {
-        return this.client.post(
-            '/resources',
-            toURLSearchParams({ op: 'modify_metadata', ...params })
-        )
+    ): Promise<null | ResourceModifyMetadataResponse> {
+        try {
+            const res = await this.client.post(
+                '/resources',
+                toURLSearchParams({ op: 'modify_metadata', ...params })
+            );
+            return res.data;
+        } catch (error) {
+            if (error instanceof AxiosError)
+                console.error("Error: ", error.response?.statusText);
+            return null;
+        }
     }
 }

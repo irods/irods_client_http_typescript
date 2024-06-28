@@ -15,7 +15,6 @@ import {
     UserGroupOperations,
     ZoneOperations,
 } from './operations'
-import { toURLSearchParams } from './utils/toURLSearchParams'
 
 class Wrapper {
     public username: string
@@ -55,6 +54,8 @@ class Wrapper {
             baseURL: this.baseURL,
         })
 
+        this.checkToken()
+
         // Add a request interceptor
         this.client.interceptors.request.use(
             (config) => {
@@ -63,7 +64,7 @@ class Wrapper {
                 // Do something before request is sent
                 return config
             },
-            (error) => {
+            (error: AxiosError) => {
                 // Do something with request error
                 return Promise.reject(error)
             }
@@ -72,18 +73,20 @@ class Wrapper {
         // Add a response interceptor
         this.client.interceptors.response.use(
             (response) => {
-                // Any status code that lie within the range of 2xx cause this function to trigger
-                // Do something with response data
-                return response.data
+                return response
             },
             (error: AxiosError) => {
                 // Any status codes that falls outside the range of 2xx cause this function to trigger
                 // Do something with response error
-                // this.checkToken()
-
-                this.handleError(error)
                 if (error.response?.status === 502) {
-                    console.log('Token is expired, re-authentication needed')
+                    console.log("Oh brother")
+                    this.authenticate().then(() => console.log("Fuckckjfdklsfkjlds"))
+                    let originalReq = error.config
+                    console.log(originalReq)
+                    // if (originalReq) {
+                    //     originalReq.headers["Authorization"] = `Bearer ${this.token}`
+                    //     return axios(originalReq)
+                    // }
                 }
                 return Promise.reject(error)
             }
@@ -99,30 +102,30 @@ class Wrapper {
         this.zones = new ZoneOperations(this.client)
     }
 
-    checkToken() {
+    async checkToken() {
         const tokenData = loadToken()
         if (tokenData) {
             this.token = tokenData.token
-            // const isExpired = new Date(tokenData.expiry) < new Date();
-            // if (!isExpired) {
-            //     console.log("Re-using token, not expired")
-            //     this.token = tokenData.token;
-            // } else {
-            //     console.log("Token is expired, renewing credentials")
-            //     clearToken(); // Clear expired token
-            //     this.authenticate(); // re-authenticate the user
-            // }
+            const isExpired = new Date(tokenData.expiry) < new Date();
+            if (!isExpired) {
+                console.log("Re-using token, not expired")
+                this.token = tokenData.token;
+            } else {
+                console.log("Token is expired, renewing credentials")
+                // clearToken(); // Clear expired token
+                await this.authenticate(); // re-authenticate the user
+            }
         } else {
             console.log('No auth credentials, creating credentials')
-            this.authenticate()
+            await this.authenticate()
         }
 
         console.log('Using token:', this.token)
     }
 
     async authenticate(): Promise<void> {
-        try {
-            await axios
+        console.log("Authenticating")
+        await axios
                 .post(`${this.baseURL}/authenticate`, null, {
                     auth: {
                         username: this.username,
@@ -130,15 +133,13 @@ class Wrapper {
                     },
                 })
                 .then((response) => {
+                    console.log("Response: ", response)
+                    saveToken(response.data)
                     this.token = response.data
-                    if (this.token !== null) {
-                        console.log('Saving token: ', this.token)
-                        saveToken(this.token)
-                    } else console.log('Error getting auth token.')
                 })
-        } catch (error: any) {
-            this.handleError(error)
-        }
+                .catch((error) => {
+                    this.handleError(error)
+                })
     }
 
     async get_information(): Promise<ServerInfo> {
@@ -147,13 +148,13 @@ class Wrapper {
 
     private handleError(error: AxiosError): void {
         if (error.response) {
-            console.error('Error response:', error.response.data)
-            console.error('Status:', error.response.status)
-            console.error('Headers:', error.response.headers)
+            // console.error('Error response:', error.response.data)
+            // console.error('Status:', error.response.status)
+            // console.error('Headers:', error.response.headers)
         } else if (error.request) {
-            console.error('Error request:', error.request)
+            // console.error('Error request:', error.request)
         } else {
-            console.error('Error message:', error.message)
+            // console.error('Error message:', error.message)
         }
         throw error
     }

@@ -1,179 +1,200 @@
-import { AxiosInstance, AxiosResponse, toFormData } from 'axios'
-import { toURLSearchParams } from '../../utils/toURLSearchParams'
+import { AxiosError, AxiosInstance } from 'axios';
+import { toURLSearchParams } from '../../utils/toURLSearchParams';
 
 export class DataObjectOperations {
-    private client: AxiosInstance
+    private client: AxiosInstance;
 
     constructor(client: AxiosInstance) {
-        this.client = client
+        this.client = client;
     }
 
     async touch(
         params: DataObjectTouchParams
-    ): Promise<DataObjectTouchResponse> {
-        return this.client.post(
-            '/data-objects',
-            toURLSearchParams({ op: 'touch', ...params })
-        )
+    ): Promise<null | DataObjectTouchResponse> {
+        try {
+            const res = await this.client.post(
+                '/data-objects',
+                toURLSearchParams({ op: 'touch', ...params })
+            );
+            return res.data;
+        } catch (error) {
+            if (error instanceof AxiosError)
+                console.error("Error: ", error.response?.statusText);
+            return null;
+        }
     }
 
     async remove(
         params: DataObjectRemoveParams
-    ): Promise<DataObjectRemoveResponse> {
-        return this.client.post(
-            '/data-objects',
-            toURLSearchParams({ op: 'remove', ...params })
-        )
+    ): Promise<null | DataObjectRemoveResponse> {
+        try {
+            const res = await this.client.post(
+                '/data-objects',
+                toURLSearchParams({ op: 'remove', ...params })
+            );
+            return res.data;
+        } catch (error) {
+            if (error instanceof AxiosError)
+                console.error("Error: ", error.response?.statusText);
+            return null;
+        }
     }
 
     async calculate_checksum(
         params: DataObjectCalculateChecksumParams
-    ): Promise<DataObjectCalculateChecksumResponse> {
-        return this.client.post(
-            '/data-objects',
-            toURLSearchParams({ op: 'calculate_checksum', ...params })
-        )
+    ): Promise<null | DataObjectCalculateChecksumResponse> {
+        try {
+            const res = await this.client.post(
+                '/data-objects',
+                toURLSearchParams({ op: 'calculate_checksum', ...params })
+            );
+            return res.data;
+        } catch (error) {
+            if (error instanceof AxiosError)
+                console.error("Error: ", error.response?.statusText);
+            return null;
+        }
     }
 
-    // GET request
     async verify_checksum(
         params: DataObjectVerifyChecksumParams
-    ): Promise<DataObjectVerifyChecksumResponse> {
-        return this.client.get('/data-objects', {
-            params: { op: 'verify_checksum', ...params },
-        })
+    ): Promise<null | DataObjectVerifyChecksumResponse> {
+        try {
+            const res = await this.client.get('/data-objects', {
+                params: { op: 'verify_checksum', ...params },
+            });
+            return res.data;
+        } catch (error) {
+            if (error instanceof AxiosError)
+                console.error("Error: ", error.response?.statusText);
+            return null;
+        }
     }
 
-    // GET request
-    async stat(params: DataObjectStatParams): Promise<DataObjectStatResponse> {
-        return this.client.get('/data-objects', {
-            params: { op: 'stat', ...params },
-        })
+    async stat(
+        params: DataObjectStatParams
+    ): Promise<null | DataObjectStatResponse> {
+        try {
+            const res = await this.client.get('/data-objects', {
+                params: { op: 'stat', ...params },
+            });
+            return res.data;
+        } catch (error) {
+            if (error instanceof AxiosError)
+                console.error("Error: ", error.response?.statusText);
+            return null;
+        }
     }
 
     async rename(
         params: DataObjectRenameParams
-    ): Promise<DataObjectRenameResponse> {
-        return this.client.post(
-            '/data-objects',
-            toURLSearchParams({ op: 'rename', ...params })
-        )
-    }
-
-    async copy(params: DataObjectCopyParams): Promise<DataObjectCopyResponse> {
-        return this.client.post(
-            '/data-objects',
-            toURLSearchParams({ op: 'copy', ...params })
-        )
-    }
-
-    async replicate(
-        params: DataObjectReplicateParams
-    ): Promise<DataObjectReplicateResponse> {
-        return this.client.post(
-            '/data-objects',
-            toURLSearchParams({ op: 'replicate', ...params })
-        )
-    }
-
-    async trim(params: DataObjectTrimParams): Promise<DataObjectTrimResponse> {
-        return this.client.post(
-            '/data-objects',
-            toURLSearchParams({ op: 'trim', ...params })
-        )
-    }
-
-    async register(
-        params: DataObjectRegisterParams
-    ): Promise<DataObjectRegisterResponse> {
-        return this.client.post(
-            '/data-objects',
-            toURLSearchParams({ op: 'register', ...params })
-        )
-    }
-
-    // GET request
-    async read(params: DataObjectReadParams): Promise<DataObjectReadResponse> {
-        return this.client.get('/data-objects', {
-            params: { op: 'read', ...params },
-        })
-    }
-
-    // Definitely needs testing, as it uses form data with binary data as a field
-    // potential input for binary data:
-    /*
-        params = {
-            ...,
-            bytes: new Blob([binaryData], { type: 'application/octet-stream' }),
-            ...
+    ): Promise<null | DataObjectRenameResponse> {
+        try {
+            const res = await this.client.post(
+                '/data-objects',
+                toURLSearchParams({ op: 'rename', ...params })
+            );
+            return res.data;
+        } catch (error) {
+            if (error instanceof AxiosError)
+                console.error("Error: ", error.response?.statusText);
+            return null;
         }
-    */
-
-    async write(
-        params: DataObjectWriteParams
-    ): Promise<DataObjectWriteResponse> {
-        return this.client.post(
-            '/data-objects',
-            toFormData({ op: 'write', ...params }),
-            {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            }
-        )
     }
 
     async parallel_write_init(
         params: DataObjectParallelWriteInitParams
-    ): Promise<DataObjectParallelWriteInitResponse> {
-        return this.client.post(
-            '/data-objects',
-            toURLSearchParams({ op: 'parallel_write_init', ...params })
-        )
+    ): Promise<null | DataObjectParallelWriteInitResponse> {
+        try {
+            const res = await this.client.post(
+                '/data-objects',
+                toURLSearchParams({ op: 'parallel_write_init', ...params })
+            );
+            return res.data;
+        } catch (error) {
+            if (error instanceof AxiosError)
+                console.error("Error: ", error.response?.statusText);
+            return null;
+        }
     }
 
     async parallel_write_shutdown(
         params: DataObjectParallelWriteShutdownParams
-    ): Promise<DataObjectParallelWriteShutdownResponse> {
-        return this.client.post(
-            '/data-objects',
-            toURLSearchParams({ op: 'parallel_write_shutdown', ...params })
-        )
+    ): Promise<null | DataObjectParallelWriteShutdownResponse> {
+        try {
+            const res = await this.client.post(
+                '/data-objects',
+                toURLSearchParams({ op: 'parallel_write_shutdown', ...params })
+            );
+            return res.data;
+        } catch (error) {
+            if (error instanceof AxiosError)
+                console.error("Error: ", error.response?.statusText);
+            return null;
+        }
     }
 
     async modify_metadata(
         params: DataObjectModifyMetadataParams
-    ): Promise<DataObjectModifyMetadataResponse> {
-        return this.client.post(
-            '/data-objects',
-            toURLSearchParams({ op: 'modify_metadata', ...params })
-        )
+    ): Promise<null | DataObjectModifyMetadataResponse> {
+        try {
+            const res = await this.client.post(
+                '/data-objects',
+                toURLSearchParams({ op: 'modify_metadata', ...params })
+            );
+            return res.data;
+        } catch (error) {
+            if (error instanceof AxiosError)
+                console.error("Error: ", error.response?.statusText);
+            return null;
+        }
     }
 
     async set_permission(
         params: DataObjectSetPermissionParams
-    ): Promise<DataObjectSetPermissionResponse> {
-        return this.client.post(
-            '/data-objects',
-            toURLSearchParams({ op: 'set_permission', ...params })
-        )
+    ): Promise<null | DataObjectSetPermissionResponse> {
+        try {
+            const res = await this.client.post(
+                '/data-objects',
+                toURLSearchParams({ op: 'set_permission', ...params })
+            );
+            return res.data;
+        } catch (error) {
+            if (error instanceof AxiosError)
+                console.error("Error: ", error.response?.statusText);
+            return null;
+        }
     }
 
     async modify_permissions(
         params: DataObjectModifyPermissionsParams
-    ): Promise<DataObjectModifyPermissionsResponse> {
-        return this.client.post(
-            '/data-objects',
-            toURLSearchParams({ op: 'modify_permissions', ...params })
-        )
+    ): Promise<null | DataObjectModifyPermissionsResponse> {
+        try {
+            const res = await this.client.post(
+                '/data-objects',
+                toURLSearchParams({ op: 'modify_permissions', ...params })
+            );
+            return res.data;
+        } catch (error) {
+            if (error instanceof AxiosError)
+                console.error("Error: ", error.response?.statusText);
+            return null;
+        }
     }
 
     async modify_replica(
         params: DataObjectModifyReplicaParams
-    ): Promise<DataObjectModifyReplicaResponse> {
-        return this.client.post(
-            '/data-objects',
-            toURLSearchParams({ op: 'modify_replica', ...params })
-        )
+    ): Promise<null | DataObjectModifyReplicaResponse> {
+        try {
+            const res = await this.client.post(
+                '/data-objects',
+                toURLSearchParams({ op: 'modify_replica', ...params })
+            );
+            return res.data;
+        } catch (error) {
+            if (error instanceof AxiosError)
+                console.error("Error: ", error.response?.statusText);
+            return null;
+        }
     }
 }
