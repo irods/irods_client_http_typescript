@@ -1,5 +1,5 @@
 {
-    "entryPoints": ["src/operations", "src/wrapper.ts"],
+    "entryPoints": ["src/operations", "src/wrapper"],
     "entryPointStrategy": "expand",
     "out": "./docs",
     "plugin": ["typedoc-plugin-missing-exports"],

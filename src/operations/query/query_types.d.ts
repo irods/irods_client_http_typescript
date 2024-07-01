@@ -1,7 +1,7 @@
 /* Execute Genquery */
 
 // GET request
-type ExecuteGenqueryParams = {
+export type ExecuteGenqueryParams = {
     query: string
     offset?: number
     count?: number
@@ -12,7 +12,7 @@ type ExecuteGenqueryParams = {
     zone?: string
 }
 
-type ExecuteGenqueryResponse = {
+export type ExecuteGenqueryResponse = {
     irods_response: IrodsResponse
     rows: [[string, string, string]]
     sql?: string
@@ -21,7 +21,7 @@ type ExecuteGenqueryResponse = {
 /* Execute Specific Query */
 
 // GET request
-type ExecuteSpecificQueryParams = {
+export type ExecuteSpecificQueryParams = {
     name: string
     args?: string
     'args-delimiter'?: string
@@ -29,7 +29,7 @@ type ExecuteSpecificQueryParams = {
     count?: number
 }
 
-type ExecuteSpecificQueryResponse = {
+export type ExecuteSpecificQueryResponse = {
     irods_response: IrodsResponse
     rows: [[string, string, string]]
 }

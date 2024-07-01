@@ -1,4 +1,5 @@
-import { AxiosError, AxiosInstance, AxiosResponse } from 'axios'
+import { AxiosError, type AxiosInstance } from 'axios'
+import * as QueryTypes from "./query_types.js"
 
 export class QueryOperations {
     private client: AxiosInstance
@@ -8,8 +9,8 @@ export class QueryOperations {
     }
 
     async execute_genquery(
-        params: ExecuteGenqueryParams
-    ): Promise<null | AxiosResponse<any, any>> {
+        params: QueryTypes.ExecuteGenqueryParams
+    ): Promise<null | QueryTypes.ExecuteGenqueryResponse> {
         try {
             const res = await this.client.get('/query', {
                 params: {
@@ -17,7 +18,7 @@ export class QueryOperations {
                     ...params,
                 },
             })
-            return res
+            return res.data
         } catch (error) {
             if (error instanceof AxiosError)
                 console.error('Error: ', error.response?.statusText)
@@ -26,8 +27,8 @@ export class QueryOperations {
     }
 
     async execute_specific_query(
-        params: ExecuteSpecificQueryParams
-    ): Promise<null | AxiosResponse<any, any>> {
+        params: QueryTypes.ExecuteSpecificQueryParams
+    ): Promise<null | QueryTypes.ExecuteSpecificQueryResponse> {
         try {
             const res = await this.client.get('/query', {
                 params: {
@@ -35,7 +36,7 @@ export class QueryOperations {
                     ...params,
                 },
             })
-            return res
+            return res.data
         } catch (error) {
             if (error instanceof AxiosError)
                 console.error('Error: ', error.response?.statusText)

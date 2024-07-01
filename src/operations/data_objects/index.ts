@@ -1,5 +1,6 @@
-import { AxiosError, AxiosInstance } from 'axios'
-import { toURLSearchParams } from '../../utils/toURLSearchParams'
+import { AxiosError, type AxiosInstance } from 'axios'
+import { toURLSearchParams } from '../../utils/toURLSearchParams.js'
+import * as DataObjectTypes from "./data_object_types.js"
 
 export class DataObjectOperations {
     private client: AxiosInstance
@@ -9,8 +10,8 @@ export class DataObjectOperations {
     }
 
     async touch(
-        params: DataObjectTouchParams
-    ): Promise<null | DataObjectTouchResponse> {
+        params: DataObjectTypes.DataObjectTouchParams
+    ): Promise<null | DataObjectTypes.DataObjectTouchResponse> {
         try {
             const res = await this.client.post(
                 '/data-objects',
@@ -25,8 +26,8 @@ export class DataObjectOperations {
     }
 
     async remove(
-        params: DataObjectRemoveParams
-    ): Promise<null | DataObjectRemoveResponse> {
+        params: DataObjectTypes.DataObjectRemoveParams
+    ): Promise<null | DataObjectTypes.DataObjectRemoveResponse> {
         try {
             const res = await this.client.post(
                 '/data-objects',
@@ -41,8 +42,8 @@ export class DataObjectOperations {
     }
 
     async calculate_checksum(
-        params: DataObjectCalculateChecksumParams
-    ): Promise<null | DataObjectCalculateChecksumResponse> {
+        params: DataObjectTypes.DataObjectCalculateChecksumParams
+    ): Promise<null | DataObjectTypes.DataObjectCalculateChecksumResponse> {
         try {
             const res = await this.client.post(
                 '/data-objects',
@@ -57,8 +58,8 @@ export class DataObjectOperations {
     }
 
     async verify_checksum(
-        params: DataObjectVerifyChecksumParams
-    ): Promise<null | DataObjectVerifyChecksumResponse> {
+        params: DataObjectTypes.DataObjectVerifyChecksumParams
+    ): Promise<null | DataObjectTypes.DataObjectVerifyChecksumResponse> {
         try {
             const res = await this.client.get('/data-objects', {
                 params: { op: 'verify_checksum', ...params },
@@ -72,8 +73,8 @@ export class DataObjectOperations {
     }
 
     async stat(
-        params: DataObjectStatParams
-    ): Promise<null | DataObjectStatResponse> {
+        params: DataObjectTypes.DataObjectStatParams
+    ): Promise<null | DataObjectTypes.DataObjectStatResponse> {
         try {
             const res = await this.client.get('/data-objects', {
                 params: { op: 'stat', ...params },
@@ -87,8 +88,8 @@ export class DataObjectOperations {
     }
 
     async rename(
-        params: DataObjectRenameParams
-    ): Promise<null | DataObjectRenameResponse> {
+        params: DataObjectTypes.DataObjectRenameParams
+    ): Promise<null | DataObjectTypes.DataObjectRenameResponse> {
         try {
             const res = await this.client.post(
                 '/data-objects',
@@ -103,8 +104,8 @@ export class DataObjectOperations {
     }
 
     async parallel_write_init(
-        params: DataObjectParallelWriteInitParams
-    ): Promise<null | DataObjectParallelWriteInitResponse> {
+        params: DataObjectTypes.DataObjectParallelWriteInitParams
+    ): Promise<null | DataObjectTypes.DataObjectParallelWriteInitResponse> {
         try {
             const res = await this.client.post(
                 '/data-objects',
@@ -119,8 +120,8 @@ export class DataObjectOperations {
     }
 
     async parallel_write_shutdown(
-        params: DataObjectParallelWriteShutdownParams
-    ): Promise<null | DataObjectParallelWriteShutdownResponse> {
+        params: DataObjectTypes.DataObjectParallelWriteShutdownParams
+    ): Promise<null | DataObjectTypes.DataObjectParallelWriteShutdownResponse> {
         try {
             const res = await this.client.post(
                 '/data-objects',
@@ -135,8 +136,8 @@ export class DataObjectOperations {
     }
 
     async modify_metadata(
-        params: DataObjectModifyMetadataParams
-    ): Promise<null | DataObjectModifyMetadataResponse> {
+        params: DataObjectTypes.DataObjectModifyMetadataParams
+    ): Promise<null | DataObjectTypes.DataObjectModifyMetadataResponse> {
         try {
             const res = await this.client.post(
                 '/data-objects',
@@ -151,8 +152,8 @@ export class DataObjectOperations {
     }
 
     async set_permission(
-        params: DataObjectSetPermissionParams
-    ): Promise<null | DataObjectSetPermissionResponse> {
+        params: DataObjectTypes.DataObjectSetPermissionParams
+    ): Promise<null | DataObjectTypes.DataObjectSetPermissionResponse> {
         try {
             const res = await this.client.post(
                 '/data-objects',
@@ -167,8 +168,8 @@ export class DataObjectOperations {
     }
 
     async modify_permissions(
-        params: DataObjectModifyPermissionsParams
-    ): Promise<null | DataObjectModifyPermissionsResponse> {
+        params: DataObjectTypes.DataObjectModifyPermissionsParams
+    ): Promise<null | DataObjectTypes.DataObjectModifyPermissionsResponse> {
         try {
             const res = await this.client.post(
                 '/data-objects',
@@ -183,8 +184,8 @@ export class DataObjectOperations {
     }
 
     async modify_replica(
-        params: DataObjectModifyReplicaParams
-    ): Promise<null | DataObjectModifyReplicaResponse> {
+        params: DataObjectTypes.DataObjectModifyReplicaParams
+    ): Promise<null | DataObjectTypes.DataObjectModifyReplicaResponse> {
         try {
             const res = await this.client.post(
                 '/data-objects',

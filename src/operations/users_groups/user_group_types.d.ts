@@ -1,117 +1,117 @@
 /* Create User */
 
-type UserCreateParams = {
+export type UserCreateParams = {
     name: string
     zone: string
-    'user-type'?: 'rodsuser' | 'groupadmin' | 'rodsadmin'
+    'user-export type'?: 'rodsuser' | 'groupadmin' | 'rodsadmin'
 }
 
-type UserCreateResponse = IrodsResponse
+export type UserCreateResponse = IrodsResponse
 
 /* Remove User */
 
-type UserRemoveParams = {
+export type UserRemoveParams = {
     name: string
     zone: string
 }
 
-type UserRemoveResponse = IrodsResponse
+export type UserRemoveResponse = IrodsResponse
 
 /* Set User Password */
 
-type UserSetPasswordParams = {
+export type UserSetPasswordParams = {
     name: string
     zone: string
     'new-password': string
 }
 
-type UserSetPasswordResponse = IrodsResponse
+export type UserSetPasswordResponse = IrodsResponse
 
-/* Set User Type */
+/* Set User export Type */
 
-type UserSetTypeParams = {
+export type UserSetTypeParams = {
     name: string
     zone: string
-    'new-user-type': 'rodsuser' | 'groupadmin' | 'rodsadmin'
+    'new-user-export type': 'rodsuser' | 'groupadmin' | 'rodsadmin'
 }
 
-type UserSetTypeResponse = IrodsResponse
+export type UserSetTypeResponse = IrodsResponse
 
 /* Create Group */
 
-type GroupCreateParams = {
+export type GroupCreateParams = {
     name: string
 }
 
-type GroupCreateResponse = IrodsResponse
+export type GroupCreateResponse = IrodsResponse
 
 /* Remove Group */
 
-type GroupRemoveParams = {
+export type GroupRemoveParams = {
     name: string
 }
 
-type GroupRemoveResponse = IrodsResponse
+export type GroupRemoveResponse = IrodsResponse
 
 /* Add User to Group */
 
-type UserAddToGroupParams = {
+export type UserAddToGroupParams = {
     user: string
     zone: string
     group: string
 }
 
-type UserAddToGroupResponse = IrodsResponse
+export type UserAddToGroupResponse = IrodsResponse
 
 /* Remove User from Group */
 
-type UserRemoveFromGroupParams = {
+export type UserRemoveFromGroupParams = {
     user: string
     zone: string
     group: string
 }
 
-type UserRemoveFromGroupResponse = IrodsResponse
+export type UserRemoveFromGroupResponse = IrodsResponse
 
 /* List Users */
 
-type User = {
+export type User = {
     name: string
     zone: string
 }
 
-type UsersResponse = IrodsResponse & {
+export type UsersResponse = IrodsResponse & {
     users: [User]
 }
 
 /* List Groups */
 
-type Group = [string, string, string]
+export type Group = [string, string, string]
 
-type GroupsResponse = IrodsResponse & {
+export type GroupsResponse = IrodsResponse & {
     groups: [Group]
 }
 
 /* Is User Member of Group */
 
-type UserMemberOfGroupParams = {
+export type UserMemberOfGroupParams = {
     group: string
     user: string
     zone: string
 }
 
-type UserMemberOfGroupResponse = IrodsResponse & {
+export type UserMemberOfGroupResponse = IrodsResponse & {
     is_member: boolean
 }
 
 /* User/Group Stat */
 
-type UserGroupStatParams = {
+export type UserGroupStatParams = {
     name: string
     zone: string
 }
 
-type UserGroupStatResponse = IrodsResponse & {
+export type UserGroupStatResponse = IrodsResponse & {
     exists: boolean
     id: string
     local_unique_name: string
@@ -120,9 +120,9 @@ type UserGroupStatResponse = IrodsResponse & {
 
 /* Group Modify */
 
-type UserGroupModifyMetadata = {
+export type UserGroupModifyMetadata = {
     name: string
     operations: [AVUOperation]
 }
 
-type UserGroupModifyMetadataResponse = IrodsResponse
+export type UserGroupModifyMetadataResponse = IrodsResponse

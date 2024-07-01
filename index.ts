@@ -1,19 +1,9 @@
-import Wrapper from './src/wrapper'
-
-const urlComponents: URLComponentsType = {
-    host: 'localhost',
-    port: '9090',
-    version: '0.3.0',
-}
-
-const api = new Wrapper(urlComponents, 'rods', 'rods')
-// api.authenticate();
-
-const res = await api.collections.create({ lpath: '/tempZone/home/testing' })
-
-
-// const res = await api.collections.remove({ lpath: "/tempZone/home/testing" })
-
-// const res = await api.collections.stat({ lpath: "/tempZone/home/rods" })
-
-console.log('Response: ', res)
+export { Wrapper } from "./src/wrapper/index.js";
+export * as CollectionTypes from "./src/operations/collections/collection_types.js"
+export * as DataObjectTypes from "./src/operations/data_objects/data_object_types.js"
+export * as QueryTypes from "./src/operations/query/query_types.js"
+export * as ResourceTypes from "./src/operations/resources/resource_types.js"
+export * as RuleTypes from "./src/operations/rules/rule_types.js"
+export * as TicketTypes from "./src/operations/tickets/ticket_types.js"
+export * as UserGroupTypes from "./src/operations/users_groups/user_group_types.js"
+export * as ZoneTypes from "./src/operations/zones/zone_types.js"

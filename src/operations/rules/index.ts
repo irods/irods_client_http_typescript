@@ -1,5 +1,6 @@
-import { AxiosError, AxiosInstance, AxiosResponse } from 'axios'
-import { toURLSearchParams } from '../../utils/toURLSearchParams'
+import { AxiosError, type AxiosInstance } from 'axios'
+import { toURLSearchParams } from '../../utils/toURLSearchParams.js'
+import * as RuleTypes from "./rule_types.js"
 
 export class RuleOperations {
     private client: AxiosInstance
@@ -8,7 +9,7 @@ export class RuleOperations {
         this.client = client
     }
 
-    async list_rule_engines(): Promise<null | ListRuleEnginesResponse> {
+    async list_rule_engines(): Promise<null | RuleTypes.ListRuleEnginesResponse> {
         try {
             const res = await this.client.get('/rules', {
                 params: {
@@ -24,8 +25,8 @@ export class RuleOperations {
     }
 
     async execute(
-        params: RuleExecuteParams
-    ): Promise<null | RuleExecuteResponse> {
+        params: RuleTypes.RuleExecuteParams
+    ): Promise<null | RuleTypes.RuleExecuteResponse> {
         try {
             const res = await this.client.post(
                 '/rules',
@@ -43,8 +44,8 @@ export class RuleOperations {
     }
 
     async remove_delay_rule(
-        params: RuleRemoveDelayRuleParams
-    ): Promise<null | RuleRemoveDelayRuleResponse> {
+        params: RuleTypes.RuleRemoveDelayRuleParams
+    ): Promise<null | RuleTypes.RuleRemoveDelayRuleResponse> {
         try {
             const res = await this.client.post(
                 '/rules',

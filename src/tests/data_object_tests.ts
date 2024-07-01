@@ -1,12 +1,12 @@
-import Wrapper from '../wrapper'
+// import Wrapper from '../wrapper/wrapper'
 
-const urlComponents: URLComponentsType = {
-    host: 'localhost',
-    port: '9090',
-    version: '0.3.0',
-}
+// const urlComponents: URLComponentsType = {
+//     host: 'localhost',
+//     port: '9090',
+//     version: '0.3.0',
+// }
 
-const api = new Wrapper(urlComponents, 'alice', 'alicepass')
+// const api = new Wrapper(urlComponents, 'alice', 'alicepass')
 
 // const res = await api.data_objects.touch({
 //     lpath: "/tempZone/home/alice/lemur2.jpg",

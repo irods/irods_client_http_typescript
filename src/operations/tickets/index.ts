@@ -1,5 +1,6 @@
-import { AxiosError, AxiosInstance, AxiosResponse } from 'axios'
-import { toURLSearchParams } from '../../utils/toURLSearchParams'
+import { AxiosError, type AxiosInstance } from 'axios'
+import { toURLSearchParams } from '../../utils/toURLSearchParams.js'
+import * as TicketTypes from "./ticket_types.js"
 
 export class TicketOperations {
     private client: AxiosInstance
@@ -9,8 +10,8 @@ export class TicketOperations {
     }
 
     async create(
-        params: TicketCreateParams
-    ): Promise<null | TicketCreateResponse> {
+        params: TicketTypes.TicketCreateParams
+    ): Promise<null | TicketTypes.TicketCreateResponse> {
         try {
             const res = await this.client.post(
                 '/tickets',
@@ -28,8 +29,8 @@ export class TicketOperations {
     }
 
     async remove(
-        params: TicketRemoveParams
-    ): Promise<null | TicketRemoveResponse> {
+        params: TicketTypes.TicketRemoveParams
+    ): Promise<null | TicketTypes.TicketRemoveResponse> {
         try {
             const res = await this.client.post(
                 '/tickets',

@@ -1,5 +1,6 @@
-import { AxiosError, AxiosInstance, AxiosResponse } from 'axios'
-import { toURLSearchParams } from '../../utils/toURLSearchParams'
+import { AxiosError, type AxiosInstance } from 'axios'
+import { toURLSearchParams } from '../../utils/toURLSearchParams.js'
+import * as ResourceTypes from "./resource_types.js"
 
 export class ResourceOperations {
     private client: AxiosInstance
@@ -9,8 +10,8 @@ export class ResourceOperations {
     }
 
     async create(
-        params: ResourceCreateParams
-    ): Promise<null | ResourceCreateResponse> {
+        params: ResourceTypes.ResourceCreateParams
+    ): Promise<null | ResourceTypes.ResourceCreateResponse> {
         try {
             const res = await this.client.post(
                 '/resources',
@@ -25,8 +26,8 @@ export class ResourceOperations {
     }
 
     async remove(
-        params: ResourceRemoveParams
-    ): Promise<null | ResourceRemoveResponse> {
+        params: ResourceTypes.ResourceRemoveParams
+    ): Promise<null | ResourceTypes.ResourceRemoveResponse> {
         try {
             const res = await this.client.post(
                 '/resources',
@@ -41,8 +42,8 @@ export class ResourceOperations {
     }
 
     async add_child(
-        params: ResourceAddChildParams
-    ): Promise<null | ResourceAddChildResponse> {
+        params: ResourceTypes.ResourceAddChildParams
+    ): Promise<null | ResourceTypes.ResourceAddChildResponse> {
         try {
             const res = await this.client.post(
                 '/resources',
@@ -57,8 +58,8 @@ export class ResourceOperations {
     }
 
     async remove_child(
-        params: ResourceRemoveChildParams
-    ): Promise<null | ResourceRemoveChildResponse> {
+        params: ResourceTypes.ResourceRemoveChildParams
+    ): Promise<null | ResourceTypes.ResourceRemoveChildResponse> {
         try {
             const res = await this.client.post(
                 '/resources',
@@ -73,8 +74,8 @@ export class ResourceOperations {
     }
 
     async rebalance(
-        params: ResourceRebalanceParams
-    ): Promise<null | ResourceRebalanceResponse> {
+        params: ResourceTypes.ResourceRebalanceParams
+    ): Promise<null | ResourceTypes.ResourceRebalanceResponse> {
         try {
             const res = await this.client.post(
                 '/resources',
@@ -89,8 +90,8 @@ export class ResourceOperations {
     }
 
     async stat(
-        params: ResourceStatParams
-    ): Promise<null | ResourceStatResponse> {
+        params: ResourceTypes.ResourceStatParams
+    ): Promise<null | ResourceTypes.ResourceStatResponse> {
         try {
             const res = await this.client.get('/resources', {
                 params: { op: 'stat', ...params },
@@ -104,8 +105,8 @@ export class ResourceOperations {
     }
 
     async modify_metadata(
-        params: ResourceModifyMetadataParams
-    ): Promise<null | ResourceModifyMetadataResponse> {
+        params: ResourceTypes.ResourceModifyMetadataParams
+    ): Promise<null | ResourceTypes.ResourceModifyMetadataResponse> {
         try {
             const res = await this.client.post(
                 '/resources',

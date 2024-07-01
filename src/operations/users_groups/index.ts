@@ -1,5 +1,6 @@
-import { AxiosError, AxiosInstance, AxiosResponse } from 'axios'
-import { toURLSearchParams } from '../../utils/toURLSearchParams'
+import { AxiosError, type AxiosInstance } from 'axios'
+import { toURLSearchParams } from '../../utils/toURLSearchParams.js'
+import * as UserGroupTypes from "./user_group_types.js"
 
 export class UserGroupOperations {
     private client: AxiosInstance
@@ -9,8 +10,8 @@ export class UserGroupOperations {
     }
 
     async create_user(
-        params: UserCreateParams
-    ): Promise<null | UserCreateResponse> {
+        params: UserGroupTypes.UserCreateParams
+    ): Promise<null | UserGroupTypes.UserCreateResponse> {
         try {
             const res = await this.client.post(
                 '/users-groups',
@@ -28,8 +29,8 @@ export class UserGroupOperations {
     }
 
     async remove_user(
-        params: UserRemoveParams
-    ): Promise<null | UserRemoveResponse> {
+        params: UserGroupTypes.UserRemoveParams
+    ): Promise<null | UserGroupTypes.UserRemoveResponse> {
         try {
             const res = await this.client.post(
                 '/users-groups',
@@ -47,8 +48,8 @@ export class UserGroupOperations {
     }
 
     async set_password(
-        params: UserSetPasswordParams
-    ): Promise<null | UserSetPasswordResponse> {
+        params: UserGroupTypes.UserSetPasswordParams
+    ): Promise<null | UserGroupTypes.UserSetPasswordResponse> {
         try {
             const res = await this.client.post(
                 '/users-groups',
@@ -66,8 +67,8 @@ export class UserGroupOperations {
     }
 
     async set_user_type(
-        params: UserSetTypeParams
-    ): Promise<null | UserSetTypeResponse> {
+        params: UserGroupTypes.UserSetTypeParams
+    ): Promise<null | UserGroupTypes.UserSetTypeResponse> {
         try {
             const res = await this.client.post(
                 '/users-groups',
@@ -85,8 +86,8 @@ export class UserGroupOperations {
     }
 
     async create_group(
-        params: GroupCreateParams
-    ): Promise<null | GroupCreateResponse> {
+        params: UserGroupTypes.GroupCreateParams
+    ): Promise<null | UserGroupTypes.GroupCreateResponse> {
         try {
             const res = await this.client.post(
                 '/users-groups',
@@ -104,8 +105,8 @@ export class UserGroupOperations {
     }
 
     async remove_group(
-        params: GroupRemoveParams
-    ): Promise<null | GroupRemoveResponse> {
+        params: UserGroupTypes.GroupRemoveParams
+    ): Promise<null | UserGroupTypes.GroupRemoveResponse> {
         try {
             const res = await this.client.post(
                 '/users-groups',
@@ -123,8 +124,8 @@ export class UserGroupOperations {
     }
 
     async add_to_group(
-        params: UserAddToGroupParams
-    ): Promise<null | UserAddToGroupResponse> {
+        params: UserGroupTypes.UserAddToGroupParams
+    ): Promise<null | UserGroupTypes.UserAddToGroupResponse> {
         try {
             const res = await this.client.post(
                 '/users-groups',
@@ -142,8 +143,8 @@ export class UserGroupOperations {
     }
 
     async remove_from_group(
-        params: UserRemoveFromGroupParams
-    ): Promise<null | UserRemoveFromGroupResponse> {
+        params: UserGroupTypes.UserRemoveFromGroupParams
+    ): Promise<null | UserGroupTypes.UserRemoveFromGroupResponse> {
         try {
             const res = await this.client.post(
                 '/users-groups',
@@ -160,7 +161,7 @@ export class UserGroupOperations {
         }
     }
 
-    async users(): Promise<null | UsersResponse> {
+    async users(): Promise<null | UserGroupTypes.UsersResponse> {
         try {
             const res = await this.client.get('/users-groups', {
                 params: {
@@ -175,7 +176,7 @@ export class UserGroupOperations {
         }
     }
 
-    async groups(): Promise<null | GroupsResponse> {
+    async groups(): Promise<null | UserGroupTypes.GroupsResponse> {
         try {
             const res = await this.client.get('/users-groups', {
                 params: {
@@ -191,8 +192,8 @@ export class UserGroupOperations {
     }
 
     async is_member_of_group(
-        params: UserMemberOfGroupParams
-    ): Promise<null | UserMemberOfGroupResponse> {
+        params: UserGroupTypes.UserMemberOfGroupParams
+    ): Promise<null | UserGroupTypes.UserMemberOfGroupResponse> {
         try {
             const res = await this.client.get('/users-groups', {
                 params: {
@@ -209,8 +210,8 @@ export class UserGroupOperations {
     }
 
     async stat(
-        params: UserGroupStatParams
-    ): Promise<null | UserGroupStatResponse> {
+        params: UserGroupTypes.UserGroupStatParams
+    ): Promise<null | UserGroupTypes.UserGroupStatResponse> {
         try {
             const res = await this.client.get('/users-groups', {
                 params: {
@@ -227,8 +228,8 @@ export class UserGroupOperations {
     }
 
     async modify_metadata(
-        params: UserGroupModifyMetadata
-    ): Promise<null | UserGroupModifyMetadataResponse> {
+        params: UserGroupTypes.UserGroupModifyMetadata
+    ): Promise<null | UserGroupTypes.UserGroupModifyMetadataResponse> {
         try {
             const res = await this.client.post(
                 '/users-groups',

@@ -1,6 +1,6 @@
 /* Touch */
 
-type DataObjectTouchParams = {
+export type DataObjectTouchParams = {
     lpath: string
     'no-create'?: 0 | 1
     'replica-number'?: number
@@ -9,22 +9,22 @@ type DataObjectTouchParams = {
     reference?: string
 }
 
-type DataObjectTouchResponse = IrodsResponse
+export type DataObjectTouchResponse = IrodsResponse
 
 /* Remove */
 
-type DataObjectRemoveParams = {
+export type DataObjectRemoveParams = {
     lpath: string
     'catalog-only': 0 | 1
     'no-trash': 0 | 1
     admin?: 0 | 1
 }
 
-type DataObjectRemoveResponse = IrodsResponse
+export type DataObjectRemoveResponse = IrodsResponse
 
 /* Calculate Checksum */
 
-type DataObjectCalculateChecksumParams = {
+export type DataObjectCalculateChecksumParams = {
     lpath: string
     resource?: string
     'replica-number'?: number
@@ -33,13 +33,13 @@ type DataObjectCalculateChecksumParams = {
     admin?: 0 | 1
 }
 
-type DataObjectCalculateChecksumResponse = IrodsResponse & {
+export type DataObjectCalculateChecksumResponse = IrodsResponse & {
     checksum: string
 }
 
 /* Verify Checksum */
 
-type DataObjectVerifyChecksumParams = {
+export type DataObjectVerifyChecksumParams = {
     lpath: string
     resource?: string
     'replica-number'?: number
@@ -47,19 +47,19 @@ type DataObjectVerifyChecksumParams = {
     admin?: 0 | 1
 }
 
-type DataObjectVerifyChecksumResponse = IrodsResponse & {
+export type DataObjectVerifyChecksumResponse = IrodsResponse & {
     results?: object
     r_error_info: [{ status: number; message: string }]
 }
 
 /* Stat */
 
-type DataObjectStatParams = {
+export type DataObjectStatParams = {
     lpath: string
     ticket?: string
 }
 
-type DataObjectStatResponse = IrodsResponse & {
+export type DataObjectStatResponse = IrodsResponse & {
     type: string
     permissions: [Permission]
     size: number
@@ -70,16 +70,16 @@ type DataObjectStatResponse = IrodsResponse & {
 
 /* Rename */
 
-type DataObjectRenameParams = {
+export type DataObjectRenameParams = {
     'old-lpath': string
     'new-lpath': string
 }
 
-type DataObjectRenameResponse = IrodsResponse
+export type DataObjectRenameResponse = IrodsResponse
 
 /* Copy */
 
-type DataObjectCopyParams = {
+export type DataObjectCopyParams = {
     'src-lpath': string
     'dst-lpath': string
     'src-resource'?: string
@@ -87,33 +87,33 @@ type DataObjectCopyParams = {
     overwrite?: 0 | 1
 }
 
-type DataObjectCopyResponse = IrodsResponse
+export type DataObjectCopyResponse = IrodsResponse
 
 /* Replicate */
 
-type DataObjectReplicateParams = {
+export type DataObjectReplicateParams = {
     lpath: string
     'src-resource': string
     'dst-resource': string
     admin?: 0 | 1
 }
 
-type DataObjectReplicateResponse = IrodsResponse
+export type DataObjectReplicateResponse = IrodsResponse
 
 /* Trim */
 
-type DataObjectTrimParams = {
+export type DataObjectTrimParams = {
     lpath: string
     'replica-number': number
     'catalog-only'?: 0 | 1
     admin?: 0 | 1
 }
 
-type DataObjectTrimResponse = IrodsResponse
+export type DataObjectTrimResponse = IrodsResponse
 
 /* Register */
 
-type DataObjectRegisterParams = {
+export type DataObjectRegisterParams = {
     lpath: string
     ppath: string
     resource: string
@@ -122,22 +122,22 @@ type DataObjectRegisterParams = {
     checksum?: string
 }
 
-type DataObjectRegisterResponse = IrodsResponse
+export type DataObjectRegisterResponse = IrodsResponse
 
 /* Read */
 
-type DataObjectReadParams = {
+export type DataObjectReadParams = {
     lpath: string
     offset?: number
     count?: number
     ticket?: string
 }
 
-type DataObjectReadResponse = string
+export type DataObjectReadResponse = string
 
 /* Write */
 
-type DataObjectWriteParams = {
+export type DataObjectWriteParams = {
     lpath: string
     resource?: string
     offset?: number
@@ -148,11 +148,11 @@ type DataObjectWriteParams = {
     'stream-index'?: number
 }
 
-type DataObjectWriteResponse = IrodsResponse
+export type DataObjectWriteResponse = IrodsResponse
 
 /* Parallel Write Init */
 
-type DataObjectParallelWriteInitParams = {
+export type DataObjectParallelWriteInitParams = {
     lpath: string
     'stream-count': number
     truncate?: 0 | 1
@@ -160,62 +160,62 @@ type DataObjectParallelWriteInitParams = {
     ticket?: string
 }
 
-type DataObjectParallelWriteInitResponse = IrodsResponse & {
+export type DataObjectParallelWriteInitResponse = IrodsResponse & {
     parallel_write_handle: string
 }
 
 /* Parallel Write Shutdown */
 
-type DataObjectParallelWriteShutdownParams = {
+export type DataObjectParallelWriteShutdownParams = {
     'parallel-write-handle': string
 }
 
-type DataObjectParallelWriteShutdownResponse = IrodsResponse
+export type DataObjectParallelWriteShutdownResponse = IrodsResponse
 
 /* Modify Metadata */
 
-type DataObjectModifyMetadataParams = {
+export type DataObjectModifyMetadataParams = {
     lpath: string
     operations: [AVUOperation]
     admin?: 0 | 1
 }
 
-type DataObjectModifyMetadataResponse = IrodsResponse
+export type DataObjectModifyMetadataResponse = IrodsResponse
 
 /* Set Permission */
 
-type DataObjectSetPermissionParams = {
+export type DataObjectSetPermissionParams = {
     lpath: string
     'entity-name': string
     permission: 'null' | 'read' | 'write' | 'own'
     admin?: 0 | 1
 }
 
-type DataObjectSetPermissionResponse = IrodsResponse
+export type DataObjectSetPermissionResponse = IrodsResponse
 
 /* Modify Permissions */
 
-type DataObjectModifyPermissionsParams = {
+export type DataObjectModifyPermissionsParams = {
     lpath: string
     operations: [ModifyPermissionsOperation]
     admin?: 0 | 1
 }
 
-type DataObjectModifyPermissionsResponse = IrodsResponse
+export type DataObjectModifyPermissionsResponse = IrodsResponse
 
 /* Modify Replica */
 
 // Separate resource hierarchy and replica number, make them mutually exclusive fields
 
-type ResourceHierarchyType = {
+export type ResourceHierarchyexportType = {
     'resource-hierarchy': string
 }
 
-type ReplicaNumberType = {
+export type ReplicaNumberexportType = {
     'replica-number': number
 }
 
-type DataObjectModifyReplicaOptionalParams = {
+export type DataObjectModifyReplicaOptionalParams = {
     'new-data-checksum'?: string
     'new-data-comments'?: string
     'new-data-create-time'?: number
@@ -228,17 +228,17 @@ type DataObjectModifyReplicaOptionalParams = {
     'new-data-resource-id'?: number
     'new-data-size'?: number
     'new-data-status'?: string
-    'new-data-type-name'?: string
+    'new-data-export type-name'?: string
     'new-data-version'?: string
 }
 
-type DataObjectModifyReplicaBaseParams = {
+export type DataObjectModifyReplicaBaseParams = {
     lpath: string
 }
 
 // Ensure mutually exclusive fields of "resource-hierarchy" and "replica-number", and that at least one optional field is filled in
-type DataObjectModifyReplicaParams = DataObjectModifyReplicaBaseParams &
-    XOR<ResourceHierarchyType, ReplicaNumberType> &
+export type DataObjectModifyReplicaParams = DataObjectModifyReplicaBaseParams &
+    XOR<ResourceHierarchyexportType, ReplicaNumberexportType> &
     RequireAtLeastOne<DataObjectModifyReplicaOptionalParams>
 
-type DataObjectModifyReplicaResponse = IrodsResponse
+export type DataObjectModifyReplicaResponse = IrodsResponse

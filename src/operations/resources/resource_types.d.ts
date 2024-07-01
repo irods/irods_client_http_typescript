@@ -1,6 +1,6 @@
 /* Create */
 
-type ResourceCreateParams = {
+export type ResourceCreateParams = {
     name: string
     type:
         | 'compound'
@@ -19,51 +19,51 @@ type ResourceCreateParams = {
     context?: string
 }
 
-type ResourceCreateResponse = FullIrodsResponse
+export type ResourceCreateResponse = IrodsResponse
 
 /* Remove */
 
-type ResourceRemoveParams = {
+export type ResourceRemoveParams = {
     name: string
 }
 
-type ResourceRemoveResponse = FullIrodsResponse
+export type ResourceRemoveResponse = IrodsResponse
 
 /* Add Child */
 
-type ResourceAddChildParams = {
+export type ResourceAddChildParams = {
     'parent-name': string
     'child-name': string
     context?: string
 }
 
-type ResourceAddChildResponse = FullIrodsResponse
+export type ResourceAddChildResponse = IrodsResponse
 
 /* Remove Child */
 
-type ResourceRemoveChildParams = {
+export type ResourceRemoveChildParams = {
     'parent-name': string
     'child-name': string
 }
 
-type ResourceRemoveChildResponse = FullIrodsResponse
+export type ResourceRemoveChildResponse = IrodsResponse
 
 /* Rebalance */
 
-type ResourceRebalanceParams = {
+export type ResourceRebalanceParams = {
     name: string
 }
 
-type ResourceRebalanceResponse = FullIrodsResponse
+export type ResourceRebalanceResponse = IrodsResponse
 
 /* Stat */
 
 // GET request
-type ResourceStatParams = {
+export type ResourceStatParams = {
     name: string
 }
 
-type ResourceInfo = {
+export type ResourceInfo = {
     id: string
     name: string
     type: string
@@ -82,16 +82,16 @@ type ResourceInfo = {
     last_modified_millis: number
 }
 
-type ResourceStatResponse = FullIrodsResponse & {
+export type ResourceStatResponse = IrodsResponse & {
     exists: boolean
     info: ResourceInfo
 }
 
 /* ModifyMetadata */
 
-type ResourceModifyMetadataParams = {
+export type ResourceModifyMetadataParams = {
     name: string
     operations: [AVUOperation]
 }
 
-type ResourceModifyMetadataResponse = IrodsResponse
+export type ResourceModifyMetadataResponse = IrodsResponse

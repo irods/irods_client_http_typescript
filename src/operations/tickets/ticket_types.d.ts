@@ -1,6 +1,6 @@
 /* Create */
 
-type TicketCreateParams = {
+export type TicketCreateParams = {
     lpath: string
     type?: string
     'use-count'?: number
@@ -12,14 +12,14 @@ type TicketCreateParams = {
     hosts?: string
 }
 
-type TicketCreateResponse = IrodsResponse & {
+export type TicketCreateResponse = IrodsResponse & {
     ticket: string
 }
 
 /* Remove */
 
-type TicketRemoveParams = {
+export type TicketRemoveParams = {
     name: string
 }
 
-type TicketRemoveResponse = IrodsResponse
+export type TicketRemoveResponse = IrodsResponse

@@ -1,10 +1,8 @@
 import axios, {
     AxiosError,
-    AxiosInstance,
-    AxiosResponse,
-    InternalAxiosRequestConfig,
+    type AxiosInstance,
 } from 'axios'
-import { saveToken, loadToken, clearToken } from './tokenStorage'
+import { saveToken, loadToken } from './tokenStorage.js'
 import {
     CollectionOperations,
     DataObjectOperations,
@@ -14,9 +12,9 @@ import {
     TicketOperations,
     UserGroupOperations,
     ZoneOperations,
-} from './operations'
+} from '../operations/index.js'
 
-class Wrapper {
+export class Wrapper {
     public username: string
     public password: string
 
@@ -158,5 +156,3 @@ class Wrapper {
         throw error
     }
 }
-
-export default Wrapper

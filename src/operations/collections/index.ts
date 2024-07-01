@@ -1,5 +1,6 @@
-import { AxiosError, AxiosInstance } from 'axios'
-import { toURLSearchParams } from '../../utils/toURLSearchParams'
+import { AxiosError, type AxiosInstance } from 'axios'
+import { toURLSearchParams } from '../../utils/toURLSearchParams.js'
+import * as CollectionTypes from "./collection_types.js"
 
 export class CollectionOperations {
     private client: AxiosInstance
@@ -9,14 +10,14 @@ export class CollectionOperations {
     }
 
     async create(
-        params: CollectionCreateParams
-    ): Promise<null | CollectionCreateResponse> {
+        params: CollectionTypes.CollectionCreateParams
+    ): Promise<null | CollectionTypes.CollectionCreateResponse> {
         try {
             const res = await this.client.post(
                 '/collections',
                 toURLSearchParams({ op: 'create', ...params })
             )
-            const data: CollectionCreateResponse = res.data;
+            const data: CollectionTypes.CollectionCreateResponse = res.data;
             if (!data.created) {
                 console.error(`Failed to create collection: '${params.lpath}' already exists`)
             }
@@ -32,8 +33,8 @@ export class CollectionOperations {
     }
 
     async remove(
-        params: CollectionRemoveParams
-    ): Promise<null | CollectionRemoveResponse> {
+        params: CollectionTypes.CollectionRemoveParams
+    ): Promise<null | CollectionTypes.CollectionRemoveResponse> {
         try {
             const res = await this.client.post(
                 '/collections',
@@ -49,8 +50,8 @@ export class CollectionOperations {
     }
 
     async stat(
-        params: CollectionStatParams
-    ): Promise<null | CollectionStatResponse> {
+        params: CollectionTypes.CollectionStatParams
+    ): Promise<null | CollectionTypes.CollectionStatResponse> {
         try {
             const res = await this.client.get('/collections', {
                 params: { op: 'stat', ...params },
@@ -64,8 +65,8 @@ export class CollectionOperations {
     }
 
     async list(
-        params: CollectionListParams
-    ): Promise<null | CollectionListResponse> {
+        params: CollectionTypes.CollectionListParams
+    ): Promise<null | CollectionTypes.CollectionListResponse> {
         try {
             const res = await this.client.get('/collections', {
                 params: { op: 'list', ...params },
@@ -80,8 +81,8 @@ export class CollectionOperations {
     }
 
     async set_permission(
-        params: CollectionSetPermissionParams
-    ): Promise<null | CollectionSetPermissionResponse> {
+        params: CollectionTypes.CollectionSetPermissionParams
+    ): Promise<null | CollectionTypes.CollectionSetPermissionResponse> {
         try {
             const res = await this.client.post(
                 '/collections',
@@ -97,8 +98,8 @@ export class CollectionOperations {
     }
 
     async set_inheritance(
-        params: CollectionSetInheritanceParams
-    ): Promise<null | CollectionSetInheritanceResponse> {
+        params: CollectionTypes.CollectionSetInheritanceParams
+    ): Promise<null | CollectionTypes.CollectionSetInheritanceResponse> {
         try {
             const res = await this.client.post(
                 '/collections',
@@ -114,8 +115,8 @@ export class CollectionOperations {
     }
 
     async modify_permissions(
-        params: CollectionModifyPermissionsParams
-    ): Promise<null | CollectionModifyPermissionsResponse> {
+        params: CollectionTypes.CollectionModifyPermissionsParams
+    ): Promise<null | CollectionTypes.CollectionModifyPermissionsResponse> {
         try {
             const res = await this.client.post(
                 '/collections',
@@ -131,8 +132,8 @@ export class CollectionOperations {
     }
 
     async modify_metadata(
-        params: CollectionModifyMetadataParams
-    ): Promise<null | CollectionModifyMetadataResponse> {
+        params: CollectionTypes.CollectionModifyMetadataParams
+    ): Promise<null | CollectionTypes.CollectionModifyMetadataResponse> {
         try {
             const res = await this.client.post(
                 '/collections',
@@ -148,8 +149,8 @@ export class CollectionOperations {
     }
 
     async rename(
-        params: CollectionRenameParams
-    ): Promise<null | CollectionRenameResponse> {
+        params: CollectionTypes.CollectionRenameParams
+    ): Promise<null | CollectionTypes.CollectionRenameResponse> {
         try {
             const res = await this.client.post(
                 '/collections',
@@ -165,8 +166,8 @@ export class CollectionOperations {
     }
 
     async touch(
-        params: CollectionTouchParams
-    ): Promise<null | CollectionTouchResponse> {
+        params: CollectionTypes.CollectionTouchParams
+    ): Promise<null | CollectionTypes.CollectionTouchResponse> {
         try {
             const res = await this.client.post(
                 '/collections',
@@ -176,7 +177,7 @@ export class CollectionOperations {
             return res.data
         } catch (error) {
             if (error instanceof AxiosError)
-                console.error('Error: ', error.response?.statusText)
+                console.error(`Failed to update mtime for '${params.lpath}': ${error.message}`)
             return null
         }
     }
