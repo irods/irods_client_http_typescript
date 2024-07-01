@@ -54,7 +54,7 @@ class Wrapper {
             baseURL: this.baseURL,
         })
 
-        this.checkToken()
+        // this.checkToken()
 
         // Add a request interceptor
         this.client.interceptors.request.use(
@@ -79,10 +79,7 @@ class Wrapper {
                 // Any status codes that falls outside the range of 2xx cause this function to trigger
                 // Do something with response error
                 if (error.response?.status === 502) {
-                    console.log('Oh brother')
-                    this.authenticate().then(() =>
-                        console.log('Fuckckjfdklsfkjlds')
-                    )
+                    this.authenticate()
                     let originalReq = error.config
                     console.log(originalReq)
                     // if (originalReq) {
@@ -110,15 +107,15 @@ class Wrapper {
             this.token = tokenData.token
             const isExpired = new Date(tokenData.expiry) < new Date()
             if (!isExpired) {
-                console.log('Re-using token, not expired')
+                // console.log('Re-using token, not expired')
                 this.token = tokenData.token
             } else {
-                console.log('Token is expired, renewing credentials')
+                // console.log('Token is expired, renewing credentials')
                 // clearToken(); // Clear expired token
                 await this.authenticate() // re-authenticate the user
             }
         } else {
-            console.log('No auth credentials, creating credentials')
+            // console.log('No auth credentials, creating credentials')
             await this.authenticate()
         }
 
@@ -126,7 +123,7 @@ class Wrapper {
     }
 
     async authenticate(): Promise<void> {
-        console.log('Authenticating')
+        // console.log('Authenticating')
         await axios
             .post(`${this.baseURL}/authenticate`, null, {
                 auth: {

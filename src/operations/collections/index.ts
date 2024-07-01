@@ -16,10 +16,18 @@ export class CollectionOperations {
                 '/collections',
                 toURLSearchParams({ op: 'create', ...params })
             )
-            return res.data
+            const data: CollectionCreateResponse = res.data;
+            if (!data.created) {
+                console.error(`Failed to create collection: '${params.lpath}' already exists`)
+            }
+            else
+                console.info(`Collection '${params.lpath}' created successfully`)
+            return data
         } catch (error) {
-            if (error instanceof AxiosError)
-                console.error('Error: ', error.response?.statusText)
+            if (error instanceof AxiosError) {
+                console.error(`Failed to create collection '${params.lpath}': ${error.message}`)
+                // console.error('Error: ', error.response?.statusText)
+            }
             return null
         }
     }
@@ -32,10 +40,11 @@ export class CollectionOperations {
                 '/collections',
                 toURLSearchParams({ op: 'remove', ...params })
             )
+            console.log(`Collection '${params.lpath}' removed successfully`)
             return res.data
         } catch (error) {
             if (error instanceof AxiosError)
-                console.error('Error: ', error.response?.statusText)
+                console.log(`Failed to remove collection '${params.lpath}': ${error.message}`)
             return null
         }
     }
@@ -64,6 +73,7 @@ export class CollectionOperations {
             })
             return res.data
         } catch (error) {
+            console.log(error)
             if (error instanceof AxiosError)
                 console.error('Error: ', error.response?.statusText)
             return null
