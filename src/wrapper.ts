@@ -132,7 +132,7 @@ class Wrapper {
                 },
             })
             .then((response) => {
-                console.log('Response: ', response)
+                // console.log('Response: ', response)
                 saveToken(response.data)
                 this.token = response.data
             })

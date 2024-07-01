@@ -9,9 +9,10 @@ const urlComponents: URLComponentsType = {
 const api = new Wrapper(urlComponents, 'rods', 'rods')
 // api.authenticate();
 
-// const res = await api.collections.create({ lpath: '/tempZone/home/testing' })
+const res = await api.collections.create({ lpath: '/tempZone/home/testing' })
 
-const res = await api.collections.remove({ lpath: "/tempZone/home/testing" })
+
+// const res = await api.collections.remove({ lpath: "/tempZone/home/testing" })
 
 // const res = await api.collections.stat({ lpath: "/tempZone/home/rods" })
 

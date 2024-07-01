@@ -26,7 +26,6 @@ export class CollectionOperations {
         } catch (error) {
             if (error instanceof AxiosError) {
                 console.error(`Failed to create collection '${params.lpath}': ${error.message}`)
-                // console.error('Error: ', error.response?.statusText)
             }
             return null
         }
@@ -59,7 +58,7 @@ export class CollectionOperations {
             return res.data
         } catch (error) {
             if (error instanceof AxiosError)
-                console.error('Error: ', error.response?.statusText)
+                console.error(`Failed to retrieve information for '${params.lpath}': ${error.message}`)
             return null
         }
     }
@@ -75,7 +74,7 @@ export class CollectionOperations {
         } catch (error) {
             console.log(error)
             if (error instanceof AxiosError)
-                console.error('Error: ', error.response?.statusText)
+                console.error(`Failed to retrieve list for '${params.lpath}': ${error.message}`)
             return null
         }
     }
@@ -88,10 +87,11 @@ export class CollectionOperations {
                 '/collections',
                 toURLSearchParams({ op: 'set_permission', ...params })
             )
+            console.log(`Permission for '${params['entity-name']}' set`)
             return res.data
         } catch (error) {
             if (error instanceof AxiosError)
-                console.error('Error: ', error.response?.statusText)
+                console.error(`Failed to set permission for '${params.lpath}': ${error.message}`)
             return null
         }
     }
@@ -104,10 +104,11 @@ export class CollectionOperations {
                 '/collections',
                 toURLSearchParams({ op: 'set_inheritance', ...params })
             )
+            console.log(`Inheritance for '${params.lpath}' ${params.enable ? "enabled" : "disabled"}`)
             return res.data
         } catch (error) {
             if (error instanceof AxiosError)
-                console.error('Error: ', error.response?.statusText)
+                console.error(`Failed to set inheritance for '${params.lpath}': ${error.message}`)
             return null
         }
     }
@@ -120,10 +121,11 @@ export class CollectionOperations {
                 '/collections',
                 toURLSearchParams({ op: 'modify_permissions', ...params })
             )
+            console.log(`Permissions for '${params.lpath}' successfully modified`)
             return res.data
         } catch (error) {
             if (error instanceof AxiosError)
-                console.error('Error: ', error.response?.statusText)
+                console.error(`Failed to modify permissions for '${params.lpath}': ${error.message}`)
             return null
         }
     }
@@ -136,10 +138,11 @@ export class CollectionOperations {
                 '/collections',
                 toURLSearchParams({ op: 'modify_metadata', ...params })
             )
+            console.log(`Metadata for '${params.lpath}' successfully modified`)
             return res.data
         } catch (error) {
             if (error instanceof AxiosError)
-                console.error('Error: ', error.response?.statusText)
+                console.error(`Failed to modify metadata for '${params.lpath}': ${error.message}`)
             return null
         }
     }
@@ -152,10 +155,11 @@ export class CollectionOperations {
                 '/collections',
                 toURLSearchParams({ op: 'rename', ...params })
             )
+            console.log(`'${params['old-lpath']}' successfully renamed to '${params['new-lpath']}'`)
             return res.data
         } catch (error) {
             if (error instanceof AxiosError)
-                console.error('Error: ', error.response?.statusText)
+                console.error(`Failed to rename '${params["old-lpath"]}': ${error.message}`)
             return null
         }
     }
@@ -168,6 +172,7 @@ export class CollectionOperations {
                 '/collections',
                 toURLSearchParams({ op: 'touch', ...params })
             )
+            console.log(`Updated mtime for '${params.lpath}' successfully`)
             return res.data
         } catch (error) {
             if (error instanceof AxiosError)
