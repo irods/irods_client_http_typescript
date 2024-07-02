@@ -1,6 +1,6 @@
 import { AxiosError, type AxiosInstance } from 'axios'
 import { toURLSearchParams } from '../../utils/toURLSearchParams.js'
-import * as RuleTypes from "./rule_types.js"
+import { RuleTypes } from "../../types/index.js"
 
 export class RuleOperations {
     private client: AxiosInstance

@@ -14,6 +14,8 @@ import {
     ZoneOperations,
 } from '../operations/index.js'
 
+import type { URLComponentsType, ServerInfo } from '../types/index.js'
+
 export class Wrapper {
     public username: string
     public password: string

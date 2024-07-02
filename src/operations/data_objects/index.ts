@@ -1,6 +1,6 @@
 import { AxiosError, type AxiosInstance } from 'axios'
 import { toURLSearchParams } from '../../utils/toURLSearchParams.js'
-import * as DataObjectTypes from "./data_object_types.js"
+import { DataObjectTypes } from "../../types/index.js"
 
 export class DataObjectOperations {
     private client: AxiosInstance

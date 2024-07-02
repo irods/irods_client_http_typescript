@@ -14,6 +14,12 @@
         "type": "git",
         "url": "git+https://github.com/farbs03/irods-http-api-wrapper-js.git"
     },
+    "keywords": [
+        "typescript",
+        "api",
+        "wrapper",
+        "irods"
+    ],
     "author": "Chris Farber",
     "license": "ISC",
     "bugs": {

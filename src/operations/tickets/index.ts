@@ -1,6 +1,6 @@
 import { AxiosError, type AxiosInstance } from 'axios'
 import { toURLSearchParams } from '../../utils/toURLSearchParams.js'
-import * as TicketTypes from "./ticket_types.js"
+import { TicketTypes } from "../../types/index.js"
 
 export class TicketOperations {
     private client: AxiosInstance

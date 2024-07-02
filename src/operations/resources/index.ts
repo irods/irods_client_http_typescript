@@ -1,6 +1,6 @@
 import { AxiosError, type AxiosInstance } from 'axios'
 import { toURLSearchParams } from '../../utils/toURLSearchParams.js'
-import * as ResourceTypes from "./resource_types.js"
+import { ResourceTypes } from "../../types/index.js"
 
 export class ResourceOperations {
     private client: AxiosInstance

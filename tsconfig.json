@@ -2,13 +2,13 @@
     "compilerOptions": {
         "target": "ES2020",
         "module": "Node16",
-        "rootDir": "./",
         "outDir": "./dist",
+        "rootDir": "./src",
         "forceConsistentCasingInFileNames": true,
         "verbatimModuleSyntax": true,
         "strict": true,
         "declaration": true,
         "sourceMap": true,
-        "declarationMap": true
+        "declarationMap": true  
     }
 }

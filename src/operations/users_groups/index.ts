@@ -1,6 +1,6 @@
 import { AxiosError, type AxiosInstance } from 'axios'
 import { toURLSearchParams } from '../../utils/toURLSearchParams.js'
-import * as UserGroupTypes from "./user_group_types.js"
+import { UserGroupTypes } from "../../types/index.js"
 
 export class UserGroupOperations {
     private client: AxiosInstance

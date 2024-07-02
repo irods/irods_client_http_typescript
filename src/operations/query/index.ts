@@ -1,5 +1,5 @@
 import { AxiosError, type AxiosInstance } from 'axios'
-import * as QueryTypes from "./query_types.js"
+import { QueryTypes } from "../../types/index.js"
 
 export class QueryOperations {
     private client: AxiosInstance

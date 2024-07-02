@@ -1,5 +1,5 @@
 import { AxiosError, type AxiosInstance } from 'axios'
-import * as ZoneTypes from "./zone_types.js"
+import { ZoneTypes } from "../../types/index.js"
 
 export class ZoneOperations {
     private client: AxiosInstance

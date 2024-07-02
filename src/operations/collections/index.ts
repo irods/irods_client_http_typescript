@@ -1,6 +1,6 @@
 import { AxiosError, type AxiosInstance } from 'axios'
 import { toURLSearchParams } from '../../utils/toURLSearchParams.js'
-import * as CollectionTypes from "./collection_types.js"
+import { CollectionTypes } from "../../types/index.js"
 
 export class CollectionOperations {
     private client: AxiosInstance
