@@ -1,3 +1,27 @@
+// Mutually exclusive fields: https://stackoverflow.com/questions/42123407/does-export typescript-support-mutually-exclusive-export types
+export type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never }
+
+export type XOR<T, U> = T | U extends object
+    ? (Without<T, U> & U) | (Without<U, T> & T)
+    : T | U
+
+// Ensure at least one field is filled in: https://learn.microsoft.com/en-us/javascript/api/@azure/keyvault-certificates/requireatleastone?view=azure-node-latest
+export type RequireAtLeastOne<T> = {
+    [K in keyof T]-?: Required<Pick<T, K>> &
+        Partial<Pick<T, Exclude<keyof T, K>>>
+}[keyof T]
+
+type BasicUser = {
+    username: string
+    password: string
+}
+
+type OidcUser = {
+    oidc_token: string
+}
+
+export type User = XOR<BasicUser, OidcUser>
+
 // Format: http://<host>:<port>/irods-http-api/<version>
 export type URLComponentsType = {
     host: string
@@ -51,16 +75,3 @@ export type ServerInfo = {
     max_size_of_request_body_in_bytes: number
     openid_connect_enabled: boolean
 }
-
-// Mutually exclusive fields: https://stackoverflow.com/questions/42123407/does-export typescript-support-mutually-exclusive-export types
-export type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never }
-
-export type XOR<T, U> = T | U extends object
-    ? (Without<T, U> & U) | (Without<U, T> & T)
-    : T | U
-
-// Ensure at least one field is filled in: https://learn.microsoft.com/en-us/javascript/api/@azure/keyvault-certificates/requireatleastone?view=azure-node-latest
-export type RequireAtLeastOne<T> = {
-    [K in keyof T]-?: Required<Pick<T, K>> &
-        Partial<Pick<T, Exclude<keyof T, K>>>
-}[keyof T]

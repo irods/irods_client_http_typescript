@@ -54,6 +54,8 @@ export class Wrapper {
             baseURL: this.baseURL,
         })
 
+        // this.authenticate()
+
         // this.checkToken()
 
         // Add a request interceptor
@@ -102,22 +104,22 @@ export class Wrapper {
     }
 
     async checkToken() {
-        const tokenData = loadToken()
-        if (tokenData) {
-            this.token = tokenData.token
-            const isExpired = new Date(tokenData.expiry) < new Date()
-            if (!isExpired) {
-                // console.log('Re-using token, not expired')
-                this.token = tokenData.token
-            } else {
-                // console.log('Token is expired, renewing credentials')
-                // clearToken(); // Clear expired token
-                await this.authenticate() // re-authenticate the user
-            }
-        } else {
-            // console.log('No auth credentials, creating credentials')
-            await this.authenticate()
-        }
+        // const tokenData = loadToken()
+        // if (tokenData) {
+        //     this.token = tokenData.token
+        //     const isExpired = new Date(tokenData.expiry) < new Date()
+        //     if (!isExpired) {
+        // console.log('Re-using token, not expired')
+        //         this.token = tokenData.token
+        //     } else {
+        // console.log('Token is expired, renewing credentials')
+        // clearToken(); // Clear expired token
+        //         await this.authenticate() // re-authenticate the user
+        //     }
+        // } else {
+        // console.log('No auth credentials, creating credentials')
+        //     await this.authenticate()
+        // }
 
         console.log('Using token:', this.token)
     }
@@ -133,7 +135,7 @@ export class Wrapper {
             })
             .then((response) => {
                 // console.log('Response: ', response)
-                saveToken(response.data)
+                // saveToken(response.data)
                 this.token = response.data
             })
             .catch((error) => {

@@ -4,10 +4,12 @@
     "description": "Wrapper for iRODS HTTP API written in JavaScript",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
-    "files": ["dist"],
+    "files": [
+        "dist"
+    ],
     "type": "module",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
         "build": "tsc"
     },
     "repository": {
@@ -30,10 +32,15 @@
         "axios": "^1.7.2"
     },
     "devDependencies": {
+        "@babel/core": "^7.24.7",
+        "@babel/preset-env": "^7.24.7",
+        "@babel/preset-typescript": "^7.24.7",
+        "@jest/globals": "^29.7.0",
         "@types/axios": "^0.14.0",
         "@types/jest": "^29.5.12",
         "@types/node": "^20.14.6",
         "axios-mock-adapter": "^1.22.0",
+        "babel-jest": "^29.7.0",
         "jest": "^29.7.0",
         "ts-jest": "^29.1.5",
         "ts-node": "^10.9.2",

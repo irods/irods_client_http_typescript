@@ -1,3 +1,10 @@
+describe('DataObjectTests', () => {
+    it('should add to 3', () => {
+        const res = 1 + 2
+        expect(res).toEqual(3)
+    })
+})
+
 // import Wrapper from '../wrapper/wrapper'
 
 // const urlComponents: URLComponentsType = {
