@@ -13,5 +13,11 @@
         "esModuleInterop": true,
         "allowJs": true,
     },
-    "exclude": ["./src/tests/*", "./docs/**/*", "./dist/**/*", "babel.config.cjs", "jest.config.cjs"]
+    "exclude": [
+        "./src/tests/*", 
+        "./docs/**/*", 
+        "./dist/**/*", 
+        "babel.config.cjs", 
+        "jest.config.cjs"
+    ]
 }

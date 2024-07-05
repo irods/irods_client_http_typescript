@@ -7,7 +7,7 @@ export type CollectionCreateParams = {
 }
 
 export type CollectionCreateResponse = IrodsResponse & {
-    created?: 0 | 1
+    created?: boolean
 }
 
 /* Remove */

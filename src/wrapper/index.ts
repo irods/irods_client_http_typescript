@@ -60,7 +60,7 @@ export class Wrapper {
 
         this.client.interceptors.request.use(
             (config) => {
-                this.checkToken()
+                // this.checkToken()
                 config.headers['Authorization'] = `Bearer ${this.token}`
                 return config
             },

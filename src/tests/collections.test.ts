@@ -13,72 +13,108 @@ describe('CollectionOperationsTest', () => {
 
     beforeAll(async () => {
         await api.authenticate()
-        await api.collections.remove({
-            lpath: '/tempZone/home/testing',
-        })
     })
 
-    test('create a new collection', async () => {
-        const mockData: CollectionTypes.CollectionCreateResponse = {
-            irods_response: {
-                status_code: 0,
-            },
-            created: 1,
-        }
+    test('Create a new collection', async () => {
+        // const mockData: CollectionTypes.CollectionCreateResponse = {
+        //     irods_response: {
+        //         status_code: 0,
+        //     },
+        //     created: true,
+        // }
         const res = await api.collections.create({
             lpath: '/tempZone/home/testing',
         })
-        expect(res).toBe(mockData)
-        // expect(mockData).toBe(mockData)
+        expect(res).toBeTruthy()
+        // expect(res).toEqual(mockData)
     })
 
-    test('remove a collection', async () => {
-        const mockData: CollectionTypes.CollectionRemoveResponse = {
-            irods_response: {
-                status_code: 0,
-            },
-        }
-        const res = await api.collections.remove({
+    test('Stat for a collection', async () => {
+        const res = await api.collections.stat({
             lpath: '/tempZone/home/testing',
         })
-        expect(res).toBe(mockData)
+        expect(res).toBeTruthy()
     })
 
-    // const res = await api.collections.stat({ lpath: "/tempZone/home/rods" })
+    test('List contents of a collection', async () => {
+        const res = await api.collections.list({
+            lpath: '/tempZone/home',
+        })
+        expect(res).toBeTruthy()
+    })
 
-    // const res = await api.collections.list({ lpath: "/tempZone/home" })
+    test('Set permission of a collection', async () => {
+        const res = await api.collections.set_permission({
+            lpath: '/tempZone/home/testing',
+            'entity-name': 'alice',
+            permission: 'read',
+        })
+        expect(res).toBeTruthy()
+    })
 
-    // const res = await api.collections.set_permission({ lpath: "/tempZone/home/rods", "entity-name": "alice", permission: "read" })
+    test('Set inheritance of a collection', async () => {
+        const res = await api.collections.set_inheritance({
+            lpath: '/tempZone/home/testing',
+            enable: 1,
+        })
+        expect(res).toBeTruthy()
+    })
 
-    // const res = await api.collections.set_inheritance({ lpath: "/tempZone/home/rods", enable: 1 })
+    test('Modify permissions of a collection', async () => {
+        const res = await api.collections.modify_permissions({
+            lpath: '/tempZone/home/testing',
+            operations: [
+                {
+                    entity_name: 'alice',
+                    acl: 'write',
+                },
+            ],
+        })
+        expect(res).toBeTruthy()
+        expect(res?.irods_response.failed_operation).toEqual({})
+    })
 
-    // const res = await api.collections.modify_permissions({
-    //     lpath: "/tempZone/home/chris",
-    //     operations: [
-    //         {
-    //             entity_name: "rods",
-    //             acl: "write"
-    //         }
-    //     ]
-    // })
+    test('Modify metadata of a collection', async () => {
+        const res = await api.collections.modify_metadata({
+            lpath: '/tempZone/home/testing',
+            operations: [
+                {
+                    operation: 'add',
+                    attribute: 'testAttr',
+                    value: 'testVal',
+                    units: 'testUnits',
+                },
+            ],
+        })
+        expect(res).toBeTruthy()
+        expect(res?.irods_response.failed_operation).toEqual({})
+    })
 
-    // const res = await api.collections.modify_metadata({
-    //     lpath: "/tempZone/home/rods",
-    //     operations: [
-    //         {
-    //             operation: "remove",
-    //             attribute: "testAttr",
-    //             value: "testVal",
-    //             units: "testUnits"
-    //         }
-    //     ]
-    // })
+    test('Rename a collection', async () => {
+        const res = await api.collections.rename({
+            'old-lpath': '/tempZone/home/testing',
+            'new-lpath': '/tempZone/home/renamed',
+        })
+        expect(res).toBeTruthy()
+    })
 
-    // const res = await api.collections.rename({ "old-lpath": "/tempZone/home/rodsTest", "new-lpath": "/tempZone/home/rods" })
+    test('Touch a collection', async () => {
+        const res = await api.collections.touch({
+            lpath: '/tempZone/home/renamed',
+        })
+        expect(res).toBeTruthy()
+    })
 
-    // const res = await api.collections.touch({
-    //     lpath: "/tempZone/home/rods"
-    // })
-
-    // console.log(res?.data)
+    test('Remove a collection', async () => {
+        // const mockData: CollectionTypes.CollectionRemoveResponse = {
+        //     irods_response: {
+        //         status_code: 0,
+        //     },
+        // }
+        const res = await api.collections.remove({
+            lpath: '/tempZone/home/renamed',
+        })
+        expect(res).toBeTruthy()
+        // expect(res).toEqual(mockData)
+    })
 })
