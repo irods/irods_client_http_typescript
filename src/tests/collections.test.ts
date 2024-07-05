@@ -1,5 +1,5 @@
 import type { URLComponentsType } from '../types/general_types.js'
-import type { CollectionTypes } from '../types/index.js'
+import { CollectionTypes } from '../types/index.js'
 import { Wrapper } from '../wrapper/index.js'
 
 describe('CollectionOperationsTest', () => {
@@ -11,23 +11,38 @@ describe('CollectionOperationsTest', () => {
 
     const api = new Wrapper(urlComponents, 'rods', 'rods')
 
-    test('should create a new collection', async () => {
+    beforeAll(async () => {
+        await api.authenticate()
+        await api.collections.remove({
+            lpath: '/tempZone/home/testing',
+        })
+    })
+
+    test('create a new collection', async () => {
         const mockData: CollectionTypes.CollectionCreateResponse = {
             irods_response: {
                 status_code: 0,
             },
             created: 1,
         }
-        // const res = await api.collections.create({
-        //     lpath: 'tempZone/home/testing',
-        // })
-        // expect(res).toEqual(mockData)
-        expect(mockData).toBe(mockData)
+        const res = await api.collections.create({
+            lpath: '/tempZone/home/testing',
+        })
+        expect(res).toBe(mockData)
+        // expect(mockData).toBe(mockData)
     })
 
-    // const res = await api.collections.create({ lpath: "/tempZone/home/testing", "create-intermediates": 0 })
-
-    // const res = await api.collections.remove({ lpath: "/tempZone/home/testing" })
+    test('remove a collection', async () => {
+        const mockData: CollectionTypes.CollectionRemoveResponse = {
+            irods_response: {
+                status_code: 0,
+            },
+        }
+        const res = await api.collections.remove({
+            lpath: '/tempZone/home/testing',
+        })
+        expect(res).toBe(mockData)
+    })
 
     // const res = await api.collections.stat({ lpath: "/tempZone/home/rods" })
 

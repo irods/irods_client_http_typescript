@@ -1,8 +1,9 @@
 {
-    "entryPoints": ["src/operations", "src/wrapper"],
+    "entryPoints": ["src/operations", "src/types", "src/wrapper"],
     "entryPointStrategy": "expand",
     "out": "./docs",
     "plugin": ["typedoc-plugin-missing-exports"],
     "internalModule": "Types",
-    "excludeExternals": true
+    "excludeExternals": true,
+    "exclude": ["src/tests", "src/utils"]
 }

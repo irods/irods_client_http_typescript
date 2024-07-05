@@ -3,7 +3,7 @@
         "target": "ES2020",
         "module": "Node16",
         "outDir": "./dist",
-        "rootDir": "./",
+        "rootDir": "./src",
         "forceConsistentCasingInFileNames": true,
         "verbatimModuleSyntax": true,
         "strict": true,
@@ -13,4 +13,5 @@
         "esModuleInterop": true,
         "allowJs": true,
     },
+    "exclude": ["./src/tests/*", "./docs/**/*", "./dist/**/*", "babel.config.cjs", "jest.config.cjs"]
 }

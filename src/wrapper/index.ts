@@ -58,37 +58,32 @@ export class Wrapper {
 
         // this.checkToken()
 
-        // Add a request interceptor
         this.client.interceptors.request.use(
             (config) => {
                 this.checkToken()
                 config.headers['Authorization'] = `Bearer ${this.token}`
-                // Do something before request is sent
                 return config
             },
             (error: AxiosError) => {
-                // Do something with request error
                 return Promise.reject(error)
             }
         )
 
-        // Add a response interceptor
         this.client.interceptors.response.use(
             (response) => {
                 return response
             },
             (error: AxiosError) => {
                 // Any status codes that falls outside the range of 2xx cause this function to trigger
-                // Do something with response error
-                if (error.response?.status === 502) {
-                    this.authenticate()
-                    let originalReq = error.config
-                    console.log(originalReq)
-                    // if (originalReq) {
-                    //     originalReq.headers["Authorization"] = `Bearer ${this.token}`
-                    //     return axios(originalReq)
-                    // }
-                }
+                // if (error.response?.status === 502) {
+                //     this.authenticate()
+                //     let originalReq = error.config
+                //     console.log(originalReq)
+                // if (originalReq) {
+                //     originalReq.headers["Authorization"] = `Bearer ${this.token}`
+                //     return axios(originalReq)
+                // }
+                // }
                 return Promise.reject(error)
             }
         )
@@ -101,6 +96,14 @@ export class Wrapper {
         this.tickets = new TicketOperations(this.client)
         this.users_groups = new UserGroupOperations(this.client)
         this.zones = new ZoneOperations(this.client)
+    }
+
+    getToken() {
+        return this.token
+    }
+
+    setToken(token: string) {
+        this.token = token
     }
 
     async checkToken() {
