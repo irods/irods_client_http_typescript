@@ -1,6 +1,7 @@
 import { AxiosError, type AxiosInstance } from 'axios'
 import { toURLSearchParams } from '../../utils/toURLSearchParams.js'
 import { DataObjectTypes } from "../../types/index.js"
+import { toFormData } from '../../utils/toFormData.js'
 
 export class DataObjectOperations {
     private client: AxiosInstance
@@ -16,6 +17,9 @@ export class DataObjectOperations {
             const res = await this.client.post(
                 '/data-objects',
                 toURLSearchParams({ op: 'touch', ...params })
+            )
+            console.log(
+                `Successfully created or updated mtime of '${params.lpath}'`
             )
             return res.data
         } catch (error) {
@@ -33,6 +37,7 @@ export class DataObjectOperations {
                 '/data-objects',
                 toURLSearchParams({ op: 'remove', ...params })
             )
+            console.log(`Successfully removed data object '${params.lpath}'`)
             return res.data
         } catch (error) {
             if (error instanceof AxiosError)
@@ -94,6 +99,117 @@ export class DataObjectOperations {
             const res = await this.client.post(
                 '/data-objects',
                 toURLSearchParams({ op: 'rename', ...params })
+            )
+            return res.data
+        } catch (error) {
+            if (error instanceof AxiosError)
+                console.error('Error: ', error.response?.statusText)
+            return null
+        }
+    }
+
+    async copy(
+        params: DataObjectTypes.DataObjectCopyParams
+    ): Promise<null | DataObjectTypes.DataObjectCopyResponse> {
+        try {
+            const res = await this.client.post(
+                '/data-objects',
+                toURLSearchParams({ op: 'copy', ...params })
+            )
+            return res.data
+        } catch (error) {
+            if (error instanceof AxiosError)
+                console.error('Error: ', error.response?.statusText)
+            return null
+        }
+    }
+
+    async replicate(
+        params: DataObjectTypes.DataObjectReplicateParams
+    ): Promise<null | DataObjectTypes.DataObjectReplicateResponse> {
+        try {
+            const res = await this.client.post(
+                '/data-objects',
+                toURLSearchParams({ op: 'replicate', ...params })
+            )
+            return res.data
+        } catch (error) {
+            if (error instanceof AxiosError)
+                console.error('Error: ', error.response?.statusText)
+            return null
+        }
+    }
+
+    async trim(
+        params: DataObjectTypes.DataObjectTrimParams
+    ): Promise<null | DataObjectTypes.DataObjectTrimResponse> {
+        try {
+            const res = await this.client.post(
+                '/data-objects',
+                toURLSearchParams({ op: 'trim', ...params })
+            )
+            return res.data
+        } catch (error) {
+            if (error instanceof AxiosError)
+                console.error('Error: ', error.response?.statusText)
+            return null
+        }
+    }
+
+    async register(
+        params: DataObjectTypes.DataObjectRegisterParams
+    ): Promise<null | DataObjectTypes.DataObjectRegisterResponse> {
+        try {
+            const res = await this.client.post(
+                '/data-objects',
+                toURLSearchParams({ op: 'register', ...params })
+            )
+            return res.data
+        } catch (error) {
+            if (error instanceof AxiosError)
+                console.error('Error: ', error.response?.statusText)
+            return null
+        }
+    }
+
+    // GET request
+    async read(
+        params: DataObjectTypes.DataObjectReadParams
+    ): Promise<null | DataObjectTypes.DataObjectReadResponse> {
+        try {
+            const res = await this.client.get('/data-objects', {
+                params: { op: 'read', ...params },
+            })
+            return res.data
+        } catch (error) {
+            if (error instanceof AxiosError)
+                console.error('Error: ', error.response?.statusText)
+            return null
+        }
+    }
+
+    // Definitely needs testing, as it uses form data with binary data as a field
+    // potential input for binary data:
+    /*
+        params = {
+            ...,
+            bytes: new Blob([binaryData], { type: 'application/octet-stream' }),
+            ...
+        }
+    */
+
+    async write(
+        params: DataObjectTypes.DataObjectWriteParams
+    ): Promise<null | DataObjectTypes.DataObjectWriteResponse> {
+        try {
+            const res = await this.client.post(
+                '/data-objects',
+                toFormData({ op: 'write', ...params }),
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                }
             )
             return res.data
         } catch (error) {

@@ -18,7 +18,7 @@ export type DataObjectTouchResponse = IrodsResponse
 export type DataObjectRemoveParams = {
     lpath: string
     'catalog-only': 0 | 1
-    'no-trash': 0 | 1
+    'no-trash'?: 0 | 1
     admin?: 0 | 1
 }
 

@@ -1,5 +1,4 @@
 import type { URLComponentsType } from '../types/general_types.js'
-import { CollectionTypes } from '../types/index.js'
 import { Wrapper } from '../wrapper/index.js'
 
 describe('CollectionOperationsTest', () => {
