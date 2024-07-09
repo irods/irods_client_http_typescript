@@ -1,7 +1,7 @@
 import type { URLComponentsType } from '../types/general_types.js'
 import { Wrapper } from '../wrapper/index.js'
 
-describe('CollectionOperationsTest', () => {
+describe('CollectionTests', () => {
     const urlComponents: URLComponentsType = {
         host: 'localhost',
         port: '9090',

@@ -10,7 +10,7 @@ describe('AuthTests', () => {
 
     const api = new Wrapper(urlComponents, 'rods', 'rods')
 
-    test('auth token is received', async () => {
+    test('Auth token is received', async () => {
         await api.authenticate()
         expect(api.getToken()).toBeTruthy()
     })

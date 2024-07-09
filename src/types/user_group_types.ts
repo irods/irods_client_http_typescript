@@ -5,7 +5,7 @@ import type { IrodsResponse, AVUOperation } from "./general_types.js"
 export type UserCreateParams = {
     name: string
     zone: string
-    'user-export type'?: 'rodsuser' | 'groupadmin' | 'rodsadmin'
+    'user-type'?: 'rodsuser' | 'groupadmin' | 'rodsadmin'
 }
 
 export type UserCreateResponse = IrodsResponse
@@ -34,7 +34,7 @@ export type UserSetPasswordResponse = IrodsResponse
 export type UserSetTypeParams = {
     name: string
     zone: string
-    'new-user-export type': 'rodsuser' | 'groupadmin' | 'rodsadmin'
+    'new-user-type': 'rodsuser' | 'groupadmin' | 'rodsadmin'
 }
 
 export type UserSetTypeResponse = IrodsResponse
