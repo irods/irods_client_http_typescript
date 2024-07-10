@@ -47,6 +47,25 @@ export class ZoneOperations {
         }
     }
 
+    async modify(
+        params: ZoneTypes.ZoneModifyParams
+    ): Promise<null | ZoneTypes.ZoneModifyResponse> {
+        try {
+            const res = await this.client.post(
+                '/zones',
+                toURLSearchParams({
+                    op: 'modify',
+                    ...params,
+                })
+            )
+            return res.data
+        } catch (error) {
+            if (error instanceof AxiosError)
+                console.error('Error: ', error.response?.statusText)
+            return null
+        }
+    }
+
     async set_zone_collection_permission(
         params: ZoneTypes.SetZoneCollectionPermissionParams
     ): Promise<null | ZoneTypes.SetZoneCollectionPermissionResponse> {

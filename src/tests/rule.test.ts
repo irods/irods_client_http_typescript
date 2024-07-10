@@ -16,7 +16,7 @@ describe('RuleTests', () => {
 
     test('List Rule Engines', async () => {
         const res = await api.rules.list_rule_engines()
-        console.log(res)
+        // console.log(res)
         expect(res).toBeTruthy()
     })
 
