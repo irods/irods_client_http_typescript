@@ -14,8 +14,7 @@ export type ExecuteGenqueryParams = {
     zone?: string
 }
 
-export type ExecuteGenqueryResponse = {
-    irods_response: IrodsResponse
+export type ExecuteGenqueryResponse = IrodsResponse & {
     rows: [[string, string, string]]
     sql?: string
 }
@@ -31,7 +30,23 @@ export type ExecuteSpecificQueryParams = {
     count?: number
 }
 
-export type ExecuteSpecificQueryResponse = {
-    irods_response: IrodsResponse
+export type ExecuteSpecificQueryResponse = IrodsResponse & {
     rows: [[string, string, string]]
 }
+
+/* Add specific query */
+
+export type AddSpecificQueryParams = {
+    name: string
+    sql: string
+}
+
+export type AddSpecificQueryResponse = IrodsResponse
+
+/* Remove Specific Query */
+
+export type RemoveSpecificQueryParams = {
+    name: string
+}
+
+export type RemoveSpecificQueryResponse = IrodsResponse
