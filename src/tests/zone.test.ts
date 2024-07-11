@@ -35,7 +35,7 @@ describe('ZoneTests', () => {
         const res = await api.zones.set_zone_collection_permission({
             name: 'testZone',
             permission: 'read',
-            user: 'alice',
+            user: 'chris',
         })
         expect(res).toBeTruthy()
     })
@@ -43,7 +43,7 @@ describe('ZoneTests', () => {
     test('Zone report', async () => {
         const res = await api.zones.report()
         expect(res).toBeTruthy()
-        console.log(res?.zone_report)
+        console.log(res?.zone_report.zones[0].servers)
     })
 
     test('Remove zone', async () => {

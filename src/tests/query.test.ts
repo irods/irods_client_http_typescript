@@ -36,6 +36,7 @@ describe('QueryTests', () => {
         const res = await api.queries.execute_specific_query({
             name: 'list_users',
         })
+        console.log(res)
         expect(res).toBeTruthy()
     })
 
