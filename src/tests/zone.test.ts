@@ -20,6 +20,7 @@ describe('ZoneTests', () => {
             comment: 'New test zone',
         })
         expect(res).toBeTruthy()
+        expect(res?.irods_response.status_code).toEqual(0)
     })
 
     test('Modify zone', async () => {
@@ -29,6 +30,7 @@ describe('ZoneTests', () => {
             value: 'Modified comment',
         })
         expect(res).toBeTruthy()
+        expect(res?.irods_response.status_code).toEqual(0)
     })
 
     test('Set zone collection permission', async () => {
@@ -38,11 +40,13 @@ describe('ZoneTests', () => {
             user: 'chris',
         })
         expect(res).toBeTruthy()
+        expect(res?.irods_response.status_code).toEqual(0)
     })
 
     test('Zone report', async () => {
         const res = await api.zones.report()
         expect(res).toBeTruthy()
+        expect(res?.irods_response.status_code).toEqual(0)
         console.log(res?.zone_report.zones[0].servers)
     })
 
@@ -51,5 +55,6 @@ describe('ZoneTests', () => {
             name: 'testZone',
         })
         expect(res).toBeTruthy()
+        expect(res?.irods_response.status_code).toEqual(0)
     })
 })

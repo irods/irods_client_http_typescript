@@ -25,6 +25,7 @@ describe('CollectionTests', () => {
             lpath: '/tempZone/home/testing',
         })
         expect(res).toBeTruthy()
+        expect(res?.irods_response.status_code).toEqual(0)
         // expect(res).toEqual(mockData)
     })
 
@@ -33,6 +34,7 @@ describe('CollectionTests', () => {
             lpath: '/tempZone/home/testing',
         })
         expect(res).toBeTruthy()
+        expect(res?.irods_response.status_code).toEqual(0)
     })
 
     test('List contents of a collection', async () => {
@@ -40,6 +42,7 @@ describe('CollectionTests', () => {
             lpath: '/tempZone/home',
         })
         expect(res).toBeTruthy()
+        expect(res?.irods_response.status_code).toEqual(0)
     })
 
     test('Set permission of a collection', async () => {
@@ -49,6 +52,7 @@ describe('CollectionTests', () => {
             permission: 'read',
         })
         expect(res).toBeTruthy()
+        expect(res?.irods_response.status_code).toEqual(0)
     })
 
     test('Set inheritance of a collection', async () => {
@@ -57,6 +61,7 @@ describe('CollectionTests', () => {
             enable: 1,
         })
         expect(res).toBeTruthy()
+        expect(res?.irods_response.status_code).toEqual(0)
     })
 
     test('Modify permissions of a collection', async () => {
@@ -70,6 +75,7 @@ describe('CollectionTests', () => {
             ],
         })
         expect(res).toBeTruthy()
+        expect(res?.irods_response.status_code).toEqual(0)
         expect(res?.irods_response.failed_operation).toEqual({})
     })
 
@@ -86,6 +92,7 @@ describe('CollectionTests', () => {
             ],
         })
         expect(res).toBeTruthy()
+        expect(res?.irods_response.status_code).toEqual(0)
         expect(res?.irods_response.failed_operation).toEqual({})
     })
 
@@ -95,6 +102,7 @@ describe('CollectionTests', () => {
             'new-lpath': '/tempZone/home/renamed',
         })
         expect(res).toBeTruthy()
+        expect(res?.irods_response.status_code).toEqual(0)
     })
 
     test('Touch a collection', async () => {
@@ -102,6 +110,7 @@ describe('CollectionTests', () => {
             lpath: '/tempZone/home/renamed',
         })
         expect(res).toBeTruthy()
+        expect(res?.irods_response.status_code).toEqual(0)
     })
 
     test('Remove a collection', async () => {
@@ -114,6 +123,7 @@ describe('CollectionTests', () => {
             lpath: '/tempZone/home/renamed',
         })
         expect(res).toBeTruthy()
+        expect(res?.irods_response.status_code).toEqual(0)
         // expect(res).toEqual(mockData)
     })
 })

@@ -24,6 +24,7 @@ describe('DataObjectTests', () => {
             bytes: testBuffer,
         })
         expect(res).toBeTruthy()
+        expect(res?.irods_response.status_code).toEqual(0)
     })
 
     test('Read data object', async () => {
@@ -40,6 +41,7 @@ describe('DataObjectTests', () => {
         })
         parallelWriteHandle = res?.parallel_write_handle
         expect(res).toBeTruthy()
+        expect(res?.irods_response.status_code).toEqual(0)
     })
 
     test('Parallel write shutdown', async () => {
@@ -49,6 +51,7 @@ describe('DataObjectTests', () => {
             'parallel-write-handle': parallelWriteHandle,
         })
         expect(res).toBeTruthy()
+        expect(res?.irods_response.status_code).toEqual(0)
     })
 
     test('Modify metadata of a data object', async () => {
@@ -64,6 +67,7 @@ describe('DataObjectTests', () => {
             ],
         })
         expect(res).toBeTruthy()
+        expect(res?.irods_response.status_code).toEqual(0)
     })
 
     test('Set permission of a data object', async () => {
@@ -73,6 +77,7 @@ describe('DataObjectTests', () => {
             permission: 'write',
         })
         expect(res).toBeTruthy()
+        expect(res?.irods_response.status_code).toEqual(0)
     })
 
     test('Modify permissions of a data object', async () => {
@@ -86,6 +91,7 @@ describe('DataObjectTests', () => {
             ],
         })
         expect(res).toBeTruthy()
+        expect(res?.irods_response.status_code).toEqual(0)
     })
 
     test('Calculate checksum', async () => {
@@ -93,6 +99,7 @@ describe('DataObjectTests', () => {
             lpath: '/tempZone/home/alice/test.txt',
         })
         expect(res).toBeTruthy()
+        expect(res?.irods_response.status_code).toEqual(0)
     })
 
     test('Verify checksum', async () => {
@@ -100,6 +107,7 @@ describe('DataObjectTests', () => {
             lpath: '/tempZone/home/alice/test.txt',
         })
         expect(res).toBeTruthy()
+        expect(res?.irods_response.status_code).toEqual(0)
     })
 
     test('Stat for data object', async () => {
@@ -107,6 +115,7 @@ describe('DataObjectTests', () => {
             lpath: '/tempZone/home/alice/test.txt',
         })
         expect(res).toBeTruthy()
+        expect(res?.irods_response.status_code).toEqual(0)
     })
 
     // All tests from here will be done on this data object copy
@@ -117,6 +126,7 @@ describe('DataObjectTests', () => {
             'dst-lpath': '/tempZone/home/alice/test2.txt',
         })
         expect(res).toBeTruthy()
+        expect(res?.irods_response.status_code).toEqual(0)
     })
 
     test('Rename data object', async () => {
@@ -125,6 +135,7 @@ describe('DataObjectTests', () => {
             'new-lpath': '/tempZone/home/alice/testCopy.txt',
         })
         expect(res).toBeTruthy()
+        expect(res?.irods_response.status_code).toEqual(0)
     })
 
     // //{ irods_response: { status_code: -1816000 } }
@@ -135,6 +146,7 @@ describe('DataObjectTests', () => {
     //         'dst-resource': 'newResc',
     //     })
     //     expect(res).toBeTruthy()
+    //     expect(res?.irods_response.status_code).toEqual(0)
     // })
 
     // // Mutually exclusive fields of "replica-number" and "resource-hierarchy", at least 1 optional field must be filled
@@ -146,6 +158,7 @@ describe('DataObjectTests', () => {
     //         'new-data-comments': 'test comment',
     //     })
     //     expect(res).toBeTruthy()
+    //     expect(res?.irods_response.status_code).toEqual(0)
     // })
 
     // // { irods_response: { status_code: -164000 } }
@@ -155,6 +168,7 @@ describe('DataObjectTests', () => {
     //         'replica-number': 1,
     //     })
     //     expect(res).toBeTruthy()
+    //     expect(res?.irods_response.status_code).toEqual(0)
     // })
 
     // test('Register data object', async () => {
@@ -164,6 +178,7 @@ describe('DataObjectTests', () => {
     //         resource: 'testResc',
     //     })
     //     expect(res).toBeTruthy()
+    //     expect(res?.irods_response.status_code).toEqual(0)
     // })
 
     test('Remove data object', async () => {
@@ -180,6 +195,8 @@ describe('DataObjectTests', () => {
         })
 
         expect(res1).toBeTruthy()
+        expect(res1?.irods_response.status_code).toEqual(0)
         expect(res2).toBeTruthy()
+        expect(res2?.irods_response.status_code).toEqual(0)
     })
 })

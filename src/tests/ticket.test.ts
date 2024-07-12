@@ -20,6 +20,7 @@ describe('TicketTests', () => {
             lpath: '/tempZone/home/rods',
         })
         expect(res).toBeTruthy()
+        expect(res?.irods_response.status_code).toEqual(0)
         expect(res?.ticket).toBeTruthy()
         ticketName = res?.ticket
     })
@@ -31,5 +32,6 @@ describe('TicketTests', () => {
             name: ticketName,
         })
         expect(res).toBeTruthy()
+        expect(res?.irods_response.status_code).toEqual(0)
     })
 })

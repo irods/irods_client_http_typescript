@@ -18,6 +18,7 @@ describe('RuleTests', () => {
         const res = await api.rules.list_rule_engines()
         // console.log(res)
         expect(res).toBeTruthy()
+        expect(res?.irods_response.status_code).toEqual(0)
     })
 
     // // recommended to include rep-instance field
@@ -27,6 +28,7 @@ describe('RuleTests', () => {
     //         'rep-instance': 'idk',
     //     })
     //     expect(res).toBeTruthy()
+    //     expect(res?.irods_response.status_code).toEqual(0)
     // })
 
     // test('Remove delay rule', async () => {
@@ -34,5 +36,6 @@ describe('RuleTests', () => {
     //         'rule-id': 0,
     //     })
     //     expect(res).toBeTruthy()
+    //     expect(res?.irods_response.status_code).toEqual(0)
     // })
 })

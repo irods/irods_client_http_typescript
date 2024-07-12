@@ -22,6 +22,7 @@ describe('QueryTests', () => {
             query: query,
         })
         expect(res).toBeTruthy()
+        expect(res?.irods_response.status_code).toEqual(0)
     })
 
     test('Add specific query', async () => {
@@ -30,6 +31,7 @@ describe('QueryTests', () => {
             sql: query,
         })
         expect(res).toBeTruthy()
+        expect(res?.irods_response.status_code).toEqual(0)
     })
 
     test('Execute specific query', async () => {
@@ -38,6 +40,7 @@ describe('QueryTests', () => {
         })
         console.log(res)
         expect(res).toBeTruthy()
+        expect(res?.irods_response.status_code).toEqual(0)
     })
 
     test('Remove specific query', async () => {
@@ -45,5 +48,6 @@ describe('QueryTests', () => {
             name: 'list_users',
         })
         expect(res).toBeTruthy()
+        expect(res?.irods_response.status_code).toEqual(0)
     })
 })

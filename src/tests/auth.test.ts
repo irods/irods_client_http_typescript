@@ -14,4 +14,10 @@ describe('AuthTests', () => {
         await api.authenticate()
         expect(api.getToken()).toBeTruthy()
     })
+
+    // test('Get information', async () => {
+    //     const info = await api.get_information()
+    //     console.log(info)
+    //     expect(info).toBeTruthy()
+    // })
 })

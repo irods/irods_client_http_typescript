@@ -22,6 +22,7 @@ describe('ResourceTests', () => {
             'vault-path': '/var/lib/irods/new_vault',
         })
         expect(res).toBeTruthy()
+        expect(res?.irods_response.status_code).toEqual(0)
     })
 
     test('Modify resource metadata', async () => {
@@ -37,6 +38,7 @@ describe('ResourceTests', () => {
             ],
         })
         expect(res).toBeTruthy()
+        expect(res?.irods_response.status_code).toEqual(0)
     })
 
     test('Resource stats', async () => {
@@ -44,6 +46,7 @@ describe('ResourceTests', () => {
             name: 'testResc',
         })
         expect(res).toBeTruthy()
+        expect(res?.irods_response.status_code).toEqual(0)
         expect(res?.info).toBeTruthy()
     })
 
@@ -53,6 +56,7 @@ describe('ResourceTests', () => {
             'parent-name': 'testResc',
         })
         expect(res).toBeTruthy()
+        expect(res?.irods_response.status_code).toEqual(0)
     })
 
     test('Rebalance resource', async () => {
@@ -60,6 +64,7 @@ describe('ResourceTests', () => {
             name: 'testResc',
         })
         expect(res).toBeTruthy()
+        expect(res?.irods_response.status_code).toEqual(0)
     })
 
     test('Remove child from resource', async () => {
@@ -68,6 +73,7 @@ describe('ResourceTests', () => {
             'parent-name': 'testResc',
         })
         expect(res).toBeTruthy()
+        expect(res?.irods_response.status_code).toEqual(0)
     })
 
     test('Remove resource', async () => {
@@ -75,5 +81,6 @@ describe('ResourceTests', () => {
             name: 'testResc',
         })
         expect(res).toBeTruthy()
+        expect(res?.irods_response.status_code).toEqual(0)
     })
 })
