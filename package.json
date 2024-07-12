@@ -1,5 +1,5 @@
 {
-    "name": "irods-http-api-wrapper",
+    "name": "irods_client_http_typescript",
     "version": "1.0.0",
     "description": "Wrapper for iRODS HTTP API written in JavaScript",
     "main": "dist/index.js",

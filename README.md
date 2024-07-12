@@ -1,4 +1,4 @@
-# iRODS JavaScript HTTP API Wrapper
+# iRODS TypeScript HTTP API Wrapper
 
 ## Getting Started
 
