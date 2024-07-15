@@ -47,7 +47,6 @@ describe('ZoneTests', () => {
         const res = await api.zones.report()
         expect(res).toBeTruthy()
         expect(res?.irods_response.status_code).toEqual(0)
-        console.log(res?.zone_report.zones[0].servers)
     })
 
     test('Remove zone', async () => {

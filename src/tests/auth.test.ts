@@ -1,4 +1,4 @@
-import { Wrapper } from '../../src/wrapper/index.js'
+import { Wrapper } from '../wrapper/index.js'
 import type { URLComponentsType } from '../types/general_types.js'
 
 describe('AuthTests', () => {
