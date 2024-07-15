@@ -1,5 +1,8 @@
 import { Wrapper } from '../wrapper/index.js'
-import type { URLComponentsType } from '../types/general_types.js'
+import type {
+    IrodsResponse,
+    URLComponentsType,
+} from '../types/general_types.js'
 
 describe('DataObjectTests', () => {
     const urlComponents: URLComponentsType = {
@@ -10,15 +13,24 @@ describe('DataObjectTests', () => {
 
     const api = new Wrapper(urlComponents, 'alice', 'alicepass')
     let parallelWriteHandle: string | undefined
+    let streamCount = 3
 
     beforeAll(async () => {
         await api.authenticate()
     })
 
+    test('Touch a data object', async () => {
+        const res = await api.data_objects.touch({
+            lpath: '/tempZone/home/alice/test.txt',
+        })
+        expect(res).toBeTruthy()
+        expect(res?.irods_response.status_code).toEqual(0)
+    })
+
     // https://nodejs.org/api/buffer.html#static-method-bufferfromarray
 
     test('Write to a data object', async () => {
-        const testBuffer = Buffer.from('hello world')
+        const testBuffer = Buffer.from('hello')
         const res = await api.data_objects.write({
             lpath: '/tempZone/home/alice/test.txt',
             bytes: testBuffer,
@@ -31,17 +43,38 @@ describe('DataObjectTests', () => {
         const res = await api.data_objects.read({
             lpath: '/tempZone/home/alice/test.txt',
         })
+        console.log(res)
         expect(res).toBeTruthy()
     })
 
     test('Parallel write init', async () => {
         const res = await api.data_objects.parallel_write_init({
             lpath: '/tempZone/home/alice/test.txt',
-            'stream-count': 1,
+            'stream-count': streamCount,
         })
         parallelWriteHandle = res?.parallel_write_handle
         expect(res).toBeTruthy()
         expect(res?.irods_response.status_code).toEqual(0)
+    })
+
+    test('Parallel write', async () => {
+        expect(parallelWriteHandle).toBeTruthy()
+        if (!parallelWriteHandle) return
+        let testBuffer: Buffer
+        let responses: Promise<IrodsResponse | null>[] = []
+        for (let i = 0; i < streamCount; i++) {
+            testBuffer = Buffer.from(`hello${i}`)
+            let res = api.data_objects.write({
+                bytes: testBuffer,
+                lpath: '/tempZone/home/alice/test.txt',
+                'parallel-write-handle': parallelWriteHandle,
+                'stream-index': i,
+                offset: i * 6,
+            })
+            responses.push(res)
+        }
+        const res = await Promise.allSettled(responses)
+        console.log(res)
     })
 
     test('Parallel write shutdown', async () => {
