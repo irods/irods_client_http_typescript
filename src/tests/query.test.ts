@@ -11,7 +11,7 @@ describe('QueryTests', () => {
     const api = new Wrapper(urlComponents, 'rods', 'rods')
 
     let query =
-        "SELECT USER_NAME, USER_TYPE, USER_ZONE WHERE USER_TYPE != 'RODSGROUP"
+        "SELECT USER_NAME, USER_TYPE, USER_ZONE WHERE USER_TYPE != 'RODSGROUP'"
 
     beforeAll(async () => {
         await api.authenticate()
