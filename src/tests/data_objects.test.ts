@@ -171,22 +171,23 @@ describe('DataObjectTests', () => {
         expect(res?.irods_response.status_code).toEqual(0)
     })
 
-    // //{ irods_response: { status_code: -1816000 } }
-    // test('Replicate data object', async () => {
-    //     const res = await api.data_objects.replicate({
-    //         lpath: '/tempZone/home/alice/testCopy.txt',
-    //         'src-resource': 'demoResc',
-    //         'dst-resource': 'newResc',
-    //     })
-    //     expect(res).toBeTruthy()
-    //     expect(res?.irods_response.status_code).toEqual(0)
-    // })
+    //{ irods_response: { status_code: -1816000 } }
+    test('Replicate data object', async () => {
+        const res = await api.data_objects.replicate({
+            lpath: '/tempZone/home/alice/test.txt',
+            'src-resource': 'demoResc',
+            'dst-resource': 'wrapperResc',
+        })
+        console.log(res)
+        expect(res).toBeTruthy()
+        expect(res?.irods_response.status_code).toEqual(0)
+    })
 
-    // // Mutually exclusive fields of "replica-number" and "resource-hierarchy", at least 1 optional field must be filled
-    // // { irods_response: { status_code: -13000 } } - don't have admin privileges
+    // Mutually exclusive fields of "replica-number" and "resource-hierarchy", at least 1 optional field must be filled
+    // { irods_response: { status_code: -13000 } } - don't have admin privileges - need to log in with rods credentials
     // test('Modify data object replica', async () => {
     //     const res = await api.data_objects.modify_replica({
-    //         lpath: '/tempZone/home/alice/testCopy.txt',
+    //         lpath: '/tempZone/home/alice/test.txt',
     //         'replica-number': 1,
     //         'new-data-comments': 'test comment',
     //     })
@@ -194,15 +195,14 @@ describe('DataObjectTests', () => {
     //     expect(res?.irods_response.status_code).toEqual(0)
     // })
 
-    // // { irods_response: { status_code: -164000 } }
-    // test('Trim data object', async () => {
-    //     const res = await api.data_objects.trim({
-    //         lpath: '/tempZone/home/alice/testCopy.txt',
-    //         'replica-number': 1,
-    //     })
-    //     expect(res).toBeTruthy()
-    //     expect(res?.irods_response.status_code).toEqual(0)
-    // })
+    test('Trim data object', async () => {
+        const res = await api.data_objects.trim({
+            lpath: '/tempZone/home/alice/test.txt',
+            'replica-number': 1,
+        })
+        expect(res).toBeTruthy()
+        expect(res?.irods_response.status_code).toEqual(0)
+    })
 
     // test('Register data object', async () => {
     //     const res = await api.data_objects.register({
