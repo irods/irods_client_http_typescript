@@ -1,8 +1,4 @@
-import axios, {
-    AxiosError,
-    type AxiosInstance,
-} from 'axios'
-import { saveToken, loadToken } from './tokenStorage.js'
+import axios, { AxiosError, type AxiosInstance } from 'axios'
 import {
     CollectionOperations,
     DataObjectOperations,
@@ -54,13 +50,8 @@ export class Wrapper {
             baseURL: this.baseURL,
         })
 
-        // this.authenticate()
-
-        // this.checkToken()
-
         this.client.interceptors.request.use(
             (config) => {
-                // this.checkToken()
                 config.headers['Authorization'] = `Bearer ${this.token}`
                 return config
             },
@@ -74,16 +65,6 @@ export class Wrapper {
                 return response
             },
             (error: AxiosError) => {
-                // Any status codes that falls outside the range of 2xx cause this function to trigger
-                // if (error.response?.status === 502) {
-                //     this.authenticate()
-                //     let originalReq = error.config
-                //     console.log(originalReq)
-                // if (originalReq) {
-                //     originalReq.headers["Authorization"] = `Bearer ${this.token}`
-                //     return axios(originalReq)
-                // }
-                // }
                 return Promise.reject(error)
             }
         )
@@ -106,29 +87,7 @@ export class Wrapper {
         this.token = token
     }
 
-    async checkToken() {
-        // const tokenData = loadToken()
-        // if (tokenData) {
-        //     this.token = tokenData.token
-        //     const isExpired = new Date(tokenData.expiry) < new Date()
-        //     if (!isExpired) {
-        // console.log('Re-using token, not expired')
-        //         this.token = tokenData.token
-        //     } else {
-        // console.log('Token is expired, renewing credentials')
-        // clearToken(); // Clear expired token
-        //         await this.authenticate() // re-authenticate the user
-        //     }
-        // } else {
-        // console.log('No auth credentials, creating credentials')
-        //     await this.authenticate()
-        // }
-
-        console.log('Using token:', this.token)
-    }
-
     async authenticate(): Promise<void> {
-        // console.log('Authenticating')
         await axios
             .post(`${this.baseURL}/authenticate`, null, {
                 auth: {
@@ -137,8 +96,6 @@ export class Wrapper {
                 },
             })
             .then((response) => {
-                // console.log('Response: ', response)
-                // saveToken(response.data)
                 this.token = response.data
             })
             .catch((error) => {
@@ -152,13 +109,13 @@ export class Wrapper {
 
     private handleError(error: AxiosError): void {
         if (error.response) {
-            // console.error('Error response:', error.response.data)
-            // console.error('Status:', error.response.status)
-            // console.error('Headers:', error.response.headers)
+            console.error('Error response:', error.response.data)
+            console.error('Status:', error.response.status)
+            console.error('Headers:', error.response.headers)
         } else if (error.request) {
-            // console.error('Error request:', error.request)
+            console.error('Error request:', error.request)
         } else {
-            // console.error('Error message:', error.message)
+            console.error('Error message:', error.message)
         }
         throw error
     }

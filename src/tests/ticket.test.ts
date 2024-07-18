@@ -1,19 +1,8 @@
-import { Wrapper } from '../wrapper/index.js'
-import type { URLComponentsType } from '../types/general_types.js'
+import { getAPI } from './setupTests'
 
 describe('TicketTests', () => {
-    const urlComponents: URLComponentsType = {
-        host: 'localhost',
-        port: '9090',
-        version: '0.3.0',
-    }
-
-    const api = new Wrapper(urlComponents, 'rods', 'rods')
+    const api = getAPI()
     let ticketName: string | undefined
-
-    beforeAll(async () => {
-        await api.authenticate()
-    })
 
     test('Create ticket', async () => {
         const res = await api.tickets.create({

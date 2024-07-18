@@ -1,14 +1,7 @@
-import type { URLComponentsType } from '../types/general_types.js'
-import { Wrapper } from '../wrapper/index.js'
+import { getAPI } from './setupTests.js'
 
 describe('QueryTests', () => {
-    const urlComponents: URLComponentsType = {
-        host: 'localhost',
-        port: '9090',
-        version: '0.3.0',
-    }
-
-    const api = new Wrapper(urlComponents, 'rods', 'rods')
+    const api = getAPI()
 
     let query =
         "SELECT USER_NAME, USER_TYPE, USER_ZONE WHERE USER_TYPE != 'RODSGROUP'"

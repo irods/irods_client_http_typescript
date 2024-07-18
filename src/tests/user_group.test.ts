@@ -1,18 +1,7 @@
-import { Wrapper } from '../wrapper/index.js'
-import type { URLComponentsType } from '../types/general_types.js'
+import { getAPI } from './setupTests.js'
 
 describe('UserGroupTests', () => {
-    const urlComponents: URLComponentsType = {
-        host: 'localhost',
-        port: '9090',
-        version: '0.3.0',
-    }
-
-    const api = new Wrapper(urlComponents, 'rods', 'rods')
-
-    beforeAll(async () => {
-        await api.authenticate()
-    })
+    const api = getAPI()
 
     test('Create user', async () => {
         const res = await api.users_groups.create_user({

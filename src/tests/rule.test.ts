@@ -1,18 +1,7 @@
-import { Wrapper } from '../wrapper/index.js'
-import type { URLComponentsType } from '../types/general_types.js'
+import { getAPI } from './setupTests'
 
 describe('RuleTests', () => {
-    const urlComponents: URLComponentsType = {
-        host: 'localhost',
-        port: '9090',
-        version: '0.3.0',
-    }
-
-    const api = new Wrapper(urlComponents, 'rods', 'rods')
-
-    beforeAll(async () => {
-        await api.authenticate()
-    })
+    const api = getAPI()
 
     test('List Rule Engines', async () => {
         const res = await api.rules.list_rule_engines()
