@@ -15,4 +15,5 @@ module.exports = {
     },
     testEnvironment: 'node',
     extensionsToTreatAsEsm: ['.ts'],
+    setupFilesAfterEnv: ['./src/tests/setupTests.ts'],
 }

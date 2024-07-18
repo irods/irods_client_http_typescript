@@ -1,24 +1,12 @@
-import { Wrapper } from '../wrapper/index.js'
-import type {
-    IrodsResponse,
-    URLComponentsType,
-} from '../types/general_types.js'
+import type { IrodsResponse } from '../types/general_types.js'
 import fs from 'fs'
 
-describe('DataObjectTests', () => {
-    const urlComponents: URLComponentsType = {
-        host: 'localhost',
-        port: '9090',
-        version: '0.3.0',
-    }
+import { getAPI } from './setupTests.js'
 
-    const api = new Wrapper(urlComponents, 'rods', 'rods')
+describe('DataObjectTests', () => {
+    const api = getAPI()
     let parallelWriteHandle: string | undefined
     let streamCount = 3
-
-    beforeAll(async () => {
-        await api.authenticate()
-    })
 
     test('Touch a data object', async () => {
         const res = await api.data_objects.touch({
