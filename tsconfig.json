@@ -14,7 +14,8 @@
         "allowJs": true,
     },
     "exclude": [
-        "./src/tests/*", 
+        "./src/tests/*",
+        "./src/tmp/*",
         "./docs/**/*", 
         "./dist/**/*", 
         "babel.config.cjs", 

@@ -5,5 +5,5 @@
     "plugin": ["typedoc-plugin-missing-exports"],
     "internalModule": "Types",
     "excludeExternals": true,
-    "exclude": ["src/tests", "src/utils"]
+    "exclude": ["src/tests", "src/utils", "src/tmp"]
 }

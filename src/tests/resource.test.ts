@@ -86,10 +86,18 @@ describe('ResourceTests', () => {
     })
 
     test('Remove resource', async () => {
-        const res = await api.resources.remove({
+        const res1 = await api.resources.remove({
             name: 'testParentResc',
         })
-        expect(res).toBeTruthy()
-        expect(res?.irods_response.status_code).toEqual(0)
+
+        const res2 = await api.resources.remove({
+            name: 'testChildResc',
+        })
+
+        expect(res1).toBeTruthy()
+        expect(res1?.irods_response.status_code).toEqual(0)
+
+        expect(res2).toBeTruthy()
+        expect(res2?.irods_response.status_code).toEqual(0)
     })
 })
