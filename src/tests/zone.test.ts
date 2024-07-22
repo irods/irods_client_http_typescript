@@ -3,9 +3,11 @@ import { getAPI } from './setupTests'
 describe('ZoneTests', () => {
     const api = getAPI()
 
+    let zoneName = 'testZone'
+
     test('Add zone', async () => {
         const res = await api.zones.add({
-            name: 'testZone',
+            name: zoneName,
             comment: 'New test zone',
         })
         expect(res).toBeTruthy()
@@ -14,7 +16,7 @@ describe('ZoneTests', () => {
 
     test('Modify zone', async () => {
         const res = await api.zones.modify({
-            name: 'testZone',
+            name: zoneName,
             property: 'comment',
             value: 'Modified comment',
         })
@@ -30,7 +32,7 @@ describe('ZoneTests', () => {
 
     test('Remove zone', async () => {
         const res = await api.zones.remove({
-            name: 'testZone',
+            name: zoneName,
         })
         expect(res).toBeTruthy()
         expect(res?.irods_response.status_code).toEqual(0)
