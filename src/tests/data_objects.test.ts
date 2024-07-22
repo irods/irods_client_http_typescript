@@ -2,15 +2,24 @@ import type { IrodsResponse } from '../types/general_types.js'
 import fs from 'fs'
 
 import { getAPI } from './setupTests.js'
+import { register } from 'module'
 
 describe('DataObjectTests', () => {
     const api = getAPI()
     let parallelWriteHandle: string | undefined
     let streamCount = 3
 
+    let zoneName = 'tempZone'
+    let user = 'rods'
+    let dataObjectName = 'dataObject.txt'
+    let registerFilename = 'newly_registered_file.txt'
+
+    let baseLPath = `/${zoneName}/home/${user}`
+    let lpath = `${baseLPath}/${dataObjectName}`
+
     test('Touch a data object', async () => {
         const res = await api.data_objects.touch({
-            lpath: '/tempZone/home/rods/dataObject.txt',
+            lpath: lpath,
         })
         expect(res).toBeTruthy()
         expect(res?.irods_response.status_code).toEqual(0)
@@ -21,7 +30,7 @@ describe('DataObjectTests', () => {
     test('Write to a data object', async () => {
         const testBuffer = Buffer.from('hello')
         const res = await api.data_objects.write({
-            lpath: '/tempZone/home/rods/dataObject.txt',
+            lpath: lpath,
             bytes: testBuffer,
         })
         expect(res).toBeTruthy()
@@ -30,7 +39,7 @@ describe('DataObjectTests', () => {
 
     test('Read data object', async () => {
         const res = await api.data_objects.read({
-            lpath: '/tempZone/home/rods/dataObject.txt',
+            lpath: lpath,
         })
         console.log(res)
         expect(res).toBeTruthy()
@@ -38,7 +47,7 @@ describe('DataObjectTests', () => {
 
     test('Parallel write init', async () => {
         const res = await api.data_objects.parallel_write_init({
-            lpath: '/tempZone/home/rods/dataObject.txt',
+            lpath: lpath,
             'stream-count': streamCount,
         })
         parallelWriteHandle = res?.parallel_write_handle
@@ -55,7 +64,7 @@ describe('DataObjectTests', () => {
             testBuffer = Buffer.from(`hello${i}`)
             let res = api.data_objects.write({
                 bytes: testBuffer,
-                lpath: '/tempZone/home/rods/dataObject.txt',
+                lpath: lpath,
                 'parallel-write-handle': parallelWriteHandle,
                 'stream-index': i,
                 offset: i * 6,
@@ -78,7 +87,7 @@ describe('DataObjectTests', () => {
 
     test('Modify metadata of a data object', async () => {
         const res = await api.data_objects.modify_metadata({
-            lpath: '/tempZone/home/rods/dataObject.txt',
+            lpath: lpath,
             operations: [
                 {
                     operation: 'add',
@@ -94,7 +103,7 @@ describe('DataObjectTests', () => {
 
     test('Set permission of a data object', async () => {
         const res = await api.data_objects.set_permission({
-            lpath: '/tempZone/home/rods/dataObject.txt',
+            lpath: lpath,
             'entity-name': 'alice',
             permission: 'write',
         })
@@ -104,7 +113,7 @@ describe('DataObjectTests', () => {
 
     test('Modify permissions of a data object', async () => {
         const res = await api.data_objects.modify_permissions({
-            lpath: '/tempZone/home/rods/dataObject.txt',
+            lpath: lpath,
             operations: [
                 {
                     acl: 'read',
@@ -118,7 +127,7 @@ describe('DataObjectTests', () => {
 
     test('Calculate checksum', async () => {
         const res = await api.data_objects.calculate_checksum({
-            lpath: '/tempZone/home/rods/dataObject.txt',
+            lpath: lpath,
         })
         expect(res).toBeTruthy()
         expect(res?.irods_response.status_code).toEqual(0)
@@ -126,7 +135,7 @@ describe('DataObjectTests', () => {
 
     test('Verify checksum', async () => {
         const res = await api.data_objects.verify_checksum({
-            lpath: '/tempZone/home/rods/dataObject.txt',
+            lpath: lpath,
         })
         expect(res).toBeTruthy()
         expect(res?.irods_response.status_code).toEqual(0)
@@ -134,18 +143,16 @@ describe('DataObjectTests', () => {
 
     test('Stat for data object', async () => {
         const res = await api.data_objects.stat({
-            lpath: '/tempZone/home/rods/dataObject.txt',
+            lpath: lpath,
         })
         expect(res).toBeTruthy()
         expect(res?.irods_response.status_code).toEqual(0)
     })
 
-    // All tests from here will be done on this data object copy
-
     test('Copy data object', async () => {
         const res = await api.data_objects.copy({
-            'src-lpath': '/tempZone/home/rods/dataObject.txt',
-            'dst-lpath': '/tempZone/home/rods/dataObject2.txt',
+            'src-lpath': lpath,
+            'dst-lpath': `${baseLPath}/dataObject2.txt`,
         })
         expect(res).toBeTruthy()
         expect(res?.irods_response.status_code).toEqual(0)
@@ -153,17 +160,16 @@ describe('DataObjectTests', () => {
 
     test('Rename data object', async () => {
         const res = await api.data_objects.rename({
-            'old-lpath': '/tempZone/home/rods/dataObject2.txt',
-            'new-lpath': '/tempZone/home/rods/dataObjectCopy.txt',
+            'old-lpath': `${baseLPath}/dataObject2.txt`,
+            'new-lpath': `${baseLPath}/dataObjectCopy.txt`,
         })
         expect(res).toBeTruthy()
         expect(res?.irods_response.status_code).toEqual(0)
     })
 
-    //{ irods_response: { status_code: -1816000 } }
     test('Replicate data object', async () => {
         const res = await api.data_objects.replicate({
-            lpath: '/tempZone/home/rods/dataObject.txt',
+            lpath: lpath,
             'src-resource': 'demoResc',
             'dst-resource': 'wrapperResc',
         })
@@ -175,7 +181,7 @@ describe('DataObjectTests', () => {
     // Mutually exclusive fields of "replica-number" and "resource-hierarchy", at least 1 optional field must be filled
     test('Modify data object replica', async () => {
         const res = await api.data_objects.modify_replica({
-            lpath: '/tempZone/home/rods/dataObject.txt',
+            lpath: lpath,
             'replica-number': 1,
             'new-data-comments': 'test comment',
         })
@@ -185,7 +191,7 @@ describe('DataObjectTests', () => {
 
     test('Trim data object', async () => {
         const res = await api.data_objects.trim({
-            lpath: '/tempZone/home/rods/dataObject.txt',
+            lpath: lpath,
             'replica-number': 1,
         })
         expect(res).toBeTruthy()
@@ -194,9 +200,8 @@ describe('DataObjectTests', () => {
 
     test('Register data object', async () => {
         // Need to create a local file
-        let filename = 'newly_registered_file.txt'
-        let physical_path = `src/tmp/${filename}`
-        let logical_path = `/tempZone/home/rods/${filename}`
+        let physical_path = `src/tmp/${registerFilename}`
+        let logical_path = `${baseLPath}/${registerFilename}`
         let content = 'data'
         try {
             fs.writeFileSync(physical_path, content)
@@ -223,19 +228,19 @@ describe('DataObjectTests', () => {
 
     test('Remove data object', async () => {
         const res1 = await api.data_objects.remove({
-            lpath: '/tempZone/home/rods/newly_registered_file.txt',
+            lpath: `${baseLPath}/${registerFilename}`,
             'catalog-only': 0,
             'no-trash': 1,
         })
 
         const res2 = await api.data_objects.remove({
-            lpath: '/tempZone/home/rods/dataObjectCopy.txt',
+            lpath: `${baseLPath}/dataObjectCopy.txt`,
             'catalog-only': 0,
             'no-trash': 1,
         })
 
         const res3 = await api.data_objects.remove({
-            lpath: '/tempZone/home/rods/dataObject.txt',
+            lpath: lpath,
             'catalog-only': 0,
             'no-trash': 1,
         })

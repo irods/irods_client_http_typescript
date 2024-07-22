@@ -3,6 +3,12 @@ import { getAPI } from './setupTests.js'
 describe('ResourceTests', () => {
     const api = getAPI()
 
+    let parentResc = 'testParentResc'
+    let childResc = 'testChildResc'
+
+    let host = 'ip-172-31-12-211'
+    let vaultPath = '/var/lib/irods/new_vault'
+
     beforeAll(async () => {
         await api.authenticate()
     })
@@ -10,16 +16,16 @@ describe('ResourceTests', () => {
     // TODO(#15): Revisit hostname used in test; if host doesn't resolve, that will lead to issues
     test('Create resource', async () => {
         const res1 = await api.resources.create({
-            name: 'testParentResc',
+            name: parentResc,
             type: 'unixfilesystem',
-            host: 'ip-172-31-12-211',
-            'vault-path': '/var/lib/irods/new_vault',
+            host: host,
+            'vault-path': vaultPath,
         })
         expect(res1).toBeTruthy()
         expect(res1?.irods_response.status_code).toEqual(0)
 
         const res2 = await api.resources.create({
-            name: 'testChildResc',
+            name: childResc,
             type: 'unixfilesystem',
             host: 'ip-172-31-12-211',
             'vault-path': '/var/lib/irods/new_vault',
@@ -30,7 +36,7 @@ describe('ResourceTests', () => {
 
     test('Modify resource metadata', async () => {
         const res = await api.resources.modify_metadata({
-            name: 'testParentResc',
+            name: parentResc,
             operations: [
                 {
                     operation: 'add',
@@ -46,7 +52,7 @@ describe('ResourceTests', () => {
 
     test('Resource stats', async () => {
         const res = await api.resources.stat({
-            name: 'testParentResc',
+            name: parentResc,
         })
         expect(res).toBeTruthy()
         expect(res?.irods_response.status_code).toEqual(0)
@@ -55,8 +61,8 @@ describe('ResourceTests', () => {
 
     test('Add child to resource', async () => {
         const res = await api.resources.add_child({
-            'child-name': 'testChildResc',
-            'parent-name': 'testParentResc',
+            'child-name': childResc,
+            'parent-name': parentResc,
         })
         expect(res).toBeTruthy()
         expect(res?.irods_response.status_code).toEqual(0)
@@ -64,7 +70,7 @@ describe('ResourceTests', () => {
 
     test('Rebalance resource', async () => {
         const res = await api.resources.rebalance({
-            name: 'testParentResc',
+            name: parentResc,
         })
         expect(res).toBeTruthy()
         expect(res?.irods_response.status_code).toEqual(0)
@@ -72,8 +78,8 @@ describe('ResourceTests', () => {
 
     test('Remove child from resource', async () => {
         const res = await api.resources.remove_child({
-            'child-name': 'testChildResc',
-            'parent-name': 'testParentResc',
+            'child-name': childResc,
+            'parent-name': parentResc,
         })
         expect(res).toBeTruthy()
         expect(res?.irods_response.status_code).toEqual(0)
@@ -81,11 +87,11 @@ describe('ResourceTests', () => {
 
     test('Remove resource', async () => {
         const res1 = await api.resources.remove({
-            name: 'testParentResc',
+            name: parentResc,
         })
 
         const res2 = await api.resources.remove({
-            name: 'testChildResc',
+            name: childResc,
         })
 
         expect(res1).toBeTruthy()

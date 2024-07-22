@@ -3,10 +3,14 @@ import { getAPI } from './setupTests.js'
 describe('UserGroupTests', () => {
     const api = getAPI()
 
+    let userName = 'testUser'
+    let groupName = 'testGroup'
+    let zoneName = 'tempZone'
+
     test('Create user', async () => {
         const res = await api.users_groups.create_user({
-            name: 'testUser',
-            zone: 'tempZone',
+            name: userName,
+            zone: zoneName,
             'user-type': 'rodsuser',
         })
         expect(res).toBeTruthy()
@@ -15,8 +19,8 @@ describe('UserGroupTests', () => {
 
     test('Set user password', async () => {
         const res = await api.users_groups.set_password({
-            name: 'testUser',
-            zone: 'tempZone',
+            name: userName,
+            zone: zoneName,
             'new-password': 'testPassword',
         })
         expect(res).toBeTruthy()
@@ -25,8 +29,8 @@ describe('UserGroupTests', () => {
 
     test('Set user type', async () => {
         const res = await api.users_groups.set_user_type({
-            name: 'testUser',
-            zone: 'tempZone',
+            name: userName,
+            zone: zoneName,
             'new-user-type': 'rodsadmin',
         })
         expect(res).toBeTruthy()
@@ -35,7 +39,7 @@ describe('UserGroupTests', () => {
 
     test('Create group', async () => {
         const res = await api.users_groups.create_group({
-            name: 'testGroup',
+            name: groupName,
         })
         expect(res).toBeTruthy()
         expect(res?.irods_response.status_code).toEqual(0)
@@ -43,9 +47,9 @@ describe('UserGroupTests', () => {
 
     test('Add user to group', async () => {
         const res = await api.users_groups.add_to_group({
-            user: 'testUser',
-            group: 'testGroup',
-            zone: 'tempZone',
+            user: userName,
+            group: groupName,
+            zone: zoneName,
         })
         expect(res).toBeTruthy()
         expect(res?.irods_response.status_code).toEqual(0)
@@ -53,9 +57,9 @@ describe('UserGroupTests', () => {
 
     test('Is user member of group', async () => {
         const res = await api.users_groups.is_member_of_group({
-            user: 'testUser',
-            group: 'testGroup',
-            zone: 'tempZone',
+            user: userName,
+            group: groupName,
+            zone: zoneName,
         })
         expect(res).toBeTruthy()
         expect(res?.irods_response.status_code).toEqual(0)
@@ -63,9 +67,9 @@ describe('UserGroupTests', () => {
 
     test('Remove user from group', async () => {
         const res = await api.users_groups.remove_from_group({
-            user: 'testUser',
-            group: 'testGroup',
-            zone: 'tempZone',
+            user: userName,
+            group: groupName,
+            zone: zoneName,
         })
         expect(res).toBeTruthy()
         expect(res?.irods_response.status_code).toEqual(0)
@@ -85,8 +89,8 @@ describe('UserGroupTests', () => {
 
     test('Stat for a user or group', async () => {
         const res = await api.users_groups.stat({
-            name: 'testUser',
-            zone: 'tempZone',
+            name: userName,
+            zone: zoneName,
         })
         expect(res).toBeTruthy()
         expect(res?.irods_response.status_code).toEqual(0)
@@ -94,7 +98,7 @@ describe('UserGroupTests', () => {
 
     test('Modify metadata for a user or group', async () => {
         const res = await api.users_groups.modify_metadata({
-            name: 'testUser',
+            name: userName,
             operations: [
                 {
                     operation: 'add',
@@ -110,8 +114,8 @@ describe('UserGroupTests', () => {
 
     test('Remove user', async () => {
         const res = await api.users_groups.remove_user({
-            name: 'testUser',
-            zone: 'tempZone',
+            name: userName,
+            zone: zoneName,
         })
         expect(res).toBeTruthy()
         expect(res?.irods_response.status_code).toEqual(0)
@@ -119,7 +123,7 @@ describe('UserGroupTests', () => {
 
     test('Remove group', async () => {
         const res = await api.users_groups.remove_group({
-            name: 'testGroup',
+            name: groupName,
         })
         expect(res).toBeTruthy()
         expect(res?.irods_response.status_code).toEqual(0)

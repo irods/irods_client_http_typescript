@@ -2,26 +2,25 @@ import { getAPI } from './setupTests.js'
 
 describe('CollectionTests', () => {
     const api = getAPI()
-    console.log(api.getToken())
+    
+    let zoneName = 'tempZone'
+    let user = 'rods'
+    let collectionName = 'testing'
+
+    let lpath = `/${zoneName}/home/${user}/${collectionName}`
+    let renamedLPath = `/${zoneName}/home/${user}/renamed`
 
     test('Create a new collection', async () => {
-        // const mockData: CollectionTypes.CollectionCreateResponse = {
-        //     irods_response: {
-        //         status_code: 0,
-        //     },
-        //     created: true,
-        // }
         const res = await api.collections.create({
-            lpath: '/tempZone/home/testing',
+            lpath: lpath,
         })
         expect(res).toBeTruthy()
         expect(res?.irods_response.status_code).toEqual(0)
-        // expect(res).toEqual(mockData)
     })
 
     test('Stat for a collection', async () => {
         const res = await api.collections.stat({
-            lpath: '/tempZone/home/testing',
+            lpath: lpath,
         })
         expect(res).toBeTruthy()
         expect(res?.irods_response.status_code).toEqual(0)
@@ -29,7 +28,7 @@ describe('CollectionTests', () => {
 
     test('List contents of a collection', async () => {
         const res = await api.collections.list({
-            lpath: '/tempZone/home',
+            lpath: `/${zoneName}/home`,
         })
         expect(res).toBeTruthy()
         expect(res?.irods_response.status_code).toEqual(0)
@@ -37,7 +36,7 @@ describe('CollectionTests', () => {
 
     test('Set permission of a collection', async () => {
         const res = await api.collections.set_permission({
-            lpath: '/tempZone/home/testing',
+            lpath: lpath,
             'entity-name': 'alice',
             permission: 'read',
         })
@@ -47,7 +46,7 @@ describe('CollectionTests', () => {
 
     test('Set inheritance of a collection', async () => {
         const res = await api.collections.set_inheritance({
-            lpath: '/tempZone/home/testing',
+            lpath: lpath,
             enable: 1,
         })
         expect(res).toBeTruthy()
@@ -56,7 +55,7 @@ describe('CollectionTests', () => {
 
     test('Modify permissions of a collection', async () => {
         const res = await api.collections.modify_permissions({
-            lpath: '/tempZone/home/testing',
+            lpath: lpath,
             operations: [
                 {
                     entity_name: 'alice',
@@ -71,7 +70,7 @@ describe('CollectionTests', () => {
 
     test('Modify metadata of a collection', async () => {
         const res = await api.collections.modify_metadata({
-            lpath: '/tempZone/home/testing',
+            lpath: lpath,
             operations: [
                 {
                     operation: 'add',
@@ -88,8 +87,8 @@ describe('CollectionTests', () => {
 
     test('Rename a collection', async () => {
         const res = await api.collections.rename({
-            'old-lpath': '/tempZone/home/testing',
-            'new-lpath': '/tempZone/home/renamed',
+            'old-lpath': lpath,
+            'new-lpath': renamedLPath,
         })
         expect(res).toBeTruthy()
         expect(res?.irods_response.status_code).toEqual(0)
@@ -97,23 +96,17 @@ describe('CollectionTests', () => {
 
     test('Touch a collection', async () => {
         const res = await api.collections.touch({
-            lpath: '/tempZone/home/renamed',
+            lpath: renamedLPath,
         })
         expect(res).toBeTruthy()
         expect(res?.irods_response.status_code).toEqual(0)
     })
 
     test('Remove a collection', async () => {
-        // const mockData: CollectionTypes.CollectionRemoveResponse = {
-        //     irods_response: {
-        //         status_code: 0,
-        //     },
-        // }
         const res = await api.collections.remove({
-            lpath: '/tempZone/home/renamed',
+            lpath: renamedLPath,
         })
         expect(res).toBeTruthy()
         expect(res?.irods_response.status_code).toEqual(0)
-        // expect(res).toEqual(mockData)
     })
 })
