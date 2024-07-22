@@ -7,6 +7,7 @@ describe('ResourceTests', () => {
         await api.authenticate()
     })
 
+    // TODO(#15): Revisit hostname used in test; if host doesn't resolve, that will lead to issues
     test('Create resource', async () => {
         const res1 = await api.resources.create({
             name: 'testParentResc',

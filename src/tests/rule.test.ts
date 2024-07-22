@@ -16,8 +16,7 @@ describe('RuleTests', () => {
         let test_msg = 'This was run by the iRODS HTTP API test suite!'
         const res = await api.rules.execute({
             'rep-instance': rep_instance,
-            'rule-text':
-                'writeLine("stdout", "This was run by the iRODS HTTP API test suite!")',
+            'rule-text': `writeLine("stdout", "${test_msg}")`,
         })
         console.log(res)
         expect(res).toBeTruthy()
