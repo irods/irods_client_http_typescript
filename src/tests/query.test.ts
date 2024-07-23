@@ -15,7 +15,7 @@ describe('QueryTests', () => {
     })
 
     test('Execute genquery', async () => {
-        const res = await api.queries.execute_genquery({
+        const res = await api.query.execute_genquery({
             query: genquery,
         })
         expect(res).toBeTruthy()
@@ -23,7 +23,7 @@ describe('QueryTests', () => {
     })
 
     test('Add specific query', async () => {
-        const res = await api.queries.add_specific_query({
+        const res = await api.query.add_specific_query({
             name: specific_query_name,
             sql: specific_query,
         })
@@ -32,7 +32,7 @@ describe('QueryTests', () => {
     })
 
     test('Execute specific query', async () => {
-        const res = await api.queries.execute_specific_query({
+        const res = await api.query.execute_specific_query({
             name: specific_query_name,
         })
         console.log(res)
@@ -42,7 +42,7 @@ describe('QueryTests', () => {
     })
 
     test('Remove specific query', async () => {
-        const res = await api.queries.remove_specific_query({
+        const res = await api.query.remove_specific_query({
             name: specific_query_name,
         })
         expect(res).toBeTruthy()

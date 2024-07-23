@@ -23,7 +23,7 @@ export class Wrapper {
 
     public collections: CollectionOperations
     public data_objects: DataObjectOperations
-    public queries: QueryOperations
+    public query: QueryOperations
     public resources: ResourceOperations
     public rules: RuleOperations
     public tickets: TicketOperations
@@ -71,7 +71,7 @@ export class Wrapper {
 
         this.collections = new CollectionOperations(this.client)
         this.data_objects = new DataObjectOperations(this.client)
-        this.queries = new QueryOperations(this.client)
+        this.query = new QueryOperations(this.client)
         this.resources = new ResourceOperations(this.client)
         this.rules = new RuleOperations(this.client)
         this.tickets = new TicketOperations(this.client)
