@@ -37,7 +37,7 @@ describe('RuleTests', () => {
         // Find the delay rule we just created.
         // This query assumes the test suite is running on a system where no other delay
         // rules are being created.
-        const findDelayRuleRes = await api.queries.execute_genquery({
+        const findDelayRuleRes = await api.query.execute_genquery({
             query: 'select max(RULE_EXEC_ID)',
         })
         expect(findDelayRuleRes).toBeTruthy()
