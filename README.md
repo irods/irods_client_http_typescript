@@ -29,7 +29,7 @@ const urlComponents: URLComponentsType = {
 const api = new Wrapper(urlComponents, '<username>', '<password>')
 ```
 
-5. Authenticate the wrapper object within an asynchronous context:
+5. Authenticate the wrapper object within an asynchronous context
 
 ```
 (async () => {
@@ -37,6 +37,21 @@ const api = new Wrapper(urlComponents, '<username>', '<password>')
 })
 ```
 
+
 - **Note**: This code is assuming you're not already within an asynchronous context, such as an async function. 
 
-6. All operations of the wrapper can now be done within an asynchronous context as well.
+6. All operations of the wrapper can now be done within an asynchronous context as well, e.g.,
+
+```
+import { CollectionTypes } from "irods-http-api-wrapper";
+
+// Declare type of res if working in typescript, otherwise just put 'let res'
+let res: CollectionTypes.CollectionCreateResponse | null
+let lpath = "/tempZone/home/user/newCollection"
+
+(async () => {
+    res = await api.collections.create({
+        lpath: lpath
+    })
+})
+```
