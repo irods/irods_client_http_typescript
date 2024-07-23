@@ -1,7 +1,7 @@
-import { getAPI } from './setupTests'
+import { createClientForTesting } from './setupTests'
 
 describe('RuleTests', () => {
-    const api = getAPI()
+    const api = createClientForTesting()
     let rep_instance = 'irods_rule_engine_plugin-irods_rule_language-instance'
 
     test('List Rule Engines', async () => {

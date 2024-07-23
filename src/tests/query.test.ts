@@ -1,7 +1,7 @@
-import { getAPI } from './setupTests.js'
+import { createClientForTesting } from './setupTests.js'
 
 describe('QueryTests', () => {
-    const api = getAPI()
+    const api = createClientForTesting()
 
     let genquery =
         "SELECT USER_NAME, USER_TYPE, USER_ZONE WHERE USER_TYPE != 'RODSGROUP'"

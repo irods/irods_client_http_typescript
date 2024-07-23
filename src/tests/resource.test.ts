@@ -1,7 +1,7 @@
-import { getAPI } from './setupTests.js'
+import { createClientForTesting } from './setupTests.js'
 
 describe('ResourceTests', () => {
-    const api = getAPI()
+    const api = createClientForTesting()
 
     let parentResc = 'testParentResc'
     let childResc = 'testChildResc'

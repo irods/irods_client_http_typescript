@@ -1,11 +1,10 @@
 import type { IrodsResponse } from '../types/general_types.js'
 import fs from 'fs'
 
-import { getAPI } from './setupTests.js'
-import { register } from 'module'
+import { createClientForTesting } from './setupTests.js'
 
 describe('DataObjectTests', () => {
-    const api = getAPI()
+    const api = createClientForTesting()
     let parallelWriteHandle: string | undefined
     let streamCount = 3
 

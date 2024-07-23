@@ -15,7 +15,9 @@ beforeAll(async () => {
     await rodsuser.authenticate()
 })
 
-export function getAPI(type?: 'rodsadmin' | 'rodsuser'): Wrapper {
+export function createClientForTesting(
+    type?: 'rodsadmin' | 'rodsuser'
+): Wrapper {
     if (type === 'rodsadmin' || !type) return rodsadmin
     return rodsuser
 }

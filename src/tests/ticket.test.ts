@@ -1,7 +1,7 @@
-import { getAPI } from './setupTests'
+import { createClientForTesting } from './setupTests'
 
 describe('TicketTests', () => {
-    const api = getAPI()
+    const api = createClientForTesting()
     let ticketName: string | undefined
 
     test('Create ticket', async () => {
