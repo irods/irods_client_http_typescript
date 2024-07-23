@@ -1,7 +1,7 @@
-import { getAPI } from './setupTests'
+import { createClientForTesting } from './setupTests'
 
 describe('AuthTests', () => {
-    const api = getAPI()
+    const api = createClientForTesting()
 
     test('Auth token is received', async () => {
         console.log(api.getToken())

@@ -1,7 +1,7 @@
-import { getAPI } from './setupTests'
+import { createClientForTesting } from './setupTests'
 
 describe('ZoneTests', () => {
-    const api = getAPI()
+    const api = createClientForTesting()
 
     let zoneName = 'testZone'
 

@@ -1,7 +1,7 @@
-import { getAPI } from './setupTests.js'
+import { createClientForTesting } from './setupTests.js'
 
 describe('UserGroupTests', () => {
-    const api = getAPI()
+    const api = createClientForTesting()
 
     let userName = 'testUser'
     let groupName = 'testGroup'
