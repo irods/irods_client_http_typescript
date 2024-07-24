@@ -44,19 +44,19 @@ describe('DataObjectTests', () => {
         expect(res).toBeTruthy()
     })
 
-    test('Parallel write init', async () => {
-        const res = await api.data_objects.parallel_write_init({
+    test('Parallel write', async () => {
+        // Parallel write init
+        const initRes = await api.data_objects.parallel_write_init({
             lpath: lpath,
             'stream-count': streamCount,
         })
-        parallelWriteHandle = res?.parallel_write_handle
-        expect(res).toBeTruthy()
-        expect(res?.irods_response.status_code).toEqual(0)
-    })
+        parallelWriteHandle = initRes?.parallel_write_handle
+        expect(initRes).toBeTruthy()
+        expect(initRes?.irods_response.status_code).toEqual(0)
 
-    test('Parallel write', async () => {
-        expect(parallelWriteHandle).toBeTruthy()
         if (!parallelWriteHandle) return
+
+        // Parallel write
         let testBuffer: Buffer
         let responses: Promise<IrodsResponse | null>[] = []
         for (let i = 0; i < streamCount; i++) {
@@ -70,18 +70,15 @@ describe('DataObjectTests', () => {
             })
             responses.push(res)
         }
-        const res = await Promise.allSettled(responses)
-        console.log(res)
-    })
+        const parallelWriteResponses = await Promise.allSettled(responses)
+        expect(parallelWriteResponses).toBeTruthy()
 
-    test('Parallel write shutdown', async () => {
-        expect(parallelWriteHandle).toBeTruthy()
-        if (!parallelWriteHandle) return
-        const res = await api.data_objects.parallel_write_shutdown({
+        // Parallel write shutdown
+        const shutdownRes = await api.data_objects.parallel_write_shutdown({
             'parallel-write-handle': parallelWriteHandle,
         })
-        expect(res).toBeTruthy()
-        expect(res?.irods_response.status_code).toEqual(0)
+        expect(shutdownRes).toBeTruthy()
+        expect(shutdownRes?.irods_response.status_code).toEqual(0)
     })
 
     test('Modify metadata of a data object', async () => {
