@@ -4,23 +4,19 @@ describe('TicketTests', () => {
     const api = createClientForTesting()
     let ticketName: string | undefined
 
-    test('Create ticket', async () => {
-        const res = await api.tickets.create({
+    test('Create and remove ticket', async () => {
+        const createRes = await api.tickets.create({
             lpath: '/tempZone/home/rods',
         })
-        expect(res).toBeTruthy()
-        expect(res?.irods_response.status_code).toEqual(0)
-        expect(res?.ticket).toBeTruthy()
-        ticketName = res?.ticket
-    })
+        expect(createRes).toBeTruthy()
+        expect(createRes?.irods_response.status_code).toEqual(0)
+        expect(createRes?.ticket).toBeTruthy()
+        ticketName = createRes!.ticket
 
-    test('Remove ticket', async () => {
-        expect(ticketName).toBeTruthy()
-        if (!ticketName) return
-        const res = await api.tickets.remove({
+        const removeRes = await api.tickets.remove({
             name: ticketName,
         })
-        expect(res).toBeTruthy()
-        expect(res?.irods_response.status_code).toEqual(0)
+        expect(removeRes).toBeTruthy()
+        expect(removeRes?.irods_response.status_code).toEqual(0)
     })
 })
