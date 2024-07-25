@@ -18,8 +18,9 @@ describe('QueryTests', () => {
         const res = await api.query.execute_genquery({
             query: genquery,
         })
-        expect(res).toBeTruthy()
-        expect(res?.irods_response.status_code).toEqual(0)
+        expect(res.data).toBeTruthy()
+        expect(res.status).toEqual(200)
+        expect(res.data?.irods_response.status_code).toEqual(0)
     })
 
     test('Add specific query', async () => {
@@ -27,8 +28,9 @@ describe('QueryTests', () => {
             name: specific_query_name,
             sql: specific_query,
         })
-        expect(res).toBeTruthy()
-        expect(res?.irods_response.status_code).toEqual(0)
+        expect(res.data).toBeTruthy()
+        expect(res.status).toEqual(200)
+        expect(res.data?.irods_response.status_code).toEqual(0)
     })
 
     test('Execute specific query', async () => {
@@ -36,16 +38,18 @@ describe('QueryTests', () => {
             name: specific_query_name,
         })
         console.log(res)
-        expect(res).toBeTruthy()
-        expect(res?.irods_response.status_code).toEqual(0)
-        expect(res?.rows[0][0]).toEqual('200') // The token ID of rodsgroup is always 200.
+        expect(res.data).toBeTruthy()
+        expect(res.status).toEqual(200)
+        expect(res.data?.irods_response.status_code).toEqual(0)
+        expect(res.data?.rows[0][0]).toEqual('200') // The token ID of rodsgroup is always 200.
     })
 
     test('Remove specific query', async () => {
         const res = await api.query.remove_specific_query({
             name: specific_query_name,
         })
-        expect(res).toBeTruthy()
-        expect(res?.irods_response.status_code).toEqual(0)
+        expect(res.data).toBeTruthy()
+        expect(res.status).toEqual(200)
+        expect(res.data?.irods_response.status_code).toEqual(0)
     })
 })

@@ -21,17 +21,19 @@ describe('ResourceTests', () => {
             host: host,
             'vault-path': vaultPath,
         })
-        expect(res1).toBeTruthy()
-        expect(res1?.irods_response.status_code).toEqual(0)
+        expect(res1.data).toBeTruthy()
+        expect(res1.status).toEqual(200)
+        expect(res1.data?.irods_response.status_code).toEqual(0)
 
         const res2 = await api.resources.create({
             name: childResc,
             type: 'unixfilesystem',
-            host: 'ip-172-31-12-211',
-            'vault-path': '/var/lib/irods/new_vault',
+            host: host,
+            'vault-path': vaultPath,
         })
-        expect(res2).toBeTruthy()
-        expect(res2?.irods_response.status_code).toEqual(0)
+        expect(res2.data).toBeTruthy()
+        expect(res2.status).toEqual(200)
+        expect(res2.data?.irods_response.status_code).toEqual(0)
     })
 
     test('Modify resource metadata', async () => {
@@ -46,17 +48,19 @@ describe('ResourceTests', () => {
                 },
             ],
         })
-        expect(res).toBeTruthy()
-        expect(res?.irods_response.status_code).toEqual(0)
+        expect(res.data).toBeTruthy()
+        expect(res.status).toEqual(200)
+        expect(res.data?.irods_response.status_code).toEqual(0)
     })
 
     test('Resource stats', async () => {
         const res = await api.resources.stat({
             name: parentResc,
         })
-        expect(res).toBeTruthy()
-        expect(res?.irods_response.status_code).toEqual(0)
-        expect(res?.info).toBeTruthy()
+        expect(res.data).toBeTruthy()
+        expect(res.status).toEqual(200)
+        expect(res.data?.irods_response.status_code).toEqual(0)
+        expect(res.data?.info).toBeTruthy()
     })
 
     test('Add child to resource', async () => {
@@ -64,16 +68,18 @@ describe('ResourceTests', () => {
             'child-name': childResc,
             'parent-name': parentResc,
         })
-        expect(res).toBeTruthy()
-        expect(res?.irods_response.status_code).toEqual(0)
+        expect(res.data).toBeTruthy()
+        expect(res.status).toEqual(200)
+        expect(res.data?.irods_response.status_code).toEqual(0)
     })
 
     test('Rebalance resource', async () => {
         const res = await api.resources.rebalance({
             name: parentResc,
         })
-        expect(res).toBeTruthy()
-        expect(res?.irods_response.status_code).toEqual(0)
+        expect(res.data).toBeTruthy()
+        expect(res.status).toEqual(200)
+        expect(res.data?.irods_response.status_code).toEqual(0)
     })
 
     test('Remove child from resource', async () => {
@@ -81,8 +87,9 @@ describe('ResourceTests', () => {
             'child-name': childResc,
             'parent-name': parentResc,
         })
-        expect(res).toBeTruthy()
-        expect(res?.irods_response.status_code).toEqual(0)
+        expect(res.data).toBeTruthy()
+        expect(res.status).toEqual(200)
+        expect(res.data?.irods_response.status_code).toEqual(0)
     })
 
     test('Remove resource', async () => {
@@ -94,10 +101,12 @@ describe('ResourceTests', () => {
             name: childResc,
         })
 
-        expect(res1).toBeTruthy()
-        expect(res1?.irods_response.status_code).toEqual(0)
+        expect(res1.data).toBeTruthy()
+        expect(res1.status).toEqual(200)
+        expect(res1.data?.irods_response.status_code).toEqual(0)
 
-        expect(res2).toBeTruthy()
-        expect(res2?.irods_response.status_code).toEqual(0)
+        expect(res2.data).toBeTruthy()
+        expect(res2.status).toEqual(200)
+        expect(res2.data?.irods_response.status_code).toEqual(0)
     })
 })

@@ -13,8 +13,9 @@ describe('UserGroupTests', () => {
             zone: zoneName,
             'user-type': 'rodsuser',
         })
-        expect(res).toBeTruthy()
-        expect(res?.irods_response.status_code).toEqual(0)
+        expect(res.data).toBeTruthy()
+        expect(res.status).toEqual(200)
+        expect(res.data?.irods_response.status_code).toEqual(0)
     })
 
     test('Set user password', async () => {
@@ -23,8 +24,9 @@ describe('UserGroupTests', () => {
             zone: zoneName,
             'new-password': 'testPassword',
         })
-        expect(res).toBeTruthy()
-        expect(res?.irods_response.status_code).toEqual(0)
+        expect(res.data).toBeTruthy()
+        expect(res.status).toEqual(200)
+        expect(res.data?.irods_response.status_code).toEqual(0)
     })
 
     test('Set user type', async () => {
@@ -33,16 +35,18 @@ describe('UserGroupTests', () => {
             zone: zoneName,
             'new-user-type': 'rodsadmin',
         })
-        expect(res).toBeTruthy()
-        expect(res?.irods_response.status_code).toEqual(0)
+        expect(res.data).toBeTruthy()
+        expect(res.status).toEqual(200)
+        expect(res.data?.irods_response.status_code).toEqual(0)
     })
 
     test('Create group', async () => {
         const res = await api.users_groups.create_group({
             name: groupName,
         })
-        expect(res).toBeTruthy()
-        expect(res?.irods_response.status_code).toEqual(0)
+        expect(res.data).toBeTruthy()
+        expect(res.status).toEqual(200)
+        expect(res.data?.irods_response.status_code).toEqual(0)
     })
 
     test('Add user to group', async () => {
@@ -51,8 +55,9 @@ describe('UserGroupTests', () => {
             group: groupName,
             zone: zoneName,
         })
-        expect(res).toBeTruthy()
-        expect(res?.irods_response.status_code).toEqual(0)
+        expect(res.data).toBeTruthy()
+        expect(res.status).toEqual(200)
+        expect(res.data?.irods_response.status_code).toEqual(0)
     })
 
     test('Is user member of group', async () => {
@@ -61,8 +66,9 @@ describe('UserGroupTests', () => {
             group: groupName,
             zone: zoneName,
         })
-        expect(res).toBeTruthy()
-        expect(res?.irods_response.status_code).toEqual(0)
+        expect(res.data).toBeTruthy()
+        expect(res.status).toEqual(200)
+        expect(res.data?.irods_response.status_code).toEqual(0)
     })
 
     test('Remove user from group', async () => {
@@ -71,20 +77,23 @@ describe('UserGroupTests', () => {
             group: groupName,
             zone: zoneName,
         })
-        expect(res).toBeTruthy()
-        expect(res?.irods_response.status_code).toEqual(0)
+        expect(res.data).toBeTruthy()
+        expect(res.status).toEqual(200)
+        expect(res.data?.irods_response.status_code).toEqual(0)
     })
 
     test('List users', async () => {
         const res = await api.users_groups.users()
-        expect(res).toBeTruthy()
-        expect(res?.irods_response.status_code).toEqual(0)
+        expect(res.data).toBeTruthy()
+        expect(res.status).toEqual(200)
+        expect(res.data?.irods_response.status_code).toEqual(0)
     })
 
     test('List groups', async () => {
         const res = await api.users_groups.groups()
-        expect(res).toBeTruthy()
-        expect(res?.irods_response.status_code).toEqual(0)
+        expect(res.data).toBeTruthy()
+        expect(res.status).toEqual(200)
+        expect(res.data?.irods_response.status_code).toEqual(0)
     })
 
     test('Stat for a user or group', async () => {
@@ -92,8 +101,9 @@ describe('UserGroupTests', () => {
             name: userName,
             zone: zoneName,
         })
-        expect(res).toBeTruthy()
-        expect(res?.irods_response.status_code).toEqual(0)
+        expect(res.data).toBeTruthy()
+        expect(res.status).toEqual(200)
+        expect(res.data?.irods_response.status_code).toEqual(0)
     })
 
     test('Modify metadata for a user or group', async () => {
@@ -108,8 +118,9 @@ describe('UserGroupTests', () => {
                 },
             ],
         })
-        expect(res).toBeTruthy()
-        expect(res?.irods_response.status_code).toEqual(0)
+        expect(res.data).toBeTruthy()
+        expect(res.status).toEqual(200)
+        expect(res.data?.irods_response.status_code).toEqual(0)
     })
 
     test('Remove user', async () => {
@@ -117,15 +128,17 @@ describe('UserGroupTests', () => {
             name: userName,
             zone: zoneName,
         })
-        expect(res).toBeTruthy()
-        expect(res?.irods_response.status_code).toEqual(0)
+        expect(res.data).toBeTruthy()
+        expect(res.status).toEqual(200)
+        expect(res.data?.irods_response.status_code).toEqual(0)
     })
 
     test('Remove group', async () => {
         const res = await api.users_groups.remove_group({
             name: groupName,
         })
-        expect(res).toBeTruthy()
-        expect(res?.irods_response.status_code).toEqual(0)
+        expect(res.data).toBeTruthy()
+        expect(res.status).toEqual(200)
+        expect(res.data?.irods_response.status_code).toEqual(0)
     })
 })

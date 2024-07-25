@@ -53,6 +53,26 @@ export type IrodsResponse = {
     }
 }
 
+/* 
+    Generic type for wrapper responses, where T is a type parameter and can be used as follows:
+        -   async operation_function(): HTTPResponse<CollectionCreateResponse> {
+		        ...
+	        }
+    The data structure for the return type of operation_function will be equivalent to:
+        {
+            status: number,
+            data: {
+                irods_response: ...
+                created?: boolean
+            }
+        }
+*/
+
+export type HTTPResponse<T> = {
+    status: number
+    data: T
+}
+
 export type StatusFields = {
     http_status: number
     message: string

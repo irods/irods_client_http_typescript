@@ -1,6 +1,7 @@
 import { AxiosError, type AxiosInstance } from 'axios'
-import { ZoneTypes } from "../../types/index.js"
+import { ZoneTypes, type HTTPResponse } from '../../types/index.js'
 import { toURLSearchParams } from '../../utils/toURLSearchParams.js'
+import assert from 'assert'
 
 export class ZoneOperations {
     private client: AxiosInstance
@@ -11,7 +12,7 @@ export class ZoneOperations {
 
     async add(
         params: ZoneTypes.ZoneAddParams
-    ): Promise<null | ZoneTypes.ZoneAddResponse> {
+    ): Promise<HTTPResponse<null | ZoneTypes.ZoneAddResponse>> {
         try {
             const res = await this.client.post(
                 '/zones',
@@ -20,17 +21,17 @@ export class ZoneOperations {
                     ...params,
                 })
             )
-            return res.data
+            return { status: res.status, data: res.data }
         } catch (error) {
-            if (error instanceof AxiosError)
-                console.error('Error: ', error.response?.statusText)
-            return null
+            assert(error instanceof AxiosError)
+            console.error('Error: ', error.response?.statusText)
+            return { status: error.response?.status!, data: null }
         }
     }
 
     async remove(
         params: ZoneTypes.ZoneRemoveParams
-    ): Promise<null | ZoneTypes.ZoneRemoveResponse> {
+    ): Promise<HTTPResponse<null | ZoneTypes.ZoneRemoveResponse>> {
         try {
             const res = await this.client.post(
                 '/zones',
@@ -39,17 +40,17 @@ export class ZoneOperations {
                     ...params,
                 })
             )
-            return res.data
+            return { status: res.status, data: res.data }
         } catch (error) {
-            if (error instanceof AxiosError)
-                console.error('Error: ', error.response?.statusText)
-            return null
+            assert(error instanceof AxiosError)
+            console.error('Error: ', error.response?.statusText)
+            return { status: error.response?.status!, data: null }
         }
     }
 
     async modify(
         params: ZoneTypes.ZoneModifyParams
-    ): Promise<null | ZoneTypes.ZoneModifyResponse> {
+    ): Promise<HTTPResponse<null | ZoneTypes.ZoneModifyResponse>> {
         try {
             const res = await this.client.post(
                 '/zones',
@@ -58,26 +59,26 @@ export class ZoneOperations {
                     ...params,
                 })
             )
-            return res.data
+            return { status: res.status, data: res.data }
         } catch (error) {
-            if (error instanceof AxiosError)
-                console.error('Error: ', error.response?.statusText)
-            return null
+            assert(error instanceof AxiosError)
+            console.error('Error: ', error.response?.statusText)
+            return { status: error.response?.status!, data: null }
         }
     }
 
-    async report(): Promise<null | ZoneTypes.ZoneReportResponse> {
+    async report(): Promise<HTTPResponse<null | ZoneTypes.ZoneReportResponse>> {
         try {
             const res = await this.client.get('/zones', {
                 params: {
                     op: 'report',
                 },
             })
-            return res.data
+            return { status: res.status, data: res.data }
         } catch (error) {
-            if (error instanceof AxiosError)
-                console.error('Error: ', error.response?.statusText)
-            return null
+            assert(error instanceof AxiosError)
+            console.error('Error: ', error.response?.statusText)
+            return { status: error.response?.status!, data: null }
         }
     }
 }
