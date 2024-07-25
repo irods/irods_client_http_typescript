@@ -10,8 +10,9 @@ describe('ZoneTests', () => {
             name: zoneName,
             comment: 'New test zone',
         })
-        expect(res).toBeTruthy()
-        expect(res?.irods_response.status_code).toEqual(0)
+        expect(res.data).toBeTruthy()
+        expect(res.status).toEqual(200)
+        expect(res.data?.irods_response.status_code).toEqual(0)
     })
 
     test('Modify zone', async () => {
@@ -20,21 +21,24 @@ describe('ZoneTests', () => {
             property: 'comment',
             value: 'Modified comment',
         })
-        expect(res).toBeTruthy()
-        expect(res?.irods_response.status_code).toEqual(0)
+        expect(res.data).toBeTruthy()
+        expect(res.status).toEqual(200)
+        expect(res.data?.irods_response.status_code).toEqual(0)
     })
 
     test('Zone report', async () => {
         const res = await api.zones.report()
-        expect(res).toBeTruthy()
-        expect(res?.irods_response.status_code).toEqual(0)
+        expect(res.data).toBeTruthy()
+        expect(res.status).toEqual(200)
+        expect(res.data?.irods_response.status_code).toEqual(0)
     })
 
     test('Remove zone', async () => {
         const res = await api.zones.remove({
             name: zoneName,
         })
-        expect(res).toBeTruthy()
-        expect(res?.irods_response.status_code).toEqual(0)
+        expect(res.data).toBeTruthy()
+        expect(res.status).toEqual(200)
+        expect(res.data?.irods_response.status_code).toEqual(0)
     })
 })

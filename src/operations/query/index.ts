@@ -1,6 +1,7 @@
 import { AxiosError, type AxiosInstance } from 'axios'
-import { QueryTypes } from "../../types/index.js"
+import { QueryTypes, type HTTPResponse } from '../../types/index.js'
 import { toURLSearchParams } from '../../utils/toURLSearchParams.js'
+import assert from 'assert'
 
 export class QueryOperations {
     private client: AxiosInstance
@@ -11,7 +12,7 @@ export class QueryOperations {
 
     async execute_genquery(
         params: QueryTypes.ExecuteGenqueryParams
-    ): Promise<null | QueryTypes.ExecuteGenqueryResponse> {
+    ): Promise<HTTPResponse<null | QueryTypes.ExecuteGenqueryResponse>> {
         try {
             const res = await this.client.get('/query', {
                 params: {
@@ -19,17 +20,17 @@ export class QueryOperations {
                     ...params,
                 },
             })
-            return res.data
+            return { status: res.status, data: res.data }
         } catch (error) {
-            if (error instanceof AxiosError)
-                console.error('Error: ', error.response?.statusText)
-            return null
+            assert(error instanceof AxiosError)
+            console.error('Error: ', error.response?.statusText)
+            return { status: error.response?.status!, data: null }
         }
     }
 
     async execute_specific_query(
         params: QueryTypes.ExecuteSpecificQueryParams
-    ): Promise<null | QueryTypes.ExecuteSpecificQueryResponse> {
+    ): Promise<HTTPResponse<null | QueryTypes.ExecuteSpecificQueryResponse>> {
         try {
             const res = await this.client.get('/query', {
                 params: {
@@ -37,17 +38,17 @@ export class QueryOperations {
                     ...params,
                 },
             })
-            return res.data
+            return { status: res.status, data: res.data }
         } catch (error) {
-            if (error instanceof AxiosError)
-                console.error('Error: ', error.response?.statusText)
-            return null
+            assert(error instanceof AxiosError)
+            console.error('Error: ', error.response?.statusText)
+            return { status: error.response?.status!, data: null }
         }
     }
 
     async add_specific_query(
         params: QueryTypes.AddSpecificQueryParams
-    ): Promise<null | QueryTypes.AddSpecificQueryResponse> {
+    ): Promise<HTTPResponse<null | QueryTypes.AddSpecificQueryResponse>> {
         try {
             const res = await this.client.post(
                 '/query',
@@ -56,17 +57,17 @@ export class QueryOperations {
                     ...params,
                 })
             )
-            return res.data
+            return { status: res.status, data: res.data }
         } catch (error) {
-            if (error instanceof AxiosError)
-                console.error('Error: ', error.response?.statusText)
-            return null
+            assert(error instanceof AxiosError)
+            console.error('Error: ', error.response?.statusText)
+            return { status: error.response?.status!, data: null }
         }
     }
 
     async remove_specific_query(
         params: QueryTypes.RemoveSpecificQueryParams
-    ): Promise<null | QueryTypes.RemoveSpecificQueryResponse> {
+    ): Promise<HTTPResponse<null | QueryTypes.RemoveSpecificQueryResponse>> {
         try {
             const res = await this.client.post(
                 '/query',
@@ -75,11 +76,11 @@ export class QueryOperations {
                     ...params,
                 })
             )
-            return res.data
+            return { status: res.status, data: res.data }
         } catch (error) {
-            if (error instanceof AxiosError)
-                console.error('Error: ', error.response?.statusText)
-            return null
+            assert(error instanceof AxiosError)
+            console.error('Error: ', error.response?.statusText)
+            return { status: error.response?.status!, data: null }
         }
     }
 }

@@ -1,4 +1,4 @@
-import type { IrodsResponse } from '../types/general_types.js'
+import type { HTTPResponse, IrodsResponse } from '../types/general_types.js'
 import fs from 'fs'
 
 import { createClientForTesting } from './setupTests.js'
@@ -20,8 +20,9 @@ describe('DataObjectTests', () => {
         const res = await api.data_objects.touch({
             lpath: lpath,
         })
-        expect(res).toBeTruthy()
-        expect(res?.irods_response.status_code).toEqual(0)
+        expect(res.data).toBeTruthy()
+        expect(res.status).toEqual(200)
+        expect(res.data?.irods_response.status_code).toEqual(0)
     })
 
     // https://nodejs.org/api/buffer.html#static-method-bufferfromarray
@@ -32,8 +33,9 @@ describe('DataObjectTests', () => {
             lpath: lpath,
             bytes: testBuffer,
         })
-        expect(res).toBeTruthy()
-        expect(res?.irods_response.status_code).toEqual(0)
+        expect(res.data).toBeTruthy()
+        expect(res.status).toEqual(200)
+        expect(res.data?.irods_response.status_code).toEqual(0)
     })
 
     test('Read data object', async () => {
@@ -41,7 +43,7 @@ describe('DataObjectTests', () => {
             lpath: lpath,
         })
         console.log(res)
-        expect(res).toBeTruthy()
+        expect(res.data).toBeTruthy()
     })
 
     test('Parallel write', async () => {
@@ -50,15 +52,16 @@ describe('DataObjectTests', () => {
             lpath: lpath,
             'stream-count': streamCount,
         })
-        parallelWriteHandle = initRes?.parallel_write_handle
-        expect(initRes).toBeTruthy()
-        expect(initRes?.irods_response.status_code).toEqual(0)
+        parallelWriteHandle = initRes.data?.parallel_write_handle
+        expect(initRes.data).toBeTruthy()
+        expect(initRes.status).toEqual(200)
+        expect(initRes.data?.irods_response.status_code).toEqual(0)
 
         if (!parallelWriteHandle) return
 
         // Parallel write
         let testBuffer: Buffer
-        let responses: Promise<IrodsResponse | null>[] = []
+        let responses: Promise<HTTPResponse<null | IrodsResponse>>[] = []
         for (let i = 0; i < streamCount; i++) {
             testBuffer = Buffer.from(`hello${i}`)
             let res = api.data_objects.write({
@@ -77,8 +80,9 @@ describe('DataObjectTests', () => {
         const shutdownRes = await api.data_objects.parallel_write_shutdown({
             'parallel-write-handle': parallelWriteHandle,
         })
-        expect(shutdownRes).toBeTruthy()
-        expect(shutdownRes?.irods_response.status_code).toEqual(0)
+        expect(shutdownRes.data).toBeTruthy()
+        expect(shutdownRes.status).toEqual(200)
+        expect(shutdownRes.data?.irods_response.status_code).toEqual(0)
     })
 
     test('Modify metadata of a data object', async () => {
@@ -93,8 +97,9 @@ describe('DataObjectTests', () => {
                 },
             ],
         })
-        expect(res).toBeTruthy()
-        expect(res?.irods_response.status_code).toEqual(0)
+        expect(res.data).toBeTruthy()
+        expect(res.status).toEqual(200)
+        expect(res.data?.irods_response.status_code).toEqual(0)
     })
 
     test('Set permission of a data object', async () => {
@@ -103,8 +108,9 @@ describe('DataObjectTests', () => {
             'entity-name': 'alice',
             permission: 'write',
         })
-        expect(res).toBeTruthy()
-        expect(res?.irods_response.status_code).toEqual(0)
+        expect(res.data).toBeTruthy()
+        expect(res.status).toEqual(200)
+        expect(res.data?.irods_response.status_code).toEqual(0)
     })
 
     test('Modify permissions of a data object', async () => {
@@ -117,32 +123,36 @@ describe('DataObjectTests', () => {
                 },
             ],
         })
-        expect(res).toBeTruthy()
-        expect(res?.irods_response.status_code).toEqual(0)
+        expect(res.data).toBeTruthy()
+        expect(res.status).toEqual(200)
+        expect(res.data?.irods_response.status_code).toEqual(0)
     })
 
     test('Calculate checksum', async () => {
         const res = await api.data_objects.calculate_checksum({
             lpath: lpath,
         })
-        expect(res).toBeTruthy()
-        expect(res?.irods_response.status_code).toEqual(0)
+        expect(res.data).toBeTruthy()
+        expect(res.status).toEqual(200)
+        expect(res.data?.irods_response.status_code).toEqual(0)
     })
 
     test('Verify checksum', async () => {
         const res = await api.data_objects.verify_checksum({
             lpath: lpath,
         })
-        expect(res).toBeTruthy()
-        expect(res?.irods_response.status_code).toEqual(0)
+        expect(res.data).toBeTruthy()
+        expect(res.status).toEqual(200)
+        expect(res.data?.irods_response.status_code).toEqual(0)
     })
 
     test('Stat for data object', async () => {
         const res = await api.data_objects.stat({
             lpath: lpath,
         })
-        expect(res).toBeTruthy()
-        expect(res?.irods_response.status_code).toEqual(0)
+        expect(res.data).toBeTruthy()
+        expect(res.status).toEqual(200)
+        expect(res.data?.irods_response.status_code).toEqual(0)
     })
 
     test('Copy data object', async () => {
@@ -150,8 +160,9 @@ describe('DataObjectTests', () => {
             'src-lpath': lpath,
             'dst-lpath': `${baseLPath}/dataObject2.txt`,
         })
-        expect(res).toBeTruthy()
-        expect(res?.irods_response.status_code).toEqual(0)
+        expect(res.data).toBeTruthy()
+        expect(res.status).toEqual(200)
+        expect(res.data?.irods_response.status_code).toEqual(0)
     })
 
     test('Rename data object', async () => {
@@ -159,8 +170,9 @@ describe('DataObjectTests', () => {
             'old-lpath': `${baseLPath}/dataObject2.txt`,
             'new-lpath': `${baseLPath}/dataObjectCopy.txt`,
         })
-        expect(res).toBeTruthy()
-        expect(res?.irods_response.status_code).toEqual(0)
+        expect(res.data).toBeTruthy()
+        expect(res.status).toEqual(200)
+        expect(res.data?.irods_response.status_code).toEqual(0)
     })
 
     test('Replicate data object', async () => {
@@ -170,8 +182,9 @@ describe('DataObjectTests', () => {
             'dst-resource': 'wrapperResc',
         })
         console.log(res)
-        expect(res).toBeTruthy()
-        expect(res?.irods_response.status_code).toEqual(0)
+        expect(res.data).toBeTruthy()
+        expect(res.status).toEqual(200)
+        expect(res.data?.irods_response.status_code).toEqual(0)
     })
 
     // Mutually exclusive fields of "replica-number" and "resource-hierarchy", at least 1 optional field must be filled
@@ -181,8 +194,9 @@ describe('DataObjectTests', () => {
             'replica-number': 1,
             'new-data-comments': 'test comment',
         })
-        expect(res).toBeTruthy()
-        expect(res?.irods_response.status_code).toEqual(0)
+        expect(res.data).toBeTruthy()
+        expect(res.status).toEqual(200)
+        expect(res.data?.irods_response.status_code).toEqual(0)
     })
 
     test('Trim data object', async () => {
@@ -190,8 +204,9 @@ describe('DataObjectTests', () => {
             lpath: lpath,
             'replica-number': 1,
         })
-        expect(res).toBeTruthy()
-        expect(res?.irods_response.status_code).toEqual(0)
+        expect(res.data).toBeTruthy()
+        expect(res.status).toEqual(200)
+        expect(res.data?.irods_response.status_code).toEqual(0)
     })
 
     test('Register data object', async () => {
@@ -218,8 +233,9 @@ describe('DataObjectTests', () => {
             console.log('Error deleting file: ', error)
         }
 
-        expect(res).toBeTruthy()
-        expect(res?.irods_response.status_code).toEqual(0)
+        expect(res.data).toBeTruthy()
+        expect(res.status).toEqual(200)
+        expect(res.data?.irods_response.status_code).toEqual(0)
     })
 
     test('Remove data object', async () => {
@@ -241,13 +257,16 @@ describe('DataObjectTests', () => {
             'no-trash': 1,
         })
 
-        expect(res1).toBeTruthy()
-        expect(res1?.irods_response.status_code).toEqual(0)
+        expect(res1.data).toBeTruthy()
+        expect(res1?.status).toEqual(200)
+        expect(res1.data?.irods_response.status_code).toEqual(0)
 
-        expect(res2).toBeTruthy()
-        expect(res2?.irods_response.status_code).toEqual(0)
+        expect(res2.data).toBeTruthy()
+        expect(res2.status).toEqual(200)
+        expect(res2.data?.irods_response.status_code).toEqual(0)
 
-        expect(res3).toBeTruthy()
-        expect(res3?.irods_response.status_code).toEqual(0)
+        expect(res3.data).toBeTruthy()
+        expect(res3.status).toEqual(200)
+        expect(res3.data?.irods_response.status_code).toEqual(0)
     })
 })
