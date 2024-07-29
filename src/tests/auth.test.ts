@@ -4,7 +4,6 @@ describe('AuthTests', () => {
     const api = createClientForTesting()
 
     test('Auth token is received', async () => {
-        console.log(api.getToken())
         expect(api.getToken()).toBeTruthy()
     })
 

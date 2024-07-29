@@ -6,7 +6,6 @@ describe('RuleTests', () => {
 
     test('List Rule Engines', async () => {
         const res = await api.rules.list_rule_engines()
-        console.log(res)
         expect(res.data).toBeTruthy()
         expect(res.status).toEqual(200)
         expect(res.data?.irods_response.status_code).toEqual(0)
@@ -19,7 +18,6 @@ describe('RuleTests', () => {
             'rep-instance': rep_instance,
             'rule-text': `writeLine("stdout", "${test_msg}")`,
         })
-        console.log(res)
         expect(res.data).toBeTruthy()
         expect(res.status).toEqual(200)
         expect(res.data?.irods_response.status_code).toEqual(0)

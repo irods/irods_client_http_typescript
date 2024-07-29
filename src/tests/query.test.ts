@@ -37,7 +37,6 @@ describe('QueryTests', () => {
         const res = await api.query.execute_specific_query({
             name: specific_query_name,
         })
-        console.log(res)
         expect(res.data).toBeTruthy()
         expect(res.status).toEqual(200)
         expect(res.data?.irods_response.status_code).toEqual(0)

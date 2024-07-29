@@ -23,7 +23,6 @@ describe('CollectionTests', () => {
         const res = await api.collections.stat({
             lpath: `/${zoneName}/home`,
         })
-        console.log(res)
         expect(res.data).toBeTruthy()
         expect(res.status).toEqual(200)
         expect(res.data?.irods_response.status_code).toEqual(0)

@@ -43,7 +43,7 @@ describe('DataObjectTests', () => {
         const res = await api.data_objects.read({
             lpath: lpath,
         })
-        console.log(res)
+        console.log(res.data)
         expect(res.data).toBeTruthy()
     })
 
@@ -184,7 +184,6 @@ describe('DataObjectTests', () => {
             'src-resource': 'demoResc',
             'dst-resource': 'wrapperResc',
         })
-        console.log(res)
         expect(res.data).toBeTruthy()
         expect(res.status).toEqual(200)
         expect(res.data?.irods_response.status_code).toEqual(0)
