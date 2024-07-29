@@ -5,14 +5,18 @@ import assert from 'assert'
 
 export class QueryOperations {
     private client: AxiosInstance
+    private debug: boolean | undefined
 
-    constructor(client: AxiosInstance) {
+    constructor(client: AxiosInstance, debug?: boolean) {
         this.client = client
+        this.debug = debug
     }
 
     async execute_genquery(
         params: QueryTypes.ExecuteGenqueryParams
     ): Promise<HTTPResponse<null | QueryTypes.ExecuteGenqueryResponse>> {
+        let retData
+        let message
         try {
             const res = await this.client.get('/query', {
                 params: {
@@ -20,17 +24,21 @@ export class QueryOperations {
                     ...params,
                 },
             })
-            return { status: res.status, data: res.data }
+            retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            console.error('Error: ', error.response?.statusText)
-            return { status: error.response?.status!, data: null }
+            message = `Error: ${error.response?.statusText}`
+            retData = { status: error.response?.status!, data: null }
         }
+        if (this.debug) console.log(message)
+        return retData
     }
 
     async execute_specific_query(
         params: QueryTypes.ExecuteSpecificQueryParams
     ): Promise<HTTPResponse<null | QueryTypes.ExecuteSpecificQueryResponse>> {
+        let retData
+        let message
         try {
             const res = await this.client.get('/query', {
                 params: {
@@ -38,17 +46,21 @@ export class QueryOperations {
                     ...params,
                 },
             })
-            return { status: res.status, data: res.data }
+            retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            console.error('Error: ', error.response?.statusText)
-            return { status: error.response?.status!, data: null }
+            message = `Error: ${error.response?.statusText}`
+            retData = { status: error.response?.status!, data: null }
         }
+        if (this.debug) console.log(message)
+        return retData
     }
 
     async add_specific_query(
         params: QueryTypes.AddSpecificQueryParams
     ): Promise<HTTPResponse<null | QueryTypes.AddSpecificQueryResponse>> {
+        let retData
+        let message
         try {
             const res = await this.client.post(
                 '/query',
@@ -57,17 +69,21 @@ export class QueryOperations {
                     ...params,
                 })
             )
-            return { status: res.status, data: res.data }
+            retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            console.error('Error: ', error.response?.statusText)
-            return { status: error.response?.status!, data: null }
+            message = `Error: ${error.response?.statusText}`
+            retData = { status: error.response?.status!, data: null }
         }
+        if (this.debug) console.log(message)
+        return retData
     }
 
     async remove_specific_query(
         params: QueryTypes.RemoveSpecificQueryParams
     ): Promise<HTTPResponse<null | QueryTypes.RemoveSpecificQueryResponse>> {
+        let retData
+        let message
         try {
             const res = await this.client.post(
                 '/query',
@@ -76,11 +92,13 @@ export class QueryOperations {
                     ...params,
                 })
             )
-            return { status: res.status, data: res.data }
+            retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            console.error('Error: ', error.response?.statusText)
-            return { status: error.response?.status!, data: null }
+            message = `Error: ${error.response?.statusText}`
+            retData = { status: error.response?.status!, data: null }
         }
+        if (this.debug) console.log(message)
+        return retData
     }
 }

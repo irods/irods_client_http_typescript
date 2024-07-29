@@ -15,6 +15,7 @@ import type { URLComponentsType, ServerInfo } from '../types/index.js'
 export class Wrapper {
     public username: string
     public password: string
+    public debug: boolean | undefined
 
     private client: AxiosInstance
     private token: string | null = null
@@ -33,10 +34,12 @@ export class Wrapper {
     constructor(
         urlComponents: URLComponentsType,
         username: string,
-        password: string
+        password: string,
+        debug?: boolean
     ) {
         this.username = username
         this.password = password
+        this.debug = debug
         // Format: http://<host>:<port>/irods-http-api/<version>
         this.baseURL =
             'http://' +
@@ -69,14 +72,14 @@ export class Wrapper {
             }
         )
 
-        this.collections = new CollectionOperations(this.client)
-        this.data_objects = new DataObjectOperations(this.client)
-        this.query = new QueryOperations(this.client)
-        this.resources = new ResourceOperations(this.client)
-        this.rules = new RuleOperations(this.client)
-        this.tickets = new TicketOperations(this.client)
-        this.users_groups = new UserGroupOperations(this.client)
-        this.zones = new ZoneOperations(this.client)
+        this.collections = new CollectionOperations(this.client, this.debug)
+        this.data_objects = new DataObjectOperations(this.client, this.debug)
+        this.query = new QueryOperations(this.client, this.debug)
+        this.resources = new ResourceOperations(this.client, this.debug)
+        this.rules = new RuleOperations(this.client, this.debug)
+        this.tickets = new TicketOperations(this.client, this.debug)
+        this.users_groups = new UserGroupOperations(this.client, this.debug)
+        this.zones = new ZoneOperations(this.client, this.debug)
     }
 
     getToken() {

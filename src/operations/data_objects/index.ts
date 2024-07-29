@@ -6,45 +6,53 @@ import assert from 'assert'
 
 export class DataObjectOperations {
     private client: AxiosInstance
+    private debug: boolean | undefined
 
-    constructor(client: AxiosInstance) {
+    constructor(client: AxiosInstance, debug?: boolean) {
         this.client = client
+        this.debug = debug
     }
 
     async touch(
         params: DataObjectTypes.DataObjectTouchParams
     ): Promise<HTTPResponse<null | DataObjectTypes.DataObjectTouchResponse>> {
+        let retData
+        let message
         try {
             const res = await this.client.post(
                 '/data-objects',
                 toURLSearchParams({ op: 'touch', ...params })
             )
-            console.log(
-                `Successfully created or updated mtime of '${params.lpath}'`
-            )
-            return { status: res.status, data: res.data }
+            message = `Successfully created or updated mtime of '${params.lpath}'`
+            retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            console.error('Error: ', error.response?.statusText)
-            return { status: error.response?.status!, data: null }
+            message = `Error: ${error.response?.statusText}`
+            retData = { status: error.response?.status!, data: null }
         }
+        if (this.debug) console.log(message)
+        return retData
     }
 
     async remove(
         params: DataObjectTypes.DataObjectRemoveParams
     ): Promise<HTTPResponse<null | DataObjectTypes.DataObjectRemoveResponse>> {
+        let retData
+        let message
         try {
             const res = await this.client.post(
                 '/data-objects',
                 toURLSearchParams({ op: 'remove', ...params })
             )
-            console.log(`Successfully removed data object '${params.lpath}'`)
-            return { status: res.status, data: res.data }
+            message = `Successfully removed data object '${params.lpath}'`
+            retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            console.error('Error: ', error.response?.statusText)
-            return { status: error.response?.status!, data: null }
+            message = `Error: ${error.response?.statusText}`
+            retData = { status: error.response?.status!, data: null }
         }
+        if (this.debug) console.log(message)
+        return retData
     }
 
     async calculate_checksum(
@@ -52,17 +60,21 @@ export class DataObjectOperations {
     ): Promise<
         HTTPResponse<null | DataObjectTypes.DataObjectCalculateChecksumResponse>
     > {
+        let retData
+        let message
         try {
             const res = await this.client.post(
                 '/data-objects',
                 toURLSearchParams({ op: 'calculate_checksum', ...params })
             )
-            return { status: res.status, data: res.data }
+            retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            console.error('Error: ', error.response?.statusText)
-            return { status: error.response?.status!, data: null }
+            message = `Error: ${error.response?.statusText}`
+            retData = { status: error.response?.status!, data: null }
         }
+        if (this.debug) console.log(message)
+        return retData
     }
 
     async verify_checksum(
@@ -70,63 +82,79 @@ export class DataObjectOperations {
     ): Promise<
         HTTPResponse<null | DataObjectTypes.DataObjectVerifyChecksumResponse>
     > {
+        let retData
+        let message
         try {
             const res = await this.client.get('/data-objects', {
                 params: { op: 'verify_checksum', ...params },
             })
-            return { status: res.status, data: res.data }
+            retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            console.error('Error: ', error.response?.statusText)
-            return { status: error.response?.status!, data: null }
+            message = `Error: ${error.response?.statusText}`
+            retData = { status: error.response?.status!, data: null }
         }
+        if (this.debug) console.log(message)
+        return retData
     }
 
     async stat(
         params: DataObjectTypes.DataObjectStatParams
     ): Promise<HTTPResponse<null | DataObjectTypes.DataObjectStatResponse>> {
+        let retData
+        let message
         try {
             const res = await this.client.get('/data-objects', {
                 params: { op: 'stat', ...params },
             })
-            return { status: res.status, data: res.data }
+            retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            console.error('Error: ', error.response?.statusText)
-            return { status: error.response?.status!, data: null }
+            message = `Error: ${error.response?.statusText}`
+            retData = { status: error.response?.status!, data: null }
         }
+        if (this.debug) console.log(message)
+        return retData
     }
 
     async rename(
         params: DataObjectTypes.DataObjectRenameParams
     ): Promise<HTTPResponse<null | DataObjectTypes.DataObjectRenameResponse>> {
+        let retData
+        let message
         try {
             const res = await this.client.post(
                 '/data-objects',
                 toURLSearchParams({ op: 'rename', ...params })
             )
-            return { status: res.status, data: res.data }
+            retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            console.error('Error: ', error.response?.statusText)
-            return { status: error.response?.status!, data: null }
+            message = `Error: ${error.response?.statusText}`
+            retData = { status: error.response?.status!, data: null }
         }
+        if (this.debug) console.log(message)
+        return retData
     }
 
     async copy(
         params: DataObjectTypes.DataObjectCopyParams
     ): Promise<HTTPResponse<null | DataObjectTypes.DataObjectCopyResponse>> {
+        let retData
+        let message
         try {
             const res = await this.client.post(
                 '/data-objects',
                 toURLSearchParams({ op: 'copy', ...params })
             )
-            return { status: res.status, data: res.data }
+            retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            console.error('Error: ', error.response?.statusText)
-            return { status: error.response?.status!, data: null }
+            message = `Error: ${error.response?.statusText}`
+            retData = { status: error.response?.status!, data: null }
         }
+        if (this.debug) console.log(message)
+        return retData
     }
 
     async replicate(
@@ -134,33 +162,41 @@ export class DataObjectOperations {
     ): Promise<
         HTTPResponse<null | DataObjectTypes.DataObjectReplicateResponse>
     > {
+        let retData
+        let message
         try {
             const res = await this.client.post(
                 '/data-objects',
                 toURLSearchParams({ op: 'replicate', ...params })
             )
-            return { status: res.status, data: res.data }
+            retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            console.error('Error: ', error.response?.statusText)
-            return { status: error.response?.status!, data: null }
+            message = `Error: ${error.response?.statusText}`
+            retData = { status: error.response?.status!, data: null }
         }
+        if (this.debug) console.log(message)
+        return retData
     }
 
     async trim(
         params: DataObjectTypes.DataObjectTrimParams
     ): Promise<HTTPResponse<null | DataObjectTypes.DataObjectTrimResponse>> {
+        let retData
+        let message
         try {
             const res = await this.client.post(
                 '/data-objects',
                 toURLSearchParams({ op: 'trim', ...params })
             )
-            return { status: res.status, data: res.data }
+            retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            console.error('Error: ', error.response?.statusText)
-            return { status: error.response?.status!, data: null }
+            message = `Error: ${error.response?.statusText}`
+            retData = { status: error.response?.status!, data: null }
         }
+        if (this.debug) console.log(message)
+        return retData
     }
 
     async register(
@@ -168,33 +204,41 @@ export class DataObjectOperations {
     ): Promise<
         HTTPResponse<null | DataObjectTypes.DataObjectRegisterResponse>
     > {
+        let retData
+        let message
         try {
             const res = await this.client.post(
                 '/data-objects',
                 toURLSearchParams({ op: 'register', ...params })
             )
-            return { status: res.status, data: res.data }
+            retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            console.error('Error: ', error.response?.statusText)
-            return { status: error.response?.status!, data: null }
+            message = `Error: ${error.response?.statusText}`
+            retData = { status: error.response?.status!, data: null }
         }
+        if (this.debug) console.log(message)
+        return retData
     }
 
     // GET request
     async read(
         params: DataObjectTypes.DataObjectReadParams
     ): Promise<HTTPResponse<null | DataObjectTypes.DataObjectReadResponse>> {
+        let retData
+        let message
         try {
             const res = await this.client.get('/data-objects', {
                 params: { op: 'read', ...params },
             })
-            return { status: res.status, data: res.data }
+            retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            console.error('Error: ', error.response?.statusText)
-            return { status: error.response?.status!, data: null }
+            message = `Error: ${error.response?.statusText}`
+            retData = { status: error.response?.status!, data: null }
         }
+        if (this.debug) console.log(message)
+        return retData
     }
 
     // Definitely needs testing, as it uses form data with binary data as a field
@@ -210,6 +254,8 @@ export class DataObjectOperations {
     async write(
         params: DataObjectTypes.DataObjectWriteParams
     ): Promise<HTTPResponse<null | DataObjectTypes.DataObjectWriteResponse>> {
+        let retData
+        let message
         try {
             const res = await this.client.post(
                 '/data-objects',
@@ -220,12 +266,14 @@ export class DataObjectOperations {
                     },
                 }
             )
-            return { status: res.status, data: res.data }
+            retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            console.error('Error: ', error.response?.statusText)
-            return { status: error.response?.status!, data: null }
+            message = `Error: ${error.response?.statusText}`
+            retData = { status: error.response?.status!, data: null }
         }
+        if (this.debug) console.log(message)
+        return retData
     }
 
     async parallel_write_init(
@@ -233,17 +281,21 @@ export class DataObjectOperations {
     ): Promise<
         HTTPResponse<null | DataObjectTypes.DataObjectParallelWriteInitResponse>
     > {
+        let retData
+        let message
         try {
             const res = await this.client.post(
                 '/data-objects',
                 toURLSearchParams({ op: 'parallel_write_init', ...params })
             )
-            return { status: res.status, data: res.data }
+            retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            console.error('Error: ', error.response?.statusText)
-            return { status: error.response?.status!, data: null }
+            message = `Error: ${error.response?.statusText}`
+            retData = { status: error.response?.status!, data: null }
         }
+        if (this.debug) console.log(message)
+        return retData
     }
 
     async parallel_write_shutdown(
@@ -251,17 +303,21 @@ export class DataObjectOperations {
     ): Promise<
         HTTPResponse<null | DataObjectTypes.DataObjectParallelWriteShutdownResponse>
     > {
+        let retData
+        let message
         try {
             const res = await this.client.post(
                 '/data-objects',
                 toURLSearchParams({ op: 'parallel_write_shutdown', ...params })
             )
-            return { status: res.status, data: res.data }
+            retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            console.error('Error: ', error.response?.statusText)
-            return { status: error.response?.status!, data: null }
+            message = `Error: ${error.response?.statusText}`
+            retData = { status: error.response?.status!, data: null }
         }
+        if (this.debug) console.log(message)
+        return retData
     }
 
     async modify_metadata(
@@ -269,17 +325,21 @@ export class DataObjectOperations {
     ): Promise<
         HTTPResponse<null | DataObjectTypes.DataObjectModifyMetadataResponse>
     > {
+        let retData
+        let message
         try {
             const res = await this.client.post(
                 '/data-objects',
                 toURLSearchParams({ op: 'modify_metadata', ...params })
             )
-            return { status: res.status, data: res.data }
+            retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            console.error('Error: ', error.response?.statusText)
-            return { status: error.response?.status!, data: null }
+            message = `Error: ${error.response?.statusText}`
+            retData = { status: error.response?.status!, data: null }
         }
+        if (this.debug) console.log(message)
+        return retData
     }
 
     async set_permission(
@@ -287,17 +347,21 @@ export class DataObjectOperations {
     ): Promise<
         HTTPResponse<null | DataObjectTypes.DataObjectSetPermissionResponse>
     > {
+        let retData
+        let message
         try {
             const res = await this.client.post(
                 '/data-objects',
                 toURLSearchParams({ op: 'set_permission', ...params })
             )
-            return { status: res.status, data: res.data }
+            retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            console.error('Error: ', error.response?.statusText)
-            return { status: error.response?.status!, data: null }
+            message = `Error: ${error.response?.statusText}`
+            retData = { status: error.response?.status!, data: null }
         }
+        if (this.debug) console.log(message)
+        return retData
     }
 
     async modify_permissions(
@@ -305,17 +369,21 @@ export class DataObjectOperations {
     ): Promise<
         HTTPResponse<null | DataObjectTypes.DataObjectModifyPermissionsResponse>
     > {
+        let retData
+        let message
         try {
             const res = await this.client.post(
                 '/data-objects',
                 toURLSearchParams({ op: 'modify_permissions', ...params })
             )
-            return { status: res.status, data: res.data }
+            retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            console.error('Error: ', error.response?.statusText)
-            return { status: error.response?.status!, data: null }
+            message = `Error: ${error.response?.statusText}`
+            retData = { status: error.response?.status!, data: null }
         }
+        if (this.debug) console.log(message)
+        return retData
     }
 
     async modify_replica(
@@ -323,16 +391,20 @@ export class DataObjectOperations {
     ): Promise<
         HTTPResponse<null | DataObjectTypes.DataObjectModifyReplicaResponse>
     > {
+        let retData
+        let message
         try {
             const res = await this.client.post(
                 '/data-objects',
                 toURLSearchParams({ op: 'modify_replica', ...params })
             )
-            return { status: res.status, data: res.data }
+            retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            console.error('Error: ', error.response?.statusText)
-            return { status: error.response?.status!, data: null }
+            message = `Error: ${error.response?.statusText}`
+            retData = { status: error.response?.status!, data: null }
         }
+        if (this.debug) console.log(message)
+        return retData
     }
 }

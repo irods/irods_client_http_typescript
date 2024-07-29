@@ -5,14 +5,18 @@ import assert from 'assert'
 
 export class UserGroupOperations {
     private client: AxiosInstance
+    private debug: boolean | undefined
 
-    constructor(client: AxiosInstance) {
+    constructor(client: AxiosInstance, debug?: boolean) {
         this.client = client
+        this.debug = debug
     }
 
     async create_user(
         params: UserGroupTypes.UserCreateParams
     ): Promise<HTTPResponse<null | UserGroupTypes.UserCreateResponse>> {
+        let retData
+        let message
         try {
             const res = await this.client.post(
                 '/users-groups',
@@ -21,17 +25,21 @@ export class UserGroupOperations {
                     ...params,
                 })
             )
-            return { status: res.status, data: res.data }
+            retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            console.error('Error: ', error.response?.statusText)
-            return { status: error.response?.status!, data: null }
+            message = `Error: ${error.response?.statusText}`
+            retData = { status: error.response?.status!, data: null }
         }
+        if (this.debug) console.log(message)
+        return retData
     }
 
     async remove_user(
         params: UserGroupTypes.UserRemoveParams
     ): Promise<HTTPResponse<null | UserGroupTypes.UserRemoveResponse>> {
+        let retData
+        let message
         try {
             const res = await this.client.post(
                 '/users-groups',
@@ -40,17 +48,21 @@ export class UserGroupOperations {
                     ...params,
                 })
             )
-            return { status: res.status, data: res.data }
+            retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            console.error('Error: ', error.response?.statusText)
-            return { status: error.response?.status!, data: null }
+            message = `Error: ${error.response?.statusText}`
+            retData = { status: error.response?.status!, data: null }
         }
+        if (this.debug) console.log(message)
+        return retData
     }
 
     async set_password(
         params: UserGroupTypes.UserSetPasswordParams
     ): Promise<HTTPResponse<null | UserGroupTypes.UserSetPasswordResponse>> {
+        let retData
+        let message
         try {
             const res = await this.client.post(
                 '/users-groups',
@@ -59,17 +71,21 @@ export class UserGroupOperations {
                     ...params,
                 })
             )
-            return { status: res.status, data: res.data }
+            retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            console.error('Error: ', error.response?.statusText)
-            return { status: error.response?.status!, data: null }
+            message = `Error: ${error.response?.statusText}`
+            retData = { status: error.response?.status!, data: null }
         }
+        if (this.debug) console.log(message)
+        return retData
     }
 
     async set_user_type(
         params: UserGroupTypes.UserSetTypeParams
     ): Promise<HTTPResponse<null | UserGroupTypes.UserSetTypeResponse>> {
+        let retData
+        let message
         try {
             const res = await this.client.post(
                 '/users-groups',
@@ -78,17 +94,21 @@ export class UserGroupOperations {
                     ...params,
                 })
             )
-            return { status: res.status, data: res.data }
+            retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            console.error('Error: ', error.response?.statusText)
-            return { status: error.response?.status!, data: null }
+            message = `Error: ${error.response?.statusText}`
+            retData = { status: error.response?.status!, data: null }
         }
+        if (this.debug) console.log(message)
+        return retData
     }
 
     async create_group(
         params: UserGroupTypes.GroupCreateParams
     ): Promise<HTTPResponse<null | UserGroupTypes.GroupCreateResponse>> {
+        let retData
+        let message
         try {
             const res = await this.client.post(
                 '/users-groups',
@@ -97,17 +117,21 @@ export class UserGroupOperations {
                     ...params,
                 })
             )
-            return { status: res.status, data: res.data }
+            retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            console.error('Error: ', error.response?.statusText)
-            return { status: error.response?.status!, data: null }
+            message = `Error: ${error.response?.statusText}`
+            retData = { status: error.response?.status!, data: null }
         }
+        if (this.debug) console.log(message)
+        return retData
     }
 
     async remove_group(
         params: UserGroupTypes.GroupRemoveParams
     ): Promise<HTTPResponse<null | UserGroupTypes.GroupRemoveResponse>> {
+        let retData
+        let message
         try {
             const res = await this.client.post(
                 '/users-groups',
@@ -116,17 +140,21 @@ export class UserGroupOperations {
                     ...params,
                 })
             )
-            return { status: res.status, data: res.data }
+            retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            console.error('Error: ', error.response?.statusText)
-            return { status: error.response?.status!, data: null }
+            message = `Error: ${error.response?.statusText}`
+            retData = { status: error.response?.status!, data: null }
         }
+        if (this.debug) console.log(message)
+        return retData
     }
 
     async add_to_group(
         params: UserGroupTypes.UserAddToGroupParams
     ): Promise<HTTPResponse<null | UserGroupTypes.UserAddToGroupResponse>> {
+        let retData
+        let message
         try {
             const res = await this.client.post(
                 '/users-groups',
@@ -135,12 +163,14 @@ export class UserGroupOperations {
                     ...params,
                 })
             )
-            return { status: res.status, data: res.data }
+            retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            console.error('Error: ', error.response?.statusText)
-            return { status: error.response?.status!, data: null }
+            message = `Error: ${error.response?.statusText}`
+            retData = { status: error.response?.status!, data: null }
         }
+        if (this.debug) console.log(message)
+        return retData
     }
 
     async remove_from_group(
@@ -148,6 +178,8 @@ export class UserGroupOperations {
     ): Promise<
         HTTPResponse<null | UserGroupTypes.UserRemoveFromGroupResponse>
     > {
+        let retData
+        let message
         try {
             const res = await this.client.post(
                 '/users-groups',
@@ -156,49 +188,61 @@ export class UserGroupOperations {
                     ...params,
                 })
             )
-            return { status: res.status, data: res.data }
+            retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            console.error('Error: ', error.response?.statusText)
-            return { status: error.response?.status!, data: null }
+            message = `Error: ${error.response?.statusText}`
+            retData = { status: error.response?.status!, data: null }
         }
+        if (this.debug) console.log(message)
+        return retData
     }
 
     async users(): Promise<HTTPResponse<null | UserGroupTypes.UsersResponse>> {
+        let retData
+        let message
         try {
             const res = await this.client.get('/users-groups', {
                 params: {
                     op: 'users',
                 },
             })
-            return { status: res.status, data: res.data }
+            retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            console.error('Error: ', error.response?.statusText)
-            return { status: error.response?.status!, data: null }
+            message = `Error: ${error.response?.statusText}`
+            retData = { status: error.response?.status!, data: null }
         }
+        if (this.debug) console.log(message)
+        return retData
     }
 
     async groups(): Promise<
         HTTPResponse<null | UserGroupTypes.GroupsResponse>
     > {
+        let retData
+        let message
         try {
             const res = await this.client.get('/users-groups', {
                 params: {
                     op: 'groups',
                 },
             })
-            return { status: res.status, data: res.data }
+            retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            console.error('Error: ', error.response?.statusText)
-            return { status: error.response?.status!, data: null }
+            message = `Error: ${error.response?.statusText}`
+            retData = { status: error.response?.status!, data: null }
         }
+        if (this.debug) console.log(message)
+        return retData
     }
 
     async is_member_of_group(
         params: UserGroupTypes.UserMemberOfGroupParams
     ): Promise<HTTPResponse<null | UserGroupTypes.UserMemberOfGroupResponse>> {
+        let retData
+        let message
         try {
             const res = await this.client.get('/users-groups', {
                 params: {
@@ -206,17 +250,21 @@ export class UserGroupOperations {
                     ...params,
                 },
             })
-            return { status: res.status, data: res.data }
+            retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            console.error('Error: ', error.response?.statusText)
-            return { status: error.response?.status!, data: null }
+            message = `Error: ${error.response?.statusText}`
+            retData = { status: error.response?.status!, data: null }
         }
+        if (this.debug) console.log(message)
+        return retData
     }
 
     async stat(
         params: UserGroupTypes.UserGroupStatParams
     ): Promise<HTTPResponse<null | UserGroupTypes.UserGroupStatResponse>> {
+        let retData
+        let message
         try {
             const res = await this.client.get('/users-groups', {
                 params: {
@@ -224,12 +272,14 @@ export class UserGroupOperations {
                     ...params,
                 },
             })
-            return { status: res.status, data: res.data }
+            retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            console.error('Error: ', error.response?.statusText)
-            return { status: error.response?.status!, data: null }
+            message = `Error: ${error.response?.statusText}`
+            retData = { status: error.response?.status!, data: null }
         }
+        if (this.debug) console.log(message)
+        return retData
     }
 
     async modify_metadata(
@@ -237,6 +287,8 @@ export class UserGroupOperations {
     ): Promise<
         HTTPResponse<null | UserGroupTypes.UserGroupModifyMetadataResponse>
     > {
+        let retData
+        let message
         try {
             const res = await this.client.post(
                 '/users-groups',
@@ -245,11 +297,13 @@ export class UserGroupOperations {
                     ...params,
                 })
             )
-            return { status: res.status, data: res.data }
+            retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            console.error('Error: ', error.response?.statusText)
-            return { status: error.response?.status!, data: null }
+            message = `Error: ${error.response?.statusText}`
+            retData = { status: error.response?.status!, data: null }
         }
+        if (this.debug) console.log(message)
+        return retData
     }
 }

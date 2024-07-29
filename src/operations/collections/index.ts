@@ -5,93 +5,97 @@ import assert from 'assert'
 
 export class CollectionOperations {
     private client: AxiosInstance
+    private debug: boolean | undefined
 
-    constructor(client: AxiosInstance) {
+    constructor(client: AxiosInstance, debug?: boolean) {
         this.client = client
+        this.debug = debug
     }
 
     async create(
         params: CollectionTypes.CollectionCreateParams
     ): Promise<HTTPResponse<null | CollectionTypes.CollectionCreateResponse>> {
+        let retData
+        let message
         try {
             const res = await this.client.post(
                 '/collections',
                 toURLSearchParams({ op: 'create', ...params })
             )
             const data: CollectionTypes.CollectionCreateResponse = res.data
-            if (!data.created) {
-                console.error(
-                    `Failed to create collection: '${params.lpath}' already exists`
-                )
-            } else
-                console.info(
-                    `Collection '${params.lpath}' created successfully`
-                )
-            return { status: res.status, data: res.data }
+            if (!data.created)
+                message = `Failed to create collection: '${params.lpath}' already exists`
+            else message = `Collection '${params.lpath}' created successfully`
+            retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            console.error(
-                `Failed to create collection '${params.lpath}': ${error.message}`
-            )
-            return { status: error.response?.status!, data: null }
+            message = `Failed to create collection '${params.lpath}': ${error.message}`
+            retData = { status: error.response?.status!, data: null }
         }
+        if (this.debug) console.log(message)
+        return retData
     }
 
     async remove(
         params: CollectionTypes.CollectionRemoveParams
     ): Promise<HTTPResponse<null | CollectionTypes.CollectionRemoveResponse>> {
+        let retData
+        let message
         try {
             const res = await this.client.post(
                 '/collections',
                 toURLSearchParams({ op: 'remove', ...params })
             )
-            console.log(`Collection '${params.lpath}' removed successfully`)
-            return { status: res.status, data: res.data }
+            message = `Collection '${params.lpath}' removed successfully`
+            retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            console.log(
-                `Failed to remove collection '${params.lpath}': ${error.message}`
-            )
-            return { status: error.response?.status!, data: null }
+            message = `Failed to remove collection '${params.lpath}': ${error.message}`
+            retData = { status: error.response?.status!, data: null }
         }
+        if (this.debug) console.log(message)
+        return retData
     }
 
     async stat(
         params: CollectionTypes.CollectionStatParams
     ): Promise<HTTPResponse<null | CollectionTypes.CollectionStatResponse>> {
+        let retData
+        let message
         try {
             const res = await this.client.get('/collections', {
                 params: { op: 'stat', ...params },
             })
-            return { status: res.status, data: res.data }
+            retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            console.error(
-                `Failed to retrieve information for '${params.lpath}': ${error.message}`
-            )
-            return {
+            message = `Failed to retrieve information for '${params.lpath}': ${error.message}`
+            retData = {
                 status: error.response?.status!,
                 data: null,
             }
         }
+        if (this.debug) console.log(message)
+        return retData
     }
 
     async list(
         params: CollectionTypes.CollectionListParams
     ): Promise<HTTPResponse<null | CollectionTypes.CollectionListResponse>> {
+        let retData
+        let message
         try {
             const res = await this.client.get('/collections', {
                 params: { op: 'list', ...params },
             })
-            return { status: res.status, data: res.data }
+            retData = { status: res.status, data: res.data }
         } catch (error) {
-            console.log(error)
             assert(error instanceof AxiosError)
-            console.error(
-                `Failed to retrieve list for '${params.lpath}': ${error.message}`
-            )
-            return { status: error.response?.status!, data: null }
+            message = `Failed to retrieve list for '${params.lpath}': ${error.message}`
+            retData = { status: error.response?.status!, data: null }
         }
+        if (this.debug) console.log(message)
+        return retData
     }
 
     async set_permission(
@@ -99,20 +103,22 @@ export class CollectionOperations {
     ): Promise<
         HTTPResponse<null | CollectionTypes.CollectionSetPermissionResponse>
     > {
+        let retData
+        let message
         try {
             const res = await this.client.post(
                 '/collections',
                 toURLSearchParams({ op: 'set_permission', ...params })
             )
-            console.log(`Permission for '${params['entity-name']}' set`)
-            return { status: res.status, data: res.data }
+            message = `Permission for '${params['entity-name']}' set`
+            retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            console.error(
-                `Failed to set permission for '${params.lpath}': ${error.message}`
-            )
-            return { status: error.response?.status!, data: null }
+            message = `Failed to set permission for '${params.lpath}': ${error.message}`
+            retData = { status: error.response?.status!, data: null }
         }
+        if (this.debug) console.log(message)
+        return retData
     }
 
     async set_inheritance(
@@ -120,24 +126,24 @@ export class CollectionOperations {
     ): Promise<
         HTTPResponse<null | CollectionTypes.CollectionSetInheritanceResponse>
     > {
+        let retData
+        let message
         try {
             const res = await this.client.post(
                 '/collections',
                 toURLSearchParams({ op: 'set_inheritance', ...params })
             )
-            console.log(
-                `Inheritance for '${params.lpath}' ${
-                    params.enable ? 'enabled' : 'disabled'
-                }`
-            )
-            return { status: res.status, data: res.data }
+            message = `Inheritance for '${params.lpath}' ${
+                params.enable ? 'enabled' : 'disabled'
+            }`
+            retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            console.error(
-                `Failed to set inheritance for '${params.lpath}': ${error.message}`
-            )
-            return { status: error.response?.status!, data: null }
+            message = `Failed to set inheritance for '${params.lpath}': ${error.message}`
+            retData = { status: error.response?.status!, data: null }
         }
+        if (this.debug) console.log(message)
+        return retData
     }
 
     async modify_permissions(
@@ -145,22 +151,22 @@ export class CollectionOperations {
     ): Promise<
         HTTPResponse<null | CollectionTypes.CollectionModifyPermissionsResponse>
     > {
+        let retData
+        let message
         try {
             const res = await this.client.post(
                 '/collections',
                 toURLSearchParams({ op: 'modify_permissions', ...params })
             )
-            console.log(
-                `Permissions for '${params.lpath}' successfully modified`
-            )
-            return { status: res.status, data: res.data }
+            message = `Permissions for '${params.lpath}' successfully modified`
+            retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            console.error(
-                `Failed to modify permissions for '${params.lpath}': ${error.message}`
-            )
-            return { status: error.response?.status!, data: null }
+            message = `Failed to modify permissions for '${params.lpath}': ${error.message}`
+            retData = { status: error.response?.status!, data: null }
         }
+        if (this.debug) console.log(message)
+        return retData
     }
 
     async modify_metadata(
@@ -168,59 +174,63 @@ export class CollectionOperations {
     ): Promise<
         HTTPResponse<null | CollectionTypes.CollectionModifyMetadataResponse>
     > {
+        let retData
+        let message
         try {
             const res = await this.client.post(
                 '/collections',
                 toURLSearchParams({ op: 'modify_metadata', ...params })
             )
-            console.log(`Metadata for '${params.lpath}' successfully modified`)
-            return { status: res.status, data: res.data }
+            message = `Metadata for '${params.lpath}' successfully modified`
+            retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            console.error(
-                `Failed to modify metadata for '${params.lpath}': ${error.message}`
-            )
-            return { status: error.response?.status!, data: null }
+            message = `Failed to modify metadata for '${params.lpath}': ${error.message}`
+            retData = { status: error.response?.status!, data: null }
         }
+        if (this.debug) console.log(message)
+        return retData
     }
 
     async rename(
         params: CollectionTypes.CollectionRenameParams
     ): Promise<HTTPResponse<null | CollectionTypes.CollectionRenameResponse>> {
+        let retData
+        let message
         try {
             const res = await this.client.post(
                 '/collections',
                 toURLSearchParams({ op: 'rename', ...params })
             )
-            console.log(
-                `'${params['old-lpath']}' successfully renamed to '${params['new-lpath']}'`
-            )
-            return { status: res.status, data: res.data }
+            message = `'${params['old-lpath']}' successfully renamed to '${params['new-lpath']}'`
+            retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            console.error(
-                `Failed to rename '${params['old-lpath']}': ${error.message}`
-            )
-            return { status: error.response?.status!, data: null }
+            message = `Failed to rename '${params['old-lpath']}': ${error.message}`
+            retData = { status: error.response?.status!, data: null }
         }
+        if (this.debug) console.log(message)
+        return retData
     }
 
     async touch(
         params: CollectionTypes.CollectionTouchParams
     ): Promise<HTTPResponse<null | CollectionTypes.CollectionTouchResponse>> {
+        let retData
+        let message
         try {
             const res = await this.client.post(
                 '/collections',
                 toURLSearchParams({ op: 'touch', ...params })
             )
-            console.log(`Updated mtime for '${params.lpath}' successfully`)
-            return { status: res.status, data: res.data }
+            message = `Updated mtime for '${params.lpath}' successfully`
+            retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            console.error(
-                `Failed to update mtime for '${params.lpath}': ${error.message}`
-            )
-            return { status: error.response?.status!, data: null }
+            message = `Failed to update mtime for '${params.lpath}': ${error.message}`
+            retData = { status: error.response?.status!, data: null }
         }
+        if (this.debug) console.log(message)
+        return retData
     }
 }
