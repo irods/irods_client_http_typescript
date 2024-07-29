@@ -8,7 +8,9 @@ export type ZoneAddParams = {
     comment?: string
 }
 
-export type ZoneAddResponse = IrodsResponse
+export type ZoneAddResponse = {
+    irods_response: IrodsResponse
+}
 
 /* Remove */
 
@@ -16,17 +18,21 @@ export type ZoneRemoveParams = {
     name: string
 }
 
-export type ZoneRemoveResponse = IrodsResponse
+export type ZoneRemoveResponse = {
+    irods_response: IrodsResponse
+}
 
 /* Modify */
 
 export type ZoneModifyParams = {
-    name: string,
-    property: string,
+    name: string
+    property: string
     value: string
 }
 
-export type ZoneModifyResponse = IrodsResponse
+export type ZoneModifyResponse = {
+    irods_response: IrodsResponse
+}
 
 /* Report */
 
@@ -233,6 +239,7 @@ export type ZoneReport = {
     zones: [Zone]
 }
 
-export type ZoneReportResponse = IrodsResponse & {
+export type ZoneReportResponse = {
+    irods_response: IrodsResponse
     zone_report: ZoneReport
 }

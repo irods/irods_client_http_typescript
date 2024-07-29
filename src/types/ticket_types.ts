@@ -14,7 +14,8 @@ export type TicketCreateParams = {
     hosts?: string
 }
 
-export type TicketCreateResponse = IrodsResponse & {
+export type TicketCreateResponse = {
+    irods_response: IrodsResponse
     ticket: string
 }
 
@@ -24,4 +25,6 @@ export type TicketRemoveParams = {
     name: string
 }
 
-export type TicketRemoveResponse = IrodsResponse
+export type TicketRemoveResponse = {
+    irods_response: IrodsResponse
+}

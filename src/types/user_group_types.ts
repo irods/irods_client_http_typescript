@@ -8,7 +8,9 @@ export type UserCreateParams = {
     'user-type'?: 'rodsuser' | 'groupadmin' | 'rodsadmin'
 }
 
-export type UserCreateResponse = IrodsResponse
+export type UserCreateResponse = {
+    irods_response: IrodsResponse
+}
 
 /* Remove User */
 
@@ -17,7 +19,9 @@ export type UserRemoveParams = {
     zone: string
 }
 
-export type UserRemoveResponse = IrodsResponse
+export type UserRemoveResponse = {
+    irods_response: IrodsResponse
+}
 
 /* Set User Password */
 
@@ -27,7 +31,9 @@ export type UserSetPasswordParams = {
     'new-password': string
 }
 
-export type UserSetPasswordResponse = IrodsResponse
+export type UserSetPasswordResponse = {
+    irods_response: IrodsResponse
+}
 
 /* Set User export Type */
 
@@ -37,7 +43,9 @@ export type UserSetTypeParams = {
     'new-user-type': 'rodsuser' | 'groupadmin' | 'rodsadmin'
 }
 
-export type UserSetTypeResponse = IrodsResponse
+export type UserSetTypeResponse = {
+    irods_response: IrodsResponse
+}
 
 /* Create Group */
 
@@ -45,7 +53,9 @@ export type GroupCreateParams = {
     name: string
 }
 
-export type GroupCreateResponse = IrodsResponse
+export type GroupCreateResponse = {
+    irods_response: IrodsResponse
+}
 
 /* Remove Group */
 
@@ -53,7 +63,9 @@ export type GroupRemoveParams = {
     name: string
 }
 
-export type GroupRemoveResponse = IrodsResponse
+export type GroupRemoveResponse = {
+    irods_response: IrodsResponse
+}
 
 /* Add User to Group */
 
@@ -63,7 +75,9 @@ export type UserAddToGroupParams = {
     group: string
 }
 
-export type UserAddToGroupResponse = IrodsResponse
+export type UserAddToGroupResponse = {
+    irods_response: IrodsResponse
+}
 
 /* Remove User from Group */
 
@@ -73,7 +87,9 @@ export type UserRemoveFromGroupParams = {
     group: string
 }
 
-export type UserRemoveFromGroupResponse = IrodsResponse
+export type UserRemoveFromGroupResponse = {
+    irods_response: IrodsResponse
+}
 
 /* List Users */
 
@@ -82,7 +98,8 @@ export type User = {
     zone: string
 }
 
-export type UsersResponse = IrodsResponse & {
+export type UsersResponse = {
+    irods_response: IrodsResponse
     users: [User]
 }
 
@@ -90,7 +107,8 @@ export type UsersResponse = IrodsResponse & {
 
 export type Group = [string, string, string]
 
-export type GroupsResponse = IrodsResponse & {
+export type GroupsResponse = {
+    irods_response: IrodsResponse
     groups: [Group]
 }
 
@@ -102,7 +120,8 @@ export type UserMemberOfGroupParams = {
     zone: string
 }
 
-export type UserMemberOfGroupResponse = IrodsResponse & {
+export type UserMemberOfGroupResponse = {
+    irods_response: IrodsResponse
     is_member: boolean
 }
 
@@ -113,7 +132,8 @@ export type UserGroupStatParams = {
     zone: string
 }
 
-export type UserGroupStatResponse = IrodsResponse & {
+export type UserGroupStatResponse = {
+    irods_response: IrodsResponse
     exists: boolean
     id: string
     local_unique_name: string
@@ -127,4 +147,6 @@ export type UserGroupModifyMetadata = {
     operations: [AVUOperation]
 }
 
-export type UserGroupModifyMetadataResponse = IrodsResponse
+export type UserGroupModifyMetadataResponse = {
+    irods_response: IrodsResponse
+}

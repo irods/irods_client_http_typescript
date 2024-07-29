@@ -1,4 +1,4 @@
-import type { IrodsResponse, AVUOperation } from "./general_types.js"
+import type { IrodsResponse, AVUOperation } from './general_types.js'
 
 /* Create */
 
@@ -21,7 +21,9 @@ export type ResourceCreateParams = {
     context?: string
 }
 
-export type ResourceCreateResponse = IrodsResponse
+export type ResourceCreateResponse = {
+    irods_response: IrodsResponse
+}
 
 /* Remove */
 
@@ -29,7 +31,9 @@ export type ResourceRemoveParams = {
     name: string
 }
 
-export type ResourceRemoveResponse = IrodsResponse
+export type ResourceRemoveResponse = {
+    irods_response: IrodsResponse
+}
 
 /* Add Child */
 
@@ -39,7 +43,9 @@ export type ResourceAddChildParams = {
     context?: string
 }
 
-export type ResourceAddChildResponse = IrodsResponse
+export type ResourceAddChildResponse = {
+    irods_response: IrodsResponse
+}
 
 /* Remove Child */
 
@@ -48,7 +54,9 @@ export type ResourceRemoveChildParams = {
     'child-name': string
 }
 
-export type ResourceRemoveChildResponse = IrodsResponse
+export type ResourceRemoveChildResponse = {
+    irods_response: IrodsResponse
+}
 
 /* Rebalance */
 
@@ -56,7 +64,9 @@ export type ResourceRebalanceParams = {
     name: string
 }
 
-export type ResourceRebalanceResponse = IrodsResponse
+export type ResourceRebalanceResponse = {
+    irods_response: IrodsResponse
+}
 
 /* Stat */
 
@@ -84,7 +94,8 @@ export type ResourceInfo = {
     last_modified_millis: number
 }
 
-export type ResourceStatResponse = IrodsResponse & {
+export type ResourceStatResponse = {
+    irods_response: IrodsResponse
     exists: boolean
     info: ResourceInfo
 }
@@ -96,4 +107,6 @@ export type ResourceModifyMetadataParams = {
     operations: [AVUOperation]
 }
 
-export type ResourceModifyMetadataResponse = IrodsResponse
+export type ResourceModifyMetadataResponse = {
+    irods_response: IrodsResponse
+}

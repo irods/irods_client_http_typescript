@@ -6,7 +6,8 @@ export type CollectionCreateParams = {
     'create-intermediates'?: 0 | 1
 }
 
-export type CollectionCreateResponse = IrodsResponse & {
+export type CollectionCreateResponse = {
+    irods_response: IrodsResponse
     created?: boolean
 }
 
@@ -18,7 +19,9 @@ export type CollectionRemoveParams = {
     'no-trash'?: 0 | 1
 }
 
-export type CollectionRemoveResponse = IrodsResponse
+export type CollectionRemoveResponse = {
+    irods_response: IrodsResponse
+}
 
 /* Stat */
 
@@ -28,7 +31,8 @@ export type CollectionStatParams = {
     ticket?: string
 }
 
-export type CollectionStatResponse = IrodsResponse & {
+export type CollectionStatResponse = {
+    irods_response: IrodsResponse
     type: string
     inheritance_enabled: boolean
     permissions: [Permission]
@@ -45,7 +49,8 @@ export type CollectionListParams = {
     ticket?: string
 }
 
-export type CollectionListResponse = IrodsResponse & {
+export type CollectionListResponse = {
+    irods_response: IrodsResponse
     entries: [string]
 }
 
@@ -58,7 +63,9 @@ export type CollectionSetPermissionParams = {
     admin?: 0 | 1
 }
 
-export type CollectionSetPermissionResponse = IrodsResponse
+export type CollectionSetPermissionResponse = {
+    irods_response: IrodsResponse
+}
 
 /* Set Inheritance */
 
@@ -68,7 +75,9 @@ export type CollectionSetInheritanceParams = {
     admin?: 0 | 1
 }
 
-export type CollectionSetInheritanceResponse = IrodsResponse
+export type CollectionSetInheritanceResponse = {
+    irods_response: IrodsResponse
+}
 
 /* Modify Permissions */
 
@@ -78,7 +87,9 @@ export type CollectionModifyPermissionsParams = {
     admin?: 0 | 1
 }
 
-export type CollectionModifyPermissionsResponse = IrodsResponse
+export type CollectionModifyPermissionsResponse = {
+    irods_response: IrodsResponse
+}
 
 /* Modify Metadata */
 
@@ -88,7 +99,9 @@ export type CollectionModifyMetadataParams = {
     admin?: 0 | 1
 }
 
-export type CollectionModifyMetadataResponse = IrodsResponse
+export type CollectionModifyMetadataResponse = {
+    irods_response: IrodsResponse
+}
 
 /* Rename */
 
@@ -97,7 +110,9 @@ export type CollectionRenameParams = {
     'new-lpath': string
 }
 
-export type CollectionRenameResponse = IrodsResponse
+export type CollectionRenameResponse = {
+    irods_response: IrodsResponse
+}
 
 /* Touch */
 
@@ -107,4 +122,6 @@ export type CollectionTouchParams = {
     reference?: string
 }
 
-export type CollectionTouchResponse = IrodsResponse
+export type CollectionTouchResponse = {
+    irods_response: IrodsResponse
+}

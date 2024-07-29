@@ -1,8 +1,9 @@
-import type { IrodsResponse } from "./general_types.js"
+import type { IrodsResponse } from './general_types.js'
 
 /* List Rule Engines */
 
-export type ListRuleEnginesResponse = IrodsResponse & {
+export type ListRuleEnginesResponse = {
+    irods_response: IrodsResponse
     rule_engine_plugin_instances: [string]
 }
 
@@ -13,7 +14,8 @@ export type RuleExecuteParams = {
     'rep-instance'?: string
 }
 
-export type RuleExecuteResponse = IrodsResponse & {
+export type RuleExecuteResponse = {
+    irods_response: IrodsResponse
     stdout: string
     stderr: string
 }
@@ -24,4 +26,6 @@ export type RuleRemoveDelayRuleParams = {
     'rule-id': number
 }
 
-export type RuleRemoveDelayRuleResponse = IrodsResponse
+export type RuleRemoveDelayRuleResponse = {
+    irods_response: IrodsResponse
+}
