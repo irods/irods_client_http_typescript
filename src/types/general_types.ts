@@ -1,4 +1,4 @@
-// Mutually exclusive fields: https://stackoverflow.com/questions/42123407/does-export typescript-support-mutually-exclusive-export types
+// Mutually exclusive fields: https://stackoverflow.com/questions/42123407/does-typescript-support-mutually-exclusive-export-types
 export type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never }
 
 export type XOR<T, U> = T | U extends object
@@ -42,14 +42,12 @@ export type ModifyPermissionsOperation = {
 }
 
 export type IrodsResponse = {
-    irods_response: {
-        status_code: number
-        status_message?: string
-        failed_operation?: {
-            operation: AVUOperation | ModifyPermissionsOperation
-            operation_index: number
-            status_message: string
-        }
+    status_code: number
+    status_message?: string
+    failed_operation?: {
+        operation: AVUOperation | ModifyPermissionsOperation
+        operation_index: number
+        status_message: string
     }
 }
 
@@ -71,11 +69,6 @@ export type IrodsResponse = {
 export type HTTPResponse<T> = {
     status: number
     data: T
-}
-
-export type StatusFields = {
-    http_status: number
-    message: string
 }
 
 export type Permission = {

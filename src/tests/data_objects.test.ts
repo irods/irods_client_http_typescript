@@ -2,6 +2,7 @@ import type { HTTPResponse, IrodsResponse } from '../types/general_types.js'
 import fs from 'fs'
 
 import { createClientForTesting } from './setupTests.js'
+import { DataObjectTypes } from '../types/index.js'
 
 describe('DataObjectTests', () => {
     const api = createClientForTesting()
@@ -61,7 +62,9 @@ describe('DataObjectTests', () => {
 
         // Parallel write
         let testBuffer: Buffer
-        let responses: Promise<HTTPResponse<null | IrodsResponse>>[] = []
+        let responses: Promise<
+            HTTPResponse<null | DataObjectTypes.DataObjectWriteResponse>
+        >[] = []
         for (let i = 0; i < streamCount; i++) {
             testBuffer = Buffer.from(`hello${i}`)
             let res = api.data_objects.write({

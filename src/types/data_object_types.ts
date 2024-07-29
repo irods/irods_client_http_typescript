@@ -11,7 +11,9 @@ export type DataObjectTouchParams = {
     reference?: string
 }
 
-export type DataObjectTouchResponse = IrodsResponse
+export type DataObjectTouchResponse = {
+    irods_response: IrodsResponse
+}
 
 /* Remove */
 
@@ -22,7 +24,9 @@ export type DataObjectRemoveParams = {
     admin?: 0 | 1
 }
 
-export type DataObjectRemoveResponse = IrodsResponse
+export type DataObjectRemoveResponse = {
+    irods_response: IrodsResponse
+}
 
 /* Calculate Checksum */
 
@@ -35,7 +39,8 @@ export type DataObjectCalculateChecksumParams = {
     admin?: 0 | 1
 }
 
-export type DataObjectCalculateChecksumResponse = IrodsResponse & {
+export type DataObjectCalculateChecksumResponse = {
+    irods_response: IrodsResponse
     checksum: string
 }
 
@@ -49,7 +54,8 @@ export type DataObjectVerifyChecksumParams = {
     admin?: 0 | 1
 }
 
-export type DataObjectVerifyChecksumResponse = IrodsResponse & {
+export type DataObjectVerifyChecksumResponse = {
+    irods_response: IrodsResponse
     results?: object
     r_error_info: [{ status: number; message: string }]
 }
@@ -61,7 +67,8 @@ export type DataObjectStatParams = {
     ticket?: string
 }
 
-export type DataObjectStatResponse = IrodsResponse & {
+export type DataObjectStatResponse = {
+    irods_response: IrodsResponse
     type: string
     permissions: [Permission]
     size: number
@@ -77,7 +84,9 @@ export type DataObjectRenameParams = {
     'new-lpath': string
 }
 
-export type DataObjectRenameResponse = IrodsResponse
+export type DataObjectRenameResponse = {
+    irods_response: IrodsResponse
+}
 
 /* Copy */
 
@@ -89,7 +98,9 @@ export type DataObjectCopyParams = {
     overwrite?: 0 | 1
 }
 
-export type DataObjectCopyResponse = IrodsResponse
+export type DataObjectCopyResponse = {
+    irods_response: IrodsResponse
+}
 
 /* Replicate */
 
@@ -100,7 +111,9 @@ export type DataObjectReplicateParams = {
     admin?: 0 | 1
 }
 
-export type DataObjectReplicateResponse = IrodsResponse
+export type DataObjectReplicateResponse = {
+    irods_response: IrodsResponse
+}
 
 /* Trim */
 
@@ -111,7 +124,9 @@ export type DataObjectTrimParams = {
     admin?: 0 | 1
 }
 
-export type DataObjectTrimResponse = IrodsResponse
+export type DataObjectTrimResponse = {
+    irods_response: IrodsResponse
+}
 
 /* Register */
 
@@ -124,7 +139,9 @@ export type DataObjectRegisterParams = {
     checksum?: string
 }
 
-export type DataObjectRegisterResponse = IrodsResponse
+export type DataObjectRegisterResponse = {
+    irods_response: IrodsResponse
+}
 
 /* Read */
 
@@ -150,7 +167,9 @@ export type DataObjectWriteParams = {
     'stream-index'?: number
 }
 
-export type DataObjectWriteResponse = IrodsResponse
+export type DataObjectWriteResponse = {
+    irods_response: IrodsResponse
+}
 
 /* Parallel Write Init */
 
@@ -162,7 +181,8 @@ export type DataObjectParallelWriteInitParams = {
     ticket?: string
 }
 
-export type DataObjectParallelWriteInitResponse = IrodsResponse & {
+export type DataObjectParallelWriteInitResponse = {
+    irods_response: IrodsResponse
     parallel_write_handle: string
 }
 
@@ -172,7 +192,9 @@ export type DataObjectParallelWriteShutdownParams = {
     'parallel-write-handle': string
 }
 
-export type DataObjectParallelWriteShutdownResponse = IrodsResponse
+export type DataObjectParallelWriteShutdownResponse = {
+    irods_response: IrodsResponse
+}
 
 /* Modify Metadata */
 
@@ -182,7 +204,9 @@ export type DataObjectModifyMetadataParams = {
     admin?: 0 | 1
 }
 
-export type DataObjectModifyMetadataResponse = IrodsResponse
+export type DataObjectModifyMetadataResponse = {
+    irods_response: IrodsResponse
+}
 
 /* Set Permission */
 
@@ -193,7 +217,9 @@ export type DataObjectSetPermissionParams = {
     admin?: 0 | 1
 }
 
-export type DataObjectSetPermissionResponse = IrodsResponse
+export type DataObjectSetPermissionResponse = {
+    irods_response: IrodsResponse
+}
 
 /* Modify Permissions */
 
@@ -203,17 +229,19 @@ export type DataObjectModifyPermissionsParams = {
     admin?: 0 | 1
 }
 
-export type DataObjectModifyPermissionsResponse = IrodsResponse
+export type DataObjectModifyPermissionsResponse = {
+    irods_response: IrodsResponse
+}
 
 /* Modify Replica */
 
 // Separate resource hierarchy and replica number, make them mutually exclusive fields
 
-export type ResourceHierarchyexportType = {
+export type ResourceHierarchyType = {
     'resource-hierarchy': string
 }
 
-export type ReplicaNumberexportType = {
+export type ReplicaNumberType = {
     'replica-number': number
 }
 
@@ -240,7 +268,9 @@ export type DataObjectModifyReplicaBaseParams = {
 
 // Ensure mutually exclusive fields of "resource-hierarchy" and "replica-number", and that at least one optional field is filled in
 export type DataObjectModifyReplicaParams = DataObjectModifyReplicaBaseParams &
-    XOR<ResourceHierarchyexportType, ReplicaNumberexportType> &
+    XOR<ResourceHierarchyType, ReplicaNumberType> &
     RequireAtLeastOne<DataObjectModifyReplicaOptionalParams>
 
-export type DataObjectModifyReplicaResponse = IrodsResponse
+export type DataObjectModifyReplicaResponse = {
+    irods_response: IrodsResponse
+}
