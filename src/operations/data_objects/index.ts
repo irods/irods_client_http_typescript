@@ -461,7 +461,7 @@ export class DataObjectOperations {
             assert(error instanceof AxiosError)
             let irods_response: IrodsResponse =
                 error.response?.data.irods_response
-            message = `Error: ${error.response?.statusText}`
+            message = `Failed to modify replica of data object '${params.lpath}': ${irods_response.status_message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
