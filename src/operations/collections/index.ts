@@ -1,6 +1,10 @@
 import { AxiosError, type AxiosInstance } from 'axios'
 import { toURLSearchParams } from '../../utils/toURLSearchParams.js'
-import { CollectionTypes, type HTTPResponse } from '../../types/index.js'
+import {
+    CollectionTypes,
+    type HTTPResponse,
+    type IrodsResponse,
+} from '../../types/index.js'
 import assert from 'assert'
 
 export class CollectionOperations {
@@ -25,11 +29,13 @@ export class CollectionOperations {
             const data: CollectionTypes.CollectionCreateResponse = res.data
             if (!data.created)
                 message = `Failed to create collection: '${params.lpath}' already exists`
-            else message = `Collection '${params.lpath}' created successfully`
+            else message = `Successfully created collection '${params.lpath}'`
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            message = `Failed to create collection '${params.lpath}': ${error.message}`
+            let irods_response: IrodsResponse =
+                error.response?.data.irods_response
+            message = `Failed to create collection '${params.lpath}': ${irods_response.status_message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -46,11 +52,13 @@ export class CollectionOperations {
                 '/collections',
                 toURLSearchParams({ op: 'remove', ...params })
             )
-            message = `Collection '${params.lpath}' removed successfully`
+            message = `Successfully removed collection '${params.lpath}'`
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            message = `Failed to remove collection '${params.lpath}': ${error.message}`
+            let irods_response: IrodsResponse =
+                error.response?.data.irods_response
+            message = `Failed to remove collection '${params.lpath}': ${irods_response.status_message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -66,14 +74,14 @@ export class CollectionOperations {
             const res = await this.client.get('/collections', {
                 params: { op: 'stat', ...params },
             })
+            message = `Successfully retrieved information for collection '${params.lpath}'`
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            message = `Failed to retrieve information for '${params.lpath}': ${error.message}`
-            retData = {
-                status: error.response?.status!,
-                data: null,
-            }
+            let irods_response: IrodsResponse =
+                error.response?.data.irods_response
+            message = `Failed to retrieve information for collection '${params.lpath}': ${irods_response.status_message}`
+            retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
         return retData
@@ -88,10 +96,13 @@ export class CollectionOperations {
             const res = await this.client.get('/collections', {
                 params: { op: 'list', ...params },
             })
+            message = `Successfully retrieved list for collection '${params.lpath}'`
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            message = `Failed to retrieve list for '${params.lpath}': ${error.message}`
+            let irods_response: IrodsResponse =
+                error.response?.data.irods_response
+            message = `Failed to retrieve list for collection '${params.lpath}': ${irods_response.status_message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -110,11 +121,13 @@ export class CollectionOperations {
                 '/collections',
                 toURLSearchParams({ op: 'set_permission', ...params })
             )
-            message = `Permission for '${params['entity-name']}' set`
+            message = `Successfully set permission for entity '${params['entity-name']}' to '${params.permission}' on collection '${params.lpath}'`
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            message = `Failed to set permission for '${params.lpath}': ${error.message}`
+            let irods_response: IrodsResponse =
+                error.response?.data.irods_response
+            message = `Failed to set permission for entity '${params['entity-name']}' to '${params.permission}' on collection '${params.lpath}': ${irods_response.status_message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -133,13 +146,19 @@ export class CollectionOperations {
                 '/collections',
                 toURLSearchParams({ op: 'set_inheritance', ...params })
             )
-            message = `Inheritance for '${params.lpath}' ${
+            message = `Successfully ${
                 params.enable ? 'enabled' : 'disabled'
-            }`
+            } inheritance for collection '${params.lpath}'`
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            message = `Failed to set inheritance for '${params.lpath}': ${error.message}`
+            let irods_response: IrodsResponse =
+                error.response?.data.irods_response
+            message = `Failed to ${
+                params.enable ? 'enable' : 'disable'
+            } inheritance for collection '${params.lpath}': ${
+                irods_response.status_message
+            }`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -158,11 +177,13 @@ export class CollectionOperations {
                 '/collections',
                 toURLSearchParams({ op: 'modify_permissions', ...params })
             )
-            message = `Permissions for '${params.lpath}' successfully modified`
+            message = `Successfully modified permissions for collection '${params.lpath}'`
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            message = `Failed to modify permissions for '${params.lpath}': ${error.message}`
+            let irods_response: IrodsResponse =
+                error.response?.data.irods_response
+            message = `Failed to modify permissions for collection '${params.lpath}': ${irods_response.status_message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -181,11 +202,13 @@ export class CollectionOperations {
                 '/collections',
                 toURLSearchParams({ op: 'modify_metadata', ...params })
             )
-            message = `Metadata for '${params.lpath}' successfully modified`
+            message = `Successfully modified metadata for collection '${params.lpath}'`
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            message = `Failed to modify metadata for '${params.lpath}': ${error.message}`
+            let irods_response: IrodsResponse =
+                error.response?.data.irods_response
+            message = `Failed to modify metadata for collection '${params.lpath}': ${irods_response.status_message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -202,11 +225,13 @@ export class CollectionOperations {
                 '/collections',
                 toURLSearchParams({ op: 'rename', ...params })
             )
-            message = `'${params['old-lpath']}' successfully renamed to '${params['new-lpath']}'`
+            message = `Successfully renamed collection '${params['old-lpath']}' to '${params['new-lpath']}'`
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            message = `Failed to rename '${params['old-lpath']}': ${error.message}`
+            let irods_response: IrodsResponse =
+                error.response?.data.irods_response
+            message = `Failed to rename collection '${params['old-lpath']}': ${irods_response.status_message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -223,11 +248,13 @@ export class CollectionOperations {
                 '/collections',
                 toURLSearchParams({ op: 'touch', ...params })
             )
-            message = `Updated mtime for '${params.lpath}' successfully`
+            message = `Successfully updated mtime for collection '${params.lpath}'`
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            message = `Failed to update mtime for '${params.lpath}': ${error.message}`
+            let irods_response: IrodsResponse =
+                error.response?.data.irods_response
+            message = `Failed to update mtime for collection '${params.lpath}': ${irods_response.status_message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
