@@ -1,10 +1,6 @@
 import { AxiosError, type AxiosInstance } from 'axios'
 import { toURLSearchParams } from '../../utils/toURLSearchParams.js'
-import {
-    UserGroupTypes,
-    type HTTPResponse,
-    type IrodsResponse,
-} from '../../types/index.js'
+import { UserGroupTypes, type HTTPResponse } from '../../types/index.js'
 import assert from 'assert'
 
 export class UserGroupOperations {

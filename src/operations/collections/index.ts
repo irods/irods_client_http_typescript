@@ -1,10 +1,6 @@
 import { AxiosError, type AxiosInstance } from 'axios'
 import { toURLSearchParams } from '../../utils/toURLSearchParams.js'
-import {
-    CollectionTypes,
-    type HTTPResponse,
-    type IrodsResponse,
-} from '../../types/index.js'
+import { CollectionTypes, type HTTPResponse } from '../../types/index.js'
 import assert from 'assert'
 
 export class CollectionOperations {

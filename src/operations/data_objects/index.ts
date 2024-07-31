@@ -1,10 +1,6 @@
 import { AxiosError, type AxiosInstance } from 'axios'
 import { toURLSearchParams } from '../../utils/toURLSearchParams.js'
-import {
-    DataObjectTypes,
-    type HTTPResponse,
-    type IrodsResponse,
-} from '../../types/index.js'
+import { DataObjectTypes, type HTTPResponse } from '../../types/index.js'
 import { toFormData } from '../../utils/toFormData.js'
 import assert from 'assert'
 
