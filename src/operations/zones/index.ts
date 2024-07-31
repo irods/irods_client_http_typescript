@@ -1,9 +1,5 @@
 import { AxiosError, type AxiosInstance } from 'axios'
-import {
-    ZoneTypes,
-    type HTTPResponse,
-    type IrodsResponse,
-} from '../../types/index.js'
+import { ZoneTypes, type HTTPResponse } from '../../types/index.js'
 import { toURLSearchParams } from '../../utils/toURLSearchParams.js'
 import assert from 'assert'
 
