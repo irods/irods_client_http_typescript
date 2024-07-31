@@ -31,9 +31,7 @@ export class DataObjectOperations {
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            let irods_response: IrodsResponse =
-                error.response?.data.irods_response
-            message = `Failed to create or update mtime of data object '${params.lpath}': ${irods_response.status_message}`
+            message = `Failed to create or update mtime of data object '${params.lpath}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -54,9 +52,7 @@ export class DataObjectOperations {
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            let irods_response: IrodsResponse =
-                error.response?.data.irods_response
-            message = `Failed to remove data object '${params.lpath}': ${irods_response.failed_operation}`
+            message = `Failed to remove data object '${params.lpath}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -79,9 +75,7 @@ export class DataObjectOperations {
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            let irods_response: IrodsResponse =
-                error.response?.data.irods_response
-            message = `Failed to calculate checksum for data object '${params.lpath}': ${irods_response.status_message}`
+            message = `Failed to calculate checksum for data object '${params.lpath}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -103,9 +97,7 @@ export class DataObjectOperations {
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            let irods_response: IrodsResponse =
-                error.response?.data.irods_response
-            message = `Failed to verify checksum for data object '${params.lpath}': ${irods_response.status_message}`
+            message = `Failed to verify checksum for data object '${params.lpath}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -125,9 +117,7 @@ export class DataObjectOperations {
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            let irods_response: IrodsResponse =
-                error.response?.data.irods_response
-            message = `Failed to retrieve information for data object '${params.lpath}': ${irods_response.status_message}`
+            message = `Failed to retrieve information for data object '${params.lpath}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -148,9 +138,7 @@ export class DataObjectOperations {
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            let irods_response: IrodsResponse =
-                error.response?.data.irods_response
-            message = `Failed to rename data object '${params['old-lpath']}': ${irods_response.status_message}`
+            message = `Failed to rename data object '${params['old-lpath']}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -171,9 +159,7 @@ export class DataObjectOperations {
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            let irods_response: IrodsResponse =
-                error.response?.data.irods_response
-            message = `Failed to copy data object '${params['src-lpath']}' to '${params['dst-lpath']}': ${irods_response.status_message}`
+            message = `Failed to copy data object '${params['src-lpath']}' to '${params['dst-lpath']}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -196,9 +182,7 @@ export class DataObjectOperations {
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            let irods_response: IrodsResponse =
-                error.response?.data.irods_response
-            message = `Failed to replicate data object '${params.lpath}': ${irods_response.status_message}`
+            message = `Failed to replicate data object '${params.lpath}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -219,9 +203,7 @@ export class DataObjectOperations {
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            let irods_response: IrodsResponse =
-                error.response?.data.irods_response
-            message = `Failed to trim data object '${params.lpath}': ${irods_response.status_message}`
+            message = `Failed to trim data object '${params.lpath}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -244,9 +226,7 @@ export class DataObjectOperations {
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            let irods_response: IrodsResponse =
-                error.response?.data.irods_response
-            message = `Failed to register physical object '${params.ppath}': ${irods_response.status_message}`
+            message = `Failed to register physical object '${params.ppath}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -267,8 +247,6 @@ export class DataObjectOperations {
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            let irods_response: IrodsResponse =
-                error.response?.data.irods_response
             message = `Failed to read data object '${params.lpath}'`
             retData = { status: error.response?.status!, data: null }
         }
@@ -305,9 +283,7 @@ export class DataObjectOperations {
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            let irods_response: IrodsResponse =
-                error.response?.data.irods_response
-            message = `Failed to write to data object '${params.lpath}': ${irods_response.status_message}`
+            message = `Failed to write to data object '${params.lpath}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -330,9 +306,7 @@ export class DataObjectOperations {
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            let irods_response: IrodsResponse =
-                error.response?.data.irods_response
-            message = `Failed to initialize parallel write session for data object '${params.lpath}': ${irods_response.status_message}`
+            message = `Failed to initialize parallel write session for data object '${params.lpath}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -355,9 +329,7 @@ export class DataObjectOperations {
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            let irods_response: IrodsResponse =
-                error.response?.data.irods_response
-            message = `Failed to shut down parallel write session: ${irods_response.status_message}`
+            message = `Failed to shut down parallel write session: ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -380,9 +352,7 @@ export class DataObjectOperations {
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            let irods_response: IrodsResponse =
-                error.response?.data.irods_response
-            message = `Failed to modify metadata for data object '${params.lpath}': ${irods_response.status_message}`
+            message = `Failed to modify metadata for data object '${params.lpath}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -405,9 +375,7 @@ export class DataObjectOperations {
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            let irods_response: IrodsResponse =
-                error.response?.data.irods_response
-            message = `Failed to set permission for entity '${params['entity-name']}' to '${params.permission}' on data object '${params.lpath}': ${irods_response.status_message}`
+            message = `Failed to set permission for entity '${params['entity-name']}' to '${params.permission}' on data object '${params.lpath}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -430,9 +398,7 @@ export class DataObjectOperations {
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            let irods_response: IrodsResponse =
-                error.response?.data.irods_response
-            message = `Failed to modify permissions for data object '${params.lpath}': ${irods_response.status_message}`
+            message = `Failed to modify permissions for data object '${params.lpath}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -459,9 +425,7 @@ export class DataObjectOperations {
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            let irods_response: IrodsResponse =
-                error.response?.data.irods_response
-            message = `Failed to modify replica of data object '${params.lpath}': ${irods_response.status_message}`
+            message = `Failed to modify replica of data object '${params.lpath}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)

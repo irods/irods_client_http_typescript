@@ -1,5 +1,9 @@
 import { AxiosError, type AxiosInstance } from 'axios'
-import { ZoneTypes, type HTTPResponse } from '../../types/index.js'
+import {
+    ZoneTypes,
+    type HTTPResponse,
+    type IrodsResponse,
+} from '../../types/index.js'
 import { toURLSearchParams } from '../../utils/toURLSearchParams.js'
 import assert from 'assert'
 
@@ -25,10 +29,11 @@ export class ZoneOperations {
                     ...params,
                 })
             )
+            message = `Successfully added zone '${params.name}'`
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            message = `Error: ${error.response?.statusText}`
+            message = `Failed to add zone '${params.name}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -48,10 +53,11 @@ export class ZoneOperations {
                     ...params,
                 })
             )
+            message = `Successfully removed zone '${params.name}'`
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            message = `Error: ${error.response?.statusText}`
+            message = `Failed to remove zone '${params.name}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -71,10 +77,11 @@ export class ZoneOperations {
                     ...params,
                 })
             )
+            message = `Successfully modified zone '${params.name}'`
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            message = `Error: ${error.response?.statusText}`
+            message = `Failed to modify zone '${params.name}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -90,10 +97,11 @@ export class ZoneOperations {
                     op: 'report',
                 },
             })
+            message = `Successfully retrieved zone report`
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            message = `Error: ${error.response?.statusText}`
+            message = `Failed to retrieve zone report: ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)

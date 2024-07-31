@@ -1,6 +1,10 @@
 import { AxiosError, type AxiosInstance } from 'axios'
 import { toURLSearchParams } from '../../utils/toURLSearchParams.js'
-import { TicketTypes, type HTTPResponse } from '../../types/index.js'
+import {
+    TicketTypes,
+    type HTTPResponse,
+    type IrodsResponse,
+} from '../../types/index.js'
 import assert from 'assert'
 
 export class TicketOperations {
@@ -25,10 +29,11 @@ export class TicketOperations {
                     ...params,
                 })
             )
+            message = `Successfully created ticket at '${params.lpath}'`
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            message = `Error: ${error.response?.statusText}`
+            message = `Failed to create ticket at '${params.lpath}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -48,10 +53,11 @@ export class TicketOperations {
                     ...params,
                 })
             )
+            message = `Successfully removed ticket '${params.name}'`
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            message = `Error: ${error.response?.statusText}`
+            message = `Failed to remove ticket '${params.name}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
