@@ -33,9 +33,7 @@ export class CollectionOperations {
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            let irods_response: IrodsResponse =
-                error.response?.data.irods_response
-            message = `Failed to create collection '${params.lpath}': ${irods_response.status_message}`
+            message = `Failed to create collection '${params.lpath}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -56,9 +54,7 @@ export class CollectionOperations {
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            let irods_response: IrodsResponse =
-                error.response?.data.irods_response
-            message = `Failed to remove collection '${params.lpath}': ${irods_response.status_message}`
+            message = `Failed to remove collection '${params.lpath}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -78,9 +74,7 @@ export class CollectionOperations {
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            let irods_response: IrodsResponse =
-                error.response?.data.irods_response
-            message = `Failed to retrieve information for collection '${params.lpath}': ${irods_response.status_message}`
+            message = `Failed to retrieve information for collection '${params.lpath}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -100,9 +94,7 @@ export class CollectionOperations {
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            let irods_response: IrodsResponse =
-                error.response?.data.irods_response
-            message = `Failed to retrieve list for collection '${params.lpath}': ${irods_response.status_message}`
+            message = `Failed to retrieve list for collection '${params.lpath}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -125,9 +117,7 @@ export class CollectionOperations {
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            let irods_response: IrodsResponse =
-                error.response?.data.irods_response
-            message = `Failed to set permission for entity '${params['entity-name']}' to '${params.permission}' on collection '${params.lpath}': ${irods_response.status_message}`
+            message = `Failed to set permission for entity '${params['entity-name']}' to '${params.permission}' on collection '${params.lpath}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -152,12 +142,10 @@ export class CollectionOperations {
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            let irods_response: IrodsResponse =
-                error.response?.data.irods_response
             message = `Failed to ${
                 params.enable ? 'enable' : 'disable'
             } inheritance for collection '${params.lpath}': ${
-                irods_response.status_message
+                error.message
             }`
             retData = { status: error.response?.status!, data: null }
         }
@@ -181,9 +169,7 @@ export class CollectionOperations {
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            let irods_response: IrodsResponse =
-                error.response?.data.irods_response
-            message = `Failed to modify permissions for collection '${params.lpath}': ${irods_response.status_message}`
+            message = `Failed to modify permissions for collection '${params.lpath}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -206,9 +192,7 @@ export class CollectionOperations {
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            let irods_response: IrodsResponse =
-                error.response?.data.irods_response
-            message = `Failed to modify metadata for collection '${params.lpath}': ${irods_response.status_message}`
+            message = `Failed to modify metadata for collection '${params.lpath}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -229,9 +213,7 @@ export class CollectionOperations {
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            let irods_response: IrodsResponse =
-                error.response?.data.irods_response
-            message = `Failed to rename collection '${params['old-lpath']}': ${irods_response.status_message}`
+            message = `Failed to rename collection '${params['old-lpath']}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -252,9 +234,7 @@ export class CollectionOperations {
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            let irods_response: IrodsResponse =
-                error.response?.data.irods_response
-            message = `Failed to update mtime for collection '${params.lpath}': ${irods_response.status_message}`
+            message = `Failed to update mtime for collection '${params.lpath}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)

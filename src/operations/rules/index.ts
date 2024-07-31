@@ -1,6 +1,10 @@
 import { AxiosError, type AxiosInstance } from 'axios'
 import { toURLSearchParams } from '../../utils/toURLSearchParams.js'
-import { RuleTypes, type HTTPResponse } from '../../types/index.js'
+import {
+    RuleTypes,
+    type HTTPResponse,
+    type IrodsResponse,
+} from '../../types/index.js'
 import assert from 'assert'
 
 export class RuleOperations {
@@ -23,10 +27,11 @@ export class RuleOperations {
                     op: 'list_rule_engines',
                 },
             })
+            message = `Successfully listed rule engines`
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            message = `Error:  ${error.response?.statusText}`
+            message = `Failed to list rule engines: ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -46,10 +51,11 @@ export class RuleOperations {
                     ...params,
                 })
             )
+            message = `Successfully executed rule`
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            message = `Error: ${error.response?.statusText}`
+            message = `Failed to execute rule: ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -69,10 +75,11 @@ export class RuleOperations {
                     ...params,
                 })
             )
+            message = `Successfully removed delay rule '${params['rule-id']}'`
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            message = `Error: ${error.response?.statusText}`
+            message = `Failed to remove delay rule '${params['rule-id']}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)

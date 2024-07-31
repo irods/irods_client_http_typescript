@@ -1,5 +1,9 @@
 import { AxiosError, type AxiosInstance } from 'axios'
-import { QueryTypes, type HTTPResponse } from '../../types/index.js'
+import {
+    QueryTypes,
+    type HTTPResponse,
+    type IrodsResponse,
+} from '../../types/index.js'
 import { toURLSearchParams } from '../../utils/toURLSearchParams.js'
 import assert from 'assert'
 
@@ -24,10 +28,11 @@ export class QueryOperations {
                     ...params,
                 },
             })
+            message = `Successfully executed genquery`
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            message = `Error: ${error.response?.statusText}`
+            message = `Failed to execute genquery: ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -46,10 +51,11 @@ export class QueryOperations {
                     ...params,
                 },
             })
+            message = `Successfully executed specific query '${params.name}'`
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            message = `Error: ${error.response?.statusText}`
+            message = `Failed to execute specific query '${params.name}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -69,10 +75,11 @@ export class QueryOperations {
                     ...params,
                 })
             )
+            message = `Successfully added specific query '${params.name}'`
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            message = `Error: ${error.response?.statusText}`
+            message = `Failed to add specific query '${params.name}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -92,10 +99,11 @@ export class QueryOperations {
                     ...params,
                 })
             )
+            message = `Successfully removed specific query '${params.name}'`
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            message = `Error: ${error.response?.statusText}`
+            message = `Failed to remove specific query '${params.name}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)

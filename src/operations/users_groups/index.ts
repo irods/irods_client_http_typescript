@@ -1,6 +1,10 @@
 import { AxiosError, type AxiosInstance } from 'axios'
 import { toURLSearchParams } from '../../utils/toURLSearchParams.js'
-import { UserGroupTypes, type HTTPResponse } from '../../types/index.js'
+import {
+    UserGroupTypes,
+    type HTTPResponse,
+    type IrodsResponse,
+} from '../../types/index.js'
 import assert from 'assert'
 
 export class UserGroupOperations {
@@ -25,10 +29,11 @@ export class UserGroupOperations {
                     ...params,
                 })
             )
+            message = `Successfully created user '${params.name}'`
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            message = `Error: ${error.response?.statusText}`
+            message = `Failed to create user '${params.name}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -48,10 +53,11 @@ export class UserGroupOperations {
                     ...params,
                 })
             )
+            message = `Successfully removed user '${params.name}'`
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            message = `Error: ${error.response?.statusText}`
+            message = `Failed to remove user '${params.name}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -71,10 +77,11 @@ export class UserGroupOperations {
                     ...params,
                 })
             )
+            message = `Successfully set password for user '${params.name}'`
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            message = `Error: ${error.response?.statusText}`
+            message = `Failed to set password for user '${params.name}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -94,10 +101,11 @@ export class UserGroupOperations {
                     ...params,
                 })
             )
+            message = `Successfully set user type of '${params.name}' to '${params['new-user-type']}'`
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            message = `Error: ${error.response?.statusText}`
+            message = `Failed to set user type of '${params.name}' to '${params['new-user-type']}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -117,10 +125,11 @@ export class UserGroupOperations {
                     ...params,
                 })
             )
+            message = `Successfully created group '${params.name}'`
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            message = `Error: ${error.response?.statusText}`
+            message = `Failed to create group '${params.name}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -140,10 +149,11 @@ export class UserGroupOperations {
                     ...params,
                 })
             )
+            message = `Successfully removed group '${params.name}'`
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            message = `Error: ${error.response?.statusText}`
+            message = `Failed to remove group '${params.name}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -163,10 +173,11 @@ export class UserGroupOperations {
                     ...params,
                 })
             )
+            message = `Successfully added user '${params.user}' to group '${params.group}'`
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            message = `Error: ${error.response?.statusText}`
+            message = `Failed to add user '${params.user}' to group '${params.group}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -188,10 +199,11 @@ export class UserGroupOperations {
                     ...params,
                 })
             )
+            message = `Successfully removed user '${params.user}' from group '${params.group}'`
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            message = `Error: ${error.response?.statusText}`
+            message = `Failed to remove user '${params.user}' from group '${params.group}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -207,10 +219,11 @@ export class UserGroupOperations {
                     op: 'users',
                 },
             })
+            message = `Successfully retrieved list of users`
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            message = `Error: ${error.response?.statusText}`
+            message = `Failed to retrieve list of users: ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -228,10 +241,11 @@ export class UserGroupOperations {
                     op: 'groups',
                 },
             })
+            message = `Successfully retrieved list of groups`
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            message = `Error: ${error.response?.statusText}`
+            message = `Failed to retrieve list of groups: ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -250,10 +264,14 @@ export class UserGroupOperations {
                     ...params,
                 },
             })
+            let data: UserGroupTypes.UserMemberOfGroupResponse = res.data
+            message = `Successfully determined that user '${params.user}' ${
+                data.is_member ? 'is' : 'is not'
+            } member of group '${params.group}'`
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            message = `Error: ${error.response?.statusText}`
+            message = `Failed to determine whether user '${params.user}' is member of group '${params.group}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -272,10 +290,11 @@ export class UserGroupOperations {
                     ...params,
                 },
             })
+            message = `Successfully retrieved information for '${params.name}'`
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            message = `Error: ${error.response?.statusText}`
+            message = `Failed to retrieve information for '${params.name}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -297,10 +316,11 @@ export class UserGroupOperations {
                     ...params,
                 })
             )
+            message = `Successfully modified metadata of '${params.name}'`
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            message = `Error: ${error.response?.statusText}`
+            message = `Failed to modify metadata of '${params.name}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)

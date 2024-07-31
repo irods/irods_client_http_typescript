@@ -1,6 +1,10 @@
 import { AxiosError, type AxiosInstance } from 'axios'
 import { toURLSearchParams } from '../../utils/toURLSearchParams.js'
-import { ResourceTypes, type HTTPResponse } from '../../types/index.js'
+import {
+    ResourceTypes,
+    type HTTPResponse,
+    type IrodsResponse,
+} from '../../types/index.js'
 import assert from 'assert'
 
 export class ResourceOperations {
@@ -22,10 +26,11 @@ export class ResourceOperations {
                 '/resources',
                 toURLSearchParams({ op: 'create', ...params })
             )
+            message = `Successfully created resource '${params.name}'`
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            message = `Error: ${error.response?.statusText}`
+            message = `Failed to create resource '${params.name}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -42,10 +47,11 @@ export class ResourceOperations {
                 '/resources',
                 toURLSearchParams({ op: 'remove', ...params })
             )
+            message = `Successfully removed resource '${params.name}'`
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            message = `Error: ${error.response?.statusText}`
+            message = `Failed to remove resource '${params.name}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -62,10 +68,11 @@ export class ResourceOperations {
                 '/resources',
                 toURLSearchParams({ op: 'add_child', ...params })
             )
+            message = `Successfully added child '${params['child-name']}' to parent '${params['parent-name']}'`
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            message = `Error: ${error.response?.statusText}`
+            message = `Failed to add child '${params['child-name']}' to parent '${params['parent-name']}: ${error.message}'`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -82,10 +89,11 @@ export class ResourceOperations {
                 '/resources',
                 toURLSearchParams({ op: 'remove_child', ...params })
             )
+            message = `Successfully removed child '${params['child-name']}' from parent '${params['parent-name']}'`
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            message = `Error: ${error.response?.statusText}`
+            message = `Failed to remove child '${params['child-name']}' from parent '${params['parent-name']}: ${error.message}'`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -102,10 +110,11 @@ export class ResourceOperations {
                 '/resources',
                 toURLSearchParams({ op: 'rebalance', ...params })
             )
+            message = `Successfully rebalanced resource '${params.name}'`
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            message = `Error: ${error.response?.statusText}`
+            message = `Failed to rebalance resource '${params.name}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -121,10 +130,11 @@ export class ResourceOperations {
             const res = await this.client.get('/resources', {
                 params: { op: 'stat', ...params },
             })
+            message = `Successfully retrieved information for resource '${params.name}'`
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            message = `Error: ${error.response?.statusText}`
+            message = `Failed to retrieve information for resource '${params.name}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
@@ -143,10 +153,11 @@ export class ResourceOperations {
                 '/resources',
                 toURLSearchParams({ op: 'modify_metadata', ...params })
             )
+            message = `Successfully modified metadata of resource '${params.name}'`
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
-            message = `Error: ${error.response?.statusText}`
+            message = `Failed to modify metadata of resource '${params.name}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
         if (this.debug) console.log(message)
