@@ -1,7 +1,7 @@
 {
     "name": "irods_client_http_typescript",
     "version": "1.0.0",
-    "description": "Wrapper for iRODS HTTP API written in JavaScript",
+    "description": "Wrapper for iRODS HTTP API written in TypeScript",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "files": [
@@ -14,7 +14,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/farbs03/irods-http-api-wrapper-js.git"
+        "url": "git+https://github.com/irods/irods_client_http_typescript.git"
     },
     "keywords": [
         "typescript",
@@ -26,9 +26,9 @@
     "author": "Chris Farber",
     "license": "ISC",
     "bugs": {
-        "url": "https://github.com/farbs03/irods-http-api-wrapper-js/issues"
+        "url": "https://github.com/irods/irods_client_http_typescript/issues"
     },
-    "homepage": "https://github.com/farbs03/irods-http-api-wrapper-js#readme",
+    "homepage": "https://github.com/irods/irods_client_http_typescript#readme",
     "dependencies": {
         "axios": "^1.7.2"
     },
