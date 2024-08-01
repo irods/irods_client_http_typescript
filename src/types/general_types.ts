@@ -11,16 +11,16 @@ export type RequireAtLeastOne<T> = {
         Partial<Pick<T, Exclude<keyof T, K>>>
 }[keyof T]
 
-type BasicUser = {
+export type BasicUserInfo = {
     username: string
     password: string
 }
 
-type OidcUser = {
+export type OidcUserInfo = {
     oidc_token: string
 }
 
-export type User = XOR<BasicUser, OidcUser>
+export type UserInfo = BasicUserInfo | OidcUserInfo
 
 // Format: http://<host>:<port>/irods-http-api/<version>
 export type URLComponentsType = {
