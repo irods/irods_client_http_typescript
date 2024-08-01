@@ -1,6 +1,6 @@
 # iRODS TypeScript HTTP API Wrapper
 
-## Getting Started
+## Installation and Usage
 
 1. Install npm package: 
 
@@ -55,3 +55,11 @@ let lpath = "/tempZone/home/user/newCollection"
     })
 })
 ```
+
+## Contributing
+
+### Documentation
+
+This repository utilizes the `typedoc` package to auto-generate documentation.
+
+If a change has been made to the codebase, the typedocs can be updated by running `npx typedoc` from the root of the repository.
