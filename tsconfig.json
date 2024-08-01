@@ -18,7 +18,6 @@
         "./src/tmp/*",
         "./docs/**/*", 
         "./dist/**/*", 
-        "babel.config.cjs", 
         "jest.config.cjs"
     ]
 }
