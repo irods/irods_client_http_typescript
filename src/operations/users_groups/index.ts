@@ -32,7 +32,9 @@ export class UserGroupOperations {
             message = `Failed to create user '${params.name}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -56,7 +58,9 @@ export class UserGroupOperations {
             message = `Failed to remove user '${params.name}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -80,7 +84,9 @@ export class UserGroupOperations {
             message = `Failed to set password for user '${params.name}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -104,7 +110,9 @@ export class UserGroupOperations {
             message = `Failed to set user type of '${params.name}' to '${params['new-user-type']}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -128,7 +136,9 @@ export class UserGroupOperations {
             message = `Failed to create group '${params.name}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -152,7 +162,9 @@ export class UserGroupOperations {
             message = `Failed to remove group '${params.name}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -176,7 +188,9 @@ export class UserGroupOperations {
             message = `Failed to add user '${params.user}' to group '${params.group}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -202,7 +216,9 @@ export class UserGroupOperations {
             message = `Failed to remove user '${params.user}' from group '${params.group}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -222,7 +238,9 @@ export class UserGroupOperations {
             message = `Failed to retrieve list of users: ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -244,7 +262,9 @@ export class UserGroupOperations {
             message = `Failed to retrieve list of groups: ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -270,7 +290,9 @@ export class UserGroupOperations {
             message = `Failed to determine whether user '${params.user}' is member of group '${params.group}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -293,7 +315,9 @@ export class UserGroupOperations {
             message = `Failed to retrieve information for '${params.name}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -319,7 +343,9 @@ export class UserGroupOperations {
             message = `Failed to modify metadata of '${params.name}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 }

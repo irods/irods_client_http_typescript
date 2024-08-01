@@ -32,7 +32,9 @@ export class TicketOperations {
             message = `Failed to create ticket at '${params.lpath}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -56,7 +58,9 @@ export class TicketOperations {
             message = `Failed to remove ticket '${params.name}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 }

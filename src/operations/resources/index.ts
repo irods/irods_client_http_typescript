@@ -29,7 +29,9 @@ export class ResourceOperations {
             message = `Failed to create resource '${params.name}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -50,7 +52,9 @@ export class ResourceOperations {
             message = `Failed to remove resource '${params.name}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -71,7 +75,9 @@ export class ResourceOperations {
             message = `Failed to add child '${params['child-name']}' to parent '${params['parent-name']}: ${error.message}'`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -92,7 +98,9 @@ export class ResourceOperations {
             message = `Failed to remove child '${params['child-name']}' from parent '${params['parent-name']}: ${error.message}'`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -113,7 +121,9 @@ export class ResourceOperations {
             message = `Failed to rebalance resource '${params.name}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -133,7 +143,9 @@ export class ResourceOperations {
             message = `Failed to retrieve information for resource '${params.name}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -156,7 +168,9 @@ export class ResourceOperations {
             message = `Failed to modify metadata of resource '${params.name}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 }

@@ -23,16 +23,20 @@ export class CollectionOperations {
                 toURLSearchParams({ op: 'create', ...params })
             )
             const data: CollectionTypes.CollectionCreateResponse = res.data
-            if (!data.created)
+            if (!data.created) {
                 message = `Failed to create collection: '${params.lpath}' already exists`
-            else message = `Successfully created collection '${params.lpath}'`
+            } else {
+                message = `Successfully created collection '${params.lpath}'`
+            }
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
             message = `Failed to create collection '${params.lpath}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -53,7 +57,9 @@ export class CollectionOperations {
             message = `Failed to remove collection '${params.lpath}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -73,7 +79,9 @@ export class CollectionOperations {
             message = `Failed to retrieve information for collection '${params.lpath}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -93,7 +101,9 @@ export class CollectionOperations {
             message = `Failed to retrieve list for collection '${params.lpath}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -116,7 +126,9 @@ export class CollectionOperations {
             message = `Failed to set permission for entity '${params['entity-name']}' to '${params.permission}' on collection '${params.lpath}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -145,7 +157,9 @@ export class CollectionOperations {
             }`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -168,7 +182,9 @@ export class CollectionOperations {
             message = `Failed to modify permissions for collection '${params.lpath}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -191,7 +207,9 @@ export class CollectionOperations {
             message = `Failed to modify metadata for collection '${params.lpath}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -212,7 +230,9 @@ export class CollectionOperations {
             message = `Failed to rename collection '${params['old-lpath']}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -233,7 +253,9 @@ export class CollectionOperations {
             message = `Failed to update mtime for collection '${params.lpath}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 }
