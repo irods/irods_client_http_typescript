@@ -30,7 +30,9 @@ export class RuleOperations {
             message = `Failed to list rule engines: ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -54,7 +56,9 @@ export class RuleOperations {
             message = `Failed to execute rule: ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -78,7 +82,9 @@ export class RuleOperations {
             message = `Failed to remove delay rule '${params['rule-id']}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 }

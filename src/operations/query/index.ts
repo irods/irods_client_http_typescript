@@ -31,7 +31,9 @@ export class QueryOperations {
             message = `Failed to execute genquery: ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -54,7 +56,9 @@ export class QueryOperations {
             message = `Failed to execute specific query '${params.name}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -78,7 +82,9 @@ export class QueryOperations {
             message = `Failed to add specific query '${params.name}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -102,7 +108,9 @@ export class QueryOperations {
             message = `Failed to remove specific query '${params.name}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 }

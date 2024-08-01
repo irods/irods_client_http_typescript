@@ -32,7 +32,9 @@ export class ZoneOperations {
             message = `Failed to add zone '${params.name}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -56,7 +58,9 @@ export class ZoneOperations {
             message = `Failed to remove zone '${params.name}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -80,7 +84,9 @@ export class ZoneOperations {
             message = `Failed to modify zone '${params.name}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -100,7 +106,9 @@ export class ZoneOperations {
             message = `Failed to retrieve zone report: ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 }

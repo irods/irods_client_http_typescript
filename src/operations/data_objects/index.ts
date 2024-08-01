@@ -30,7 +30,9 @@ export class DataObjectOperations {
             message = `Failed to create or update mtime of data object '${params.lpath}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -51,7 +53,9 @@ export class DataObjectOperations {
             message = `Failed to remove data object '${params.lpath}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -74,7 +78,9 @@ export class DataObjectOperations {
             message = `Failed to calculate checksum for data object '${params.lpath}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -96,7 +102,9 @@ export class DataObjectOperations {
             message = `Failed to verify checksum for data object '${params.lpath}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -116,7 +124,9 @@ export class DataObjectOperations {
             message = `Failed to retrieve information for data object '${params.lpath}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -137,7 +147,9 @@ export class DataObjectOperations {
             message = `Failed to rename data object '${params['old-lpath']}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -158,7 +170,9 @@ export class DataObjectOperations {
             message = `Failed to copy data object '${params['src-lpath']}' to '${params['dst-lpath']}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -181,7 +195,9 @@ export class DataObjectOperations {
             message = `Failed to replicate data object '${params.lpath}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -202,7 +218,9 @@ export class DataObjectOperations {
             message = `Failed to trim data object '${params.lpath}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -225,7 +243,9 @@ export class DataObjectOperations {
             message = `Failed to register physical object '${params.ppath}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -246,7 +266,9 @@ export class DataObjectOperations {
             message = `Failed to read data object '${params.lpath}'`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -282,7 +304,9 @@ export class DataObjectOperations {
             message = `Failed to write to data object '${params.lpath}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -305,7 +329,9 @@ export class DataObjectOperations {
             message = `Failed to initialize parallel write session for data object '${params.lpath}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -328,7 +354,9 @@ export class DataObjectOperations {
             message = `Failed to shut down parallel write session: ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -351,7 +379,9 @@ export class DataObjectOperations {
             message = `Failed to modify metadata for data object '${params.lpath}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -374,7 +404,9 @@ export class DataObjectOperations {
             message = `Failed to set permission for entity '${params['entity-name']}' to '${params.permission}' on data object '${params.lpath}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -397,7 +429,9 @@ export class DataObjectOperations {
             message = `Failed to modify permissions for data object '${params.lpath}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 
@@ -414,17 +448,20 @@ export class DataObjectOperations {
                 toURLSearchParams({ op: 'modify_replica', ...params })
             )
             // If params['replica-number'] doesn't exist, then params['resource-hierarchy'] does (or should, at least)
-            if (params['replica-number'])
+            if (params['replica-number']) {
                 message = `Successfully modified replica number ${params['replica-number']} of data object '${params.lpath}'`
-            else
+            } else {
                 message = `Successfully modified replica of data object '${params.lpath}' with resource hierarchy '${params['resource-hierarchy']}'`
+            }
             retData = { status: res.status, data: res.data }
         } catch (error) {
             assert(error instanceof AxiosError)
             message = `Failed to modify replica of data object '${params.lpath}': ${error.message}`
             retData = { status: error.response?.status!, data: null }
         }
-        if (this.debug) console.log(message)
+        if (this.debug) {
+            console.log(message)
+        }
         return retData
     }
 }
