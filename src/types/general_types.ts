@@ -1,4 +1,4 @@
-// Mutually exclusive fields: https://stackoverflow.com/questions/42123407/does-typescript-support-mutually-exclusive-export-types
+// Mutually exclusive fields: https://stackoverflow.com/questions/42123407/does-typescript-support-mutually-exclusive-types
 export type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never }
 
 export type XOR<T, U> = T | U extends object
