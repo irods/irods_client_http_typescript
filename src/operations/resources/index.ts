@@ -58,6 +58,29 @@ export class ResourceOperations {
         return retData
     }
 
+    async modify(
+        params: ResourceTypes.ResourceModifyParams
+    ): Promise<HTTPResponse<null | ResourceTypes.ResourceModifyResponse>> {
+        let retData
+        let message
+        try {
+            const res = await this.client.post(
+                '/resources',
+                toURLSearchParams({ op: 'modify', ...params })
+            )
+            message = `Successfully modified resource '${params.name}'`
+            retData = { status: res.status, data: res.data }
+        } catch (error) {
+            assert(error instanceof AxiosError)
+            message = `Failed to modify resource '${params.name}': ${error.message}`
+            retData = { status: error.response?.status!, data: null }
+        }
+        if (this.debug) {
+            console.log(message)
+        }
+        return retData
+    }
+
     async add_child(
         params: ResourceTypes.ResourceAddChildParams
     ): Promise<HTTPResponse<null | ResourceTypes.ResourceAddChildResponse>> {
