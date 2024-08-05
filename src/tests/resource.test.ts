@@ -36,6 +36,17 @@ describe('ResourceTests', () => {
         expect(res2.data?.irods_response.status_code).toEqual(0)
     })
 
+    test('Modify resource', async () => {
+        const res = await api.resources.modify({
+            name: parentResc,
+            property: 'comments',
+            value: 'Test comment',
+        })
+        expect(res.data).toBeTruthy()
+        expect(res.status).toEqual(200)
+        expect(res.data?.irods_response.status_code).toEqual(0)
+    })
+
     test('Modify resource metadata', async () => {
         const res = await api.resources.modify_metadata({
             name: parentResc,

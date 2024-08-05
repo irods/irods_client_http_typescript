@@ -4,18 +4,7 @@ import type { IrodsResponse, AVUOperation } from './general_types.js'
 
 export type ResourceCreateParams = {
     name: string
-    type:
-        | 'compound'
-        | 'deferred'
-        | 'load_balanced'
-        | 'mockarchive'
-        | 'nonblocking'
-        | 'passthru'
-        | 'random'
-        | 'replication'
-        | 'structfile'
-        | 'univmss'
-        | 'unixfilesystem'
+    type: string
     host?: string
     'vault-path'?: string
     context?: string
@@ -32,6 +21,34 @@ export type ResourceRemoveParams = {
 }
 
 export type ResourceRemoveResponse = {
+    irods_response: IrodsResponse
+}
+
+/* Modify */
+
+export type ResourceModifyProperty =
+    | {
+          property:
+              | 'name'
+              | 'type'
+              | 'host'
+              | 'vault_path'
+              | 'context'
+              | 'free_space'
+              | 'comments'
+              | 'information'
+          value: string
+      }
+    | {
+          property: 'status' // If modifying property "status", restrict values to only be "up" or "down"
+          value: 'up' | 'down'
+      }
+
+export type ResourceModifyParams = {
+    name: string
+} & ResourceModifyProperty
+
+export type ResourceModifyResponse = {
     irods_response: IrodsResponse
 }
 
