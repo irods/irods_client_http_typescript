@@ -1,59 +1,66 @@
 # iRODS TypeScript HTTP API Wrapper
 
-## Installation and Usage
-
-1. Install npm package: 
+## Installation
 
 ```
 npm install git+https://github.com/irods/irods_client_http_typescript
 ```
 
-2. Import `IrodsHttpClient` class:
+## Usage
+
+The following example demonstrates how the client can be used to create a new collection.
 
 ```js
 import { IrodsHttpClient } from 'irods_client_http_typescript'
-```
+import type { URLComponentsType } from 'irods_client_http_typescript'
+import assert from 'assert'
 
-3. Create a url configuration object, containing info about the irods http api that's running on your local machine:
-
-```js
+// Create a url configuration object, containing info about
+// the irods http api that's running on your local machine.
 const urlComponents: URLComponentsType = {
     host: '<host>',
     port: '<port>',
     version: '<version>',
 }
-```
 
-4. Create a wrapper object, passing in the url components, as well as the username and password you want to log in with:
-```js
+// Create an IrodsHttpClient object.
+// <username> and <password> are placeholders.
 const api = new IrodsHttpClient(urlComponents, '<username>', '<password>')
-```
 
-5. Authenticate the wrapper object within an asynchronous context
+// <username> is the same placeholder value used above.
+let lpath = "/tempZone/home/<username>/newCollection"
 
-```js
-(async () => {
-    await api.authenticate()
-})
-```
+// After authenticating the client in an asynchronous context,
+// any operations of the api can be done.
+async function authenticateAndCreateCollection(lpath: string) {
+    try {
+        await api.authenticate()
+        let res = await api.collections.create({lpath: lpath})
 
+        // res.status contains the http status code of the response.
+        // If res.status >= 400, then res.data is null and there was an error.
+        assert(res.status < 400, 'Error obtaining response!')
 
-- **Note**: This code is assuming you're not already within an asynchronous context, such as an async function. 
+        // At this point, the response went through, so res.data shouldn't be null.
+        // If the irods_response status code is non-zero, there was an error.
+        assert(
+            res.data !== null && res.data.irods_response.status_code >= 0, 
+            'Error with response data!'
+        )
 
-6. All operations of the wrapper can now be done within an asynchronous context as well, e.g.,
+        console.log('Response obtained:', res)
+    }
+    catch (e) {
+        if (e instanceof AssertionError) {
+            console.log(e.message)
+        }
+        else {
+            console.log('Unexpected error:', e)
+        }
+    }
+}
 
-```js
-import { CollectionTypes } from "irods-http-api-wrapper";
-
-// Declare type of res if working in typescript, otherwise just put 'let res'
-let res: CollectionTypes.CollectionCreateResponse | null
-let lpath = "/tempZone/home/user/newCollection"
-
-(async () => {
-    res = await api.collections.create({
-        lpath: lpath
-    })
-})
+authenticateAndCreateCollection(lpath);
 ```
 
 ## Contributing
