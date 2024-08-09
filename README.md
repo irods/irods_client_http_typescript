@@ -8,10 +8,10 @@
 npm install git+https://github.com/irods/irods_client_http_typescript
 ```
 
-2. Import `Wrapper` class:
+2. Import `IrodsHttpClient` class:
 
 ```js
-import { Wrapper } from 'irods_client_http_typescript'
+import { IrodsHttpClient } from 'irods_client_http_typescript'
 ```
 
 3. Create a url configuration object, containing info about the irods http api that's running on your local machine:
@@ -26,7 +26,7 @@ const urlComponents: URLComponentsType = {
 
 4. Create a wrapper object, passing in the url components, as well as the username and password you want to log in with:
 ```js
-const api = new Wrapper(urlComponents, '<username>', '<password>')
+const api = new IrodsHttpClient(urlComponents, '<username>', '<password>')
 ```
 
 5. Authenticate the wrapper object within an asynchronous context

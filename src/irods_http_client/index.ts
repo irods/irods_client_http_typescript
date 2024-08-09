@@ -12,7 +12,7 @@ import {
 
 import type { URLComponentsType, ServerInfo } from '../types/index.js'
 
-export class Wrapper {
+export class IrodsHttpClient {
     public username: string
     public password: string
     public debug: boolean | undefined
